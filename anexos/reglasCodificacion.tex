@@ -1,0 +1,604 @@
+Las reglas de codificación aplicadas al software del proyecto se han obtenido, por utilizar una referencia, de las reglas aplicadas por Google en sus proyectos libres. Esta guía está ampliamente documentada e incluye su propia herramienta para comprobar su correcta aplicación \completar lo que facilita la revisión del código así como corrección de desviaciones de estilo.
+\\
+
+En este anexo se traducen y resumen los aspectos más importantes de dicha guía. En algunos casos se han adaptado las reglas al caso concreto de este proyecto.
+\\
+
+Establecer unas reglas de codificación, unificando un estilo en la notación y uso de la sintaxis, es interesante de cara a posibilitar una mayor facilidad de lectura en futuros desarrollos aumentando así la mantenibilidad del código.
+
+Estas reglas aplican al código C++ del proyecto, no a los \ingles{scripts} auxiliares.
+
+\section{Aspectos generales} \label{sec:codificacionSW:general}
+
+\section{Ficheros de cabecera} \label{sec:codificacionSW:cabeceras}
+
+    En general todos los ficheros con extensión \codigo{.cpp} correspondientes a las librerías deberán ir acompañados del fichero de cabecera \codigo{.h} correspondiente.
+    \\
+    
+    Quedan exentos de cumplir esta regla los ficheros correspondientes a Test (unitarios, de integración, etc) así como ficheros que contengan únicamente una función \codigo{main()}.
+
+\minititulo{Inclusión Múltiple}
+
+    Para evitar problemas de inclusión múltiple todos los ficheros de cabecera con extensión \codigo{.h} deberán incluir guardas con el siguiente formato y escrito en mayúsculas: \codigo{<nombre\_del\_fichero>\_<extensión>. } 
+    \\ 
+    
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo:
+
+    #ifndef SERVO_RHA_H
+    #define SERVO_RHA_H
+    ...
+    ...
+    ...
+    #endif
+    \end{lstlisting}
+    
+\minititulo{Orden de inclusión de ficheros}
+
+    Para evitar problemas en las dependencias de las distintas librerías se incluirán las mismas dejando para el final las librerías propias del proyecto e incluyendo el resto de la más general a la más particular. 
+    \completarCon{Revisar el código!}
+    \\ 
+    
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo orden al incluir cabeceras:
+
+    #include <stdint.h>    // lib estandar de c++
+    #include <Arduino.h>     // lib de Arduino
+    #include <SoftwareSerial.h>     // lib para controlar el puerto serie. Basado en Arduino
+    
+    #include "debug.h"     // def y control de las funciones de debug
+    #include "rha_types.h"     // tipos de datos
+    #include "joint_rha.h"     // clase a incluir
+    \end{lstlisting}
+    \completarCon{¿def como abreviatura?}
+    
+    Se deben incluir todos los ficheros que definan los símbolos utilizados en el fichero sobre el que se incluyen. Las declaraciones anticipadas de objetos no están permitidas salvo excepciones justificadas.
+ 
+\section{Ámbitos}\label{sec:codificacionSW:ambitos}
+\minititulo{Espacios de nombres}
+
+    Como norma general las constantes, variables o funciones que no estén contenidas en ningún objeto se incluirán dentro de un espacio de nombres o \ingles{namespace} que haga referencia a la utilidad de las mismas.
+    \\ 
+    
+    No está permitido usar directivas del tipo \codigo{ <using namespace \_\_\_\_;>.}
+    \\ 
+    
+    Los espacios de nombres se escriben con la primera letra de cada palabra, en caso de haber más de una, en mayúscula y sin separación de ningún tipo.
+    \\ 
+    
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: Constantes referentes al test de comportamiento ante una entrada tipo rampa
+
+    namespace SlopeTest {
+        #define SAMPLE_SLOPE 110
+        #define SAMPLE_TEST_SLOPE 20
+        #define SLOPE_SPEED 0.1
+    }
+    
+Prohibido el uso de:
+    
+    using namespace StepTest;
+    \end{lstlisting}
+    \completarCon{¿def como abreviatura?}
+    
+\minititulo{Variables Locales}
+
+    Las variables se definirán preferiblemente en el ámbito más bajo \completarCon{¿se dice así?} en que se vayan a utilizar. Preferiblemente la inicialización de las mismas se hará junto a la declaración.
+    \\ 
+    
+    Se pueden dar excepciones, como pueden ser vectores sobre los que se iterará dentro de un bucle u otros casos similares. En estos casos se de declarará el objeto fuera del propio ámbito para evitar recursivas llamadas a constructor y destructor de los mismos.
+    \\ 
+    
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+    // Siempre que la variable sobre la que se itera no se vaya a utilizar para posteriores operaciones: 
+    for(int i = 0, i < 10; i++) {
+    }
+    
+    //mejor que el caso siguiente, que adicionalmente incumple la regla preferente de inicializar la variable cuando se declara:
+    int i; 
+    for(i = 0, i < 10; i++) {
+    }
+    
+    //queda permitido declarar vectores u otros objetos similares antes si se va a iterar o trabajar sobre los mismos
+    int vector[5] = {1,2,3,4,5};
+    for(int i = 0, i < 10; i++) {
+        Serial.print(vector[i]);
+    }
+
+    \end{lstlisting}
+    \completarCon{¿def como abreviatura?}
+    
+\section{Clases}\label{sec:codificacionSW:clases}
+
+\minititulo{Constructores y métodos de Inicialización}
+
+Para todos los objetos debe haber constructores por defecto sin parámetros de entrada. Aunque se pueden añadir constructores que inicialicen los diferentes parámetros será obligatorio generar métodos que los inicialicen una vez construido el objeto. Arduino, aún estando basado en el lenguaje \codigo{C++} no permite un uso completo de memoria dinámica. Es especialmente importante para declarar estos objetos como miembros de otros. \completarCon{no se si está muy claro :|}
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+	//NO se permite:
+    - joint_rha.h -
+    ServoRHA servo_*;
+    - joint_rha.cpp -
+    servo_ = new ServoRHA(1, 10, 5);
+    
+    //Se llama al constructor del objeto para luego inicializarlo:
+    - joint_rha.h -
+    ServoRHA servo_;
+    - joint_rha.cpp -
+    servo.init(... params ...);
+
+    \end{lstlisting}
+
+Para evitar funciones con muchos parámetros que reduzcan la legibilidad del código se permite generar diferentes inicializadores para los distintos parámetros. En la documentación del objeto deberá quedar bien claro que inicializadores deben invocarse para el correcto funcionamiento del mismo.
+
+\minititulo{Estructuras o Clases}
+
+Por norma general las estructuras se utilizarán exclusivamente para objetos pasivos, objetos que contienen información. Todo lo demás se codificará dentro una clase.
+\\ 
+
+En el caso de estructuras se permiten únicamente métodos para el manejo de los datos sin añadir ninguno tipo de comportamiento, están permitidos los constructores, destructores, métodos de reset, validación, etc. El acceso a los miembros de la estructura se hará directamente sobre los propios parámetros y no mediante métodos específicos. Los parámetros serán siempre públicos para ser consistente con este punto.
+\\ 
+
+Para mayores funcionalidades se generará una clase.
+
+\minititulo{Control de Acceso}
+
+Como norma general se declararan como privados todos los atributos de las clases exceptuando aquellos objetos que a su vez tengan, internamente, control de acceso definido (otras clases). De cara a generar Test con clases propias se permite la declaración de atributos como \codigo{protected}.
+
+\section{Tipos de datos}\label{sec:codificacionSW:datos}
+
+Los tipos de datos usados irán acordes con la librería \codigo{stdint.h}. Estos son del tipo \codigo{int16\_t}, \codigo{uint32\_t}, etc. Este tipo de datos garantiza el control del tamaño del dato declarado.
+
+Se utilizarán los nombres \codigo{float} y \codigo{double} convencionales para declarar datos en coma flotante.
+
+\section{Nombres}\label{sec:codificacionSW:nombres}
+
+\minititulo{Reglas generales}
+
+Los nombres deberán ser descriptivos. Por norma general no se utilizarán abreviaciones que no estén comúnmente aceptadas.
+
+\minititulo{Nombre de los ficheros}
+
+    Los nombres de los ficheros de código C++ se nombran en minúsculas separando, en caso de haber varias palabras, con un guión bajo. Los ficheros correspondientes a los test llevarán, precediendo al nombre la palabra "test".
+    \\ 
+    
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+        %Introducir label y caption
+        \begin{lstlisting}[frame=single]
+Ejemplos:
+
+    joint_handler.h
+    joint_rha.cpp
+    test_servo_rha.cpp
+    \end{lstlisting}
+
+\minititulo{Nombre de los directorios}
+
+    Los ficheros de código irán contenidos en diferentes directorios para cada librería o conjunto de test. Estos directorios llevarán el nombre de la librería que contienen, en el mismo formato que la misma, en este caso sin extensión. Los test se ejecutan en el orden en que se ordenan los directorios. En este caso se añadirá un caracter para ordenar los mismos de manera adecuada. 
+    \\ 
+    
+    Están exentos de esta regla los ficheros principales (que contienen la función \codigo{main()}, ó \codigo{setup()} y \codigo{loop()} en caso de ser ficheros con extensión \codigo{.ino}). 
+    \\
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplos:
+
+/lib/
+    joint_handler/
+    joint_rha/
+/test/
+    a_test_servo_rha/
+    b_test_joint_rha/
+    \end{lstlisting}
+
+\minititulo{Nombres para objetos}
+
+Los nombres llevarán mayúscula al comienzo así como al inicio de cada palabra, sin guion bajo como separación.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+    class ServoRHA{ ... };
+    class JointHandler{ ... };
+    struct SpeedGoal { ... } ;
+
+    \end{lstlisting}
+    
+\minititulo{Nombres de variables}   
+
+	Por norma general las variables se nombrarán en minúsculas, separando, cuando fuera necesario, las diferentes palabras mediante un guión bajo.
+    
+\minititulo{Nombres de atributos de clases}
+   
+La norma para nombrar atributos de clases será igual que en el caso general acabando, en este caso, con un guión bajo.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+    class Regulator {
+        float kp_, ki_, kd_;
+        float ierror_[INTEGER_INTERVAL];
+        uint8_t index_;    
+    ... } ;
+
+    \end{lstlisting}
+    
+\minititulo{Nombres de miembros de estructuras}
+ 
+Las variables miembro de estructuras serán nombradas de igual forma que en el caso general.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+    struct SpeedGoal {
+        uint8_t servo_id;
+        int16_t speed;
+        int16_t speed_slope;
+        uint8_t direction;  
+    ... } ;
+
+    \end{lstlisting}
+    
+\minititulo{Nombres de funciones} 
+
+Las funciones comenzarán en minúscula marcando con mayúscula cada nueva palabra que aparezca. Los acrónimos irán en mayúscula. Esta regla afecta a métodos de clases a de igual manera a excepción de constructores y destructores.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+  class ServoRHA {
+ 	...
+ public:
+    ServoRHA() { time_last_error_ = 0; time_last_ = 0; last_error_ = 0;
+                error_ = 0; derror_ = 0; ierror_ = 0; }
+    ServoRHA(uint8_t servo_id);
+    void init(uint8_t servo_id);
+    void addUpadteInfoToPacket(uint8_t *buffer);
+    bool addTorqueToPacket(uint8_t *buffer);
+    void setTorqueOnOfToPacket(uint8_t *buffer, uint8_t onOff);
+
+  ... } ;
+
+    \end{lstlisting}
+    
+\minititulo{Nombres de parámetros funciones} 
+	
+Los parámetros de métodos y funciones se nombran siguiendo el caso general para nombrar variables.
+    
+\minititulo{Espacios de nombres} 
+
+Como se ha visto en la sección \ref{sec:codificacionSW:ambitos} los espacios de nombres se definen de manera equivalente a las clases. 
+
+\minititulo{Nombres de enumeraciones} 
+
+En el caso de enumeraciones se seguirá la misma norma que para las clases y espacios de nombres. En este caso cabe la excepción de poder ser declaradas sin nombre.
+
+\minititulo{Nombres de macros} 
+
+Todo nombre precedido por una instrucción \codigo{\#define} se nombrará en mayúsculas, separando las palabras, si las hubiera, mediante el uso del guión bajo. Esto aplica tanto a macros como constantes.
+
+\section{Comentarios}\label{sec:codificacionSW:comentarios}
+
+Es necesario el uso de comentarios para documentar el código y aumentar la legibilidad del mismo. En este caso se seguirá el estilo utilizado por \ingles{doxygen}, que será la herramienta utilizada para, posteriormente generar la documentación. 
+
+\minititulo{Comentarios de ficheros}
+
+Todos los ficheros deberán llevar comentarios en su cabecera. Estos comentarios tendrán el siguiente aspecto:
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+/**
+ * @file
+ * @brief Implements ServoRHA class. This object inherits from CytronG15Servo object to enhance its capabilities
+ *
+ * @Author: Enrique Heredia Aguado <enheragu>
+ * @Date:   2017_Sep_08
+ * @Project: RHA
+ * @Filename: servo_rha.h
+ * @Last modified by:   quique
+ * @Last modified time: 30-Sep-2017
+ */
+
+    \end{lstlisting}
+    
+\minititulo{Comentarios de Clases}
+
+\completarCon{¡TDB!}
+
+\minititulo{Comentarios de funciones}
+
+Todas las funciones y métodos deberán llevar un comentario describiendo su funcionamiento así como los parámetros de entrada y salida. Estos comentarios tendrán el siguiente aspecto y se situarán encima de la definición de la función o método:
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+    
+ /** @brief Saves in buffer the package return level of servo (error information for each command sent)
+   * @method ServoRHA::addReturnOptionToPacket
+   * @param {uint8_t*} buffer array in which add the information
+   * @param {uint8_t} option RETURN_PACKET_ALL -> servo returns packet for all commands sent; RETURN_PACKET_NONE -> servo never retunrs state packet; RETURN_PACKET_READ_INSTRUCTIONS -> servo answer packet state when a READ command is sent (to read position, temperature, etc)
+   * @see addToPacket()
+   */
+
+    \end{lstlisting}
+    
+
+\minititulo{Comentarios y aclaraciones}
+	
+    Cuando sea necesario hacer aclaraciones, a nivel de código se harán utilizando el estilo de comentario con doble barra \codigo{//}. Por lo general los nombres de variables y funciones deberán ser de por si descriptivas por lo que este tipo de comentarios se reservan para partes del código especialmente enrevesadas.
+    \\ 
+    Los comentarios, cuando vayan en línea con el código, se situarán a dos espacios del mismo, dejando un espacio entre el comentario en sí y la doble barra.
+    
+\minititulo{TODO y notas}
+
+	En algunos casos se podrán dejar cosas para hacer en futuro (TODO) o notas aclaratorias (NOTE). En ambos casos se pondrá en mayúsculas y seguido de dos puntos. Quedando comentados mediante doble barra.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    // TODO: complete CW and CCW selection
+    // NOTE: important the use of mascares to obtain direction os movement
+
+    \end{lstlisting}
+    
+\minititulo{Código en desuso}
+
+En algunas situaciones hay fragmentos de código que ya no se utilizan o están temporalmente deshabilitados. Estos fragmentos serán comentados mediante barra y asterisco :
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+	/* ... 
+    ... some code ...
+    ... */
+
+    \end{lstlisting}
+    
+\section{Formato}\label{sec:codificacionSW:formato}
+
+\minititulo{Espacios y tabulaciones}
+
+Por norma general se utilizará cuatro espacios como indentación para distintos ámbitos. 
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+void ServoRHA::setWheelSpeedToPacket( ... ) {
+    ...    
+    if ( ... ) {
+        ...
+    }
+    ...  
+}
+
+    \end{lstlisting}
+    
+\minititulo{Declaración y definición de funciones}
+
+El valor de retorno así como los parámetros de una función deberán ir en la misma línea. En caso de no caber o para mayor claridad se pondrán a la misma altura que los anteriores.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    void ServoRHA::setWheelSpeedToPacket(uint8_t *buffer, uint16_t speed, uint8_t direction) {
+	...
+    }
+
+    void ServoRHA::setWheelSpeedToPacket(uint8_t *buffer, uint16_t speed,
+                                         uint8_t direction) {
+	...
+    }
+
+    \end{lstlisting}
+    
+    
+\minititulo{Condicionales}
+
+Como norma general no se dejarán espacios entre los paréntesis. Si se dejará un espacio entre la sentencia \codigo{if} y el condicional, así como entre este último y la llave que abre el ámbito condicional.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+//Forma correcta:
+    if (direction == CW) {
+        speed = speed | 0x0400;
+    }
+    
+//Ejemplos incorrectos:
+    if(direction == CW) {  // Falta un espacio tras la sentencia if
+    if (direction == CW){  // Falta un espacio entre el condicional y la llave
+    if(direction == CW){  // Combina los casos anteriores 
+
+    \end{lstlisting}
+    
+    En caso de que el condicional afecte solo a una sentencia esta se pondrá, como norma general, sin llaves y en la misma línea que el condicional. De igual forma se hará tras sentencias de tipo \codigo{else} o combinando \codigo{else if}. En caso de utilizar llaves se seguirá la norma que aplica a dicho caso.
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    if (speed1 < speed2-speed_margin) return ServoRHAConstants::LESS_THAN;
+    else if (speed1 > speed2+speed_margin) return ServoRHAConstants::GREATER_THAN;
+    else return ServoRHAConstants::EQUAL;
+
+    \end{lstlisting}
+    
+    Cuando si afecta a diferentes líneas y hay sentencias de tipo \codigo{else}, estas irán en la misma línea de cierre de llave del condicional (siempre que no afecte a la legibilidad del código ya sea por presencia de comentarios u otras causas similares).
+    \\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    if (...) {
+            ...
+        } else {
+            ...
+        }
+
+    \end{lstlisting}
+    
+\minititulo{Bucles}
+
+El formato será equivalente al caso de los condicionales:
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    for (...) {
+       ...
+    }
+    for (...) oneLineStatement;
+    while (condition) {
+        ...
+    }
+
+    \end{lstlisting}  
+    
+    
+\minititulo{Valor de retorno de funciones y métodos}
+
+No es necesario utilizar paréntesis para rodear la expresión a retornar. Solo se utilizarán en los casos en que se utilizarían si se fuera a asignar dicha expresión a una variable.
+
+\minititulo{Formato para clases}
+
+Las directivas \codigo{public}, \codigo{protected} y \codigo{private} irán indentados un espacio respecto a la definición de la clase. Por norma general irán precedidos por una línea en blanco (excepto cuando las preceda la definición de la propia clase).
+\\ 
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+
+class JointHandler {
+ private:  // un espacio
+    ...
+ public:
+    ...
+
+    \end{lstlisting} 
+    
+\minititulo{Espacios de nombre}
+
+Los espacios de nombres siguen la norma general para indentar diferentes ámbitos.
+
+\section{Espacios en blanco}\label{sec:codificacionSW:espacios_blanco}
+
+Los espacios horizontales dependerán de cada caso. En ningún caso se finalizará una línea con un espacio en blanco.
+
+\minititulo{Caso general}
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    void JointHandler::setTimer(uint64_t timer) {  // Un espacio entre el cierre del parentesis y la apertura de llaves
+    class TimerMicroseconds : public Timer {  // Espacio entre los dos puntos en casos de herencia o inicializadores dentro de constructores. Se pone un espacio a cada lado.
+    void checkWait()  // No se deja espacio entre el nombre y los parentesis. Tampoco entre parentesis vacios.
+    float getError() { return error_; }  // Se deja espacio entre llaves e implementacion, a ambos lados.
+
+    \end{lstlisting}
+
+\minititulo{Bucles, condicionales y estructuras de control}
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    if (b) {  // Espacio entre la sentencia if y la condicion, asi como esta misma con la apertura de llaves
+    } else {  // Espacios al rededor de la sentencia else
+    }
+    switch (i) {
+        case 1:  // No se deja espacio antes de los dos puntos
+        ...
+        case 2: break;  // Si se deja despues de los mismos
+    for (int i = 0 ; i < 5 ; i++) {  // En caso de bucles for, ademas de los espacios al rededor de los parentesis se dejara un espacio tras cada punto y coma.
+    \end{lstlisting}
+    
+\minititulo{Operadores}
+
+    \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
+    %Introducir label y caption
+    \begin{lstlisting}[frame=single]
+Ejemplo: 
+
+    // En general se deja un espacio al rededor de los distintos tipos de operadores
+    x = 0;
+    v = w * x + y / z;
+    v = w*x + y/z;
+    v = w * (x + z);
+    
+    // No se separan operadores unarios de sus argumentos:
+    x = -5;
+    x++;
+    if (x && !y)
+
+    \end{lstlisting}
+    
+\completarCon{¿Espacios verticales y horizontales deberian ir dentro de la seccion de formato no?}
+
+\section{Espacio vertical}
+
+Por lo general se dejaran espacios verticales para una mayor claridad del código sin abusar de los mismos. Aunque separar diferentes partes puede ayudar demasiados espacios verticales pueden dificultar la lectura de código.
+
+\completarCon{Hablar de como se definen las variables, cuando se pueden poner varias en la misma línea y demás}
+
+
+https://google.github.io/styleguide/cppguide.html

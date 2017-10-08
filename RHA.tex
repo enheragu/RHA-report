@@ -1,0 +1,157 @@
+% Plantilla realizada por Alberto Brunete (UPM). Basada en la de Santiago Morante Cendrero (UC3M)
+
+%parametros de tipo libro
+\documentclass[10pt,a4paper]{book}
+
+%idioma español y acentos
+\usepackage[spanish, es-tabla]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+
+%algunos símbolos matemáticos y paquete para usar subimágenes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage[title,titletoc,toc]{appendix}
+%Márgenes
+\usepackage[left=3cm,top=3cm,right=3cm,bottom=3cm]{geometry}
+\usepackage{url}
+%
+\usepackage{multicol}
+
+\usepackage{longtable}
+
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage[usenames]{color}
+
+ \definecolor{pRojo}{RGB}{255,30,30}
+ \definecolor{pAmarillo}{RGB}{255,203,15}
+ \definecolor{pAzul}{RGB}{60,145,188}
+ \definecolor{pVerde}{RGB}{92,196,123}
+ \definecolor{pGris}{RGB}{69,69,69}
+
+ %para generar índice con hipervínculos
+ \usepackage{hyperref}
+
+
+% %%%%%%%%% SUPER COMANDOS %%%%%%%%%%
+ \newcommand{\completar}{\textcolor{pRojo}{\small{\textbf{-- COMPLETAR --}}}}
+ \newcommand{\completarCon}[1]{ \textcolor{pRojo}{\small{\MakeUppercase{\textbf{#1}}}}}
+ \newcommand{\ingles}[1]{\textit{#1}}
+ \newcommand{\glosario}[1]{\ingles{\gls{#1}}}
+ \newcommand{\glosarioPlural}[1]{\ingles{\glspl{#1}}}
+ \newcommand{\minititulo}[1]{\subsection{#1}}
+ %\newcommand{\minititulo}[1]{{\vspace{\baselineskip}
+ %                            {\Large\textbf{#1}}
+ %                            \vspace{0.5\baselineskip plus 0pt}
+ %                            \normalsize}
+ %                            }
+ \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \usepackage[xindy,toc,nonumberlist]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
+ \makeglossaries
+ \usepackage[xindy]{imakeidx}
+ \makeindex
+
+\loadglsentries[main]{capitulos/glosario}
+% or using \input:
+%\input{INP-00-glossary}
+
+\graphicspath{figuras/} %path de los gráficos
+
+%parametros del documento (sus propiedades)
+\hypersetup{
+    pdftitle={Nombre del alumno - TFG - año},
+    pdfsubject={TFG - año},
+    pdfauthor={Nombre del alumno},
+    pdfkeywords={palabraclave1} {palabraclave2} {palabraclave3},
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+
+
+%empieza el documento
+\begin{document}
+
+% %elementos antes del trabajo en sí se meten dentro de frontmatter
+ \frontmatter
+
+% %cada incluye referencia a un archivo de tipo .tex
+ \include{capitulos/portada}
+
+ \include{capitulos/firmas}
+
+ %Licencia opcional
+ %\include{capitulos/licencia}
+
+ \include{capitulos/evaluacion}
+
+ \include{capitulos/agradecimientos}
+
+ \include{capitulos/resumen}
+
+ %genera índice
+ \tableofcontents
+
+% %índice de figuras.
+ \listoffigures
+
+ %índice de tablas.
+ \listoftables
+
+ \glsaddall
+ \printglossaries 
+
+ %empieza la parte descriptiva del trabajo
+ \mainmatter
+
+ \include{capitulos/introduccion}
+
+ %partes finales del trabajo: conclusiones, bibliografia y anexos
+
+ \include{capitulos/estadoarte}
+
+ \include{capitulos/mecanica}
+
+ \include{capitulos/electronica}
+
+ \include{capitulos/software}
+
+ \include{capitulos/control}
+
+ %\include{capitulos/ejemplos}
+
+ \include{capitulos/resultados}
+
+ \include{capitulos/gestion}
+
+ \include{capitulos/conclusion}
+
+ \include{capitulos/anexo}
+
+% \backmatter
+
+% %estilo de bibliografía: plana, alfa...
+% \bibliographystyle{plain}
+
+% %genera doble hoja en blanco
+% \cleardoublepage
+
+ %apartado de bibliografía
+% \addcontentsline{toc}{chapter}{Bibliografía}
+
+ %se incluye la bibliografía. Archivo de tipo .bib (bibtex)
+% \bibliography{bibliografia/bibliografia}
+
+%fin del documento
+\end{document}
