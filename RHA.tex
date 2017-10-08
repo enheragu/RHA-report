@@ -38,28 +38,13 @@
  \usepackage{hyperref}
 
 
-% %%%%%%%%% SUPER COMANDOS %%%%%%%%%%
- \newcommand{\completar}{\textcolor{pRojo}{\small{\textbf{-- COMPLETAR --}}}}
- \newcommand{\completarCon}[1]{ \textcolor{pRojo}{\small{\MakeUppercase{\textbf{#1}}}}}
- \newcommand{\ingles}[1]{\textit{#1}}
- \newcommand{\glosario}[1]{\ingles{\gls{#1}}}
- \newcommand{\glosarioPlural}[1]{\ingles{\glspl{#1}}}
- \newcommand{\minititulo}[1]{\subsection{#1}}
- %\newcommand{\minititulo}[1]{{\vspace{\baselineskip}
- %                            {\Large\textbf{#1}}
- %                            \vspace{0.5\baselineskip plus 0pt}
- %                            \normalsize}
- %                            }
- \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
- \usepackage[xindy,toc,nonumberlist]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
+\usepackage[xindy,toc,acronyms,nonumberlist]{glossaries}
+ %\usepackage[xindy,acronym,toc,nonumberlist,sort=use]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
  \makeglossaries
  \usepackage[xindy]{imakeidx}
  \makeindex
 
-\loadglsentries[main]{capitulos/glosario}
+ \loadglsentries[main]{capitulos/glosario}
 % or using \input:
 %\input{INP-00-glossary}
 
@@ -78,6 +63,23 @@
     urlcolor=black,
 }
 
+
+% %%%%%%%%% SUPER COMANDOS %%%%%%%%%%
+\newcommand{\completar}{\textcolor{pRojo}{\small{\textbf{-- COMPLETAR --}}}}
+\newcommand{\completarCon}[1]{ \textcolor{pRojo}{\small{\MakeUppercase{\textbf{#1}}}}}
+\newcommand{\ingles}[1]{\textit{#1}}
+\newcommand{\glosario}[1]{\ingles{\gls{#1}}}
+\newcommand{\glosarioPlural}[1]{\ingles{\glspl{#1}}}
+\newcommand{\minititulo}[1]{\subsection{#1}}
+%\newcommand{\minititulo}[1]{{\vspace{\baselineskip}
+%                            {\Large\textbf{#1}}
+%                            \vspace{0.5\baselineskip plus 0pt}
+%                            \normalsize}
+%                            }
+\newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
+\newcommand{\iconoImagen}[1]{\centering \includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}
+%width height
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %empieza el documento
@@ -109,8 +111,11 @@
  %índice de tablas.
  \listoftables
 
- \glsaddall
+ %\glsaddall
+ %\printglossary[type={main,acronym}]
+ %\printglossary[type=\acronymtype]
  \printglossaries 
+% TODO: \glsaddall
 
  %empieza la parte descriptiva del trabajo
  \mainmatter

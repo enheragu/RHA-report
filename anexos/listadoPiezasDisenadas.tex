@@ -1,23 +1,92 @@
 \completar
 \begin{center}
-\begin{longtable}{|c|c|c|c|}
-\caption{Listado de piezas diseñadas e imprimibles}\\
+\begin{longtable}{|c|c|c|c|c|c|}
+\caption{Listado de piezas diseñadas de fabricación propia}\\
 \hline
-\textbf{Esquema Pieza} & \textbf{Referencia} & \textbf{Cantidad} & \textbf{Peso Estimado {\completarCon{footnote?}El peso estimado se obtiene con el programa Cura \completar aplicando los parámetrosñ de la tabla \ref{tab:listadoPiezas:param_impresion}}} \\
+\textbf{Num} & \textbf{Esquema Pieza} & \textbf{Referencia} & \textbf{Cantidad} & \textbf{Descripción} & \textbf{Peso Estimado}$^1$ \\
 \hline
 \endfirsthead
-\multicolumn{4}{c}%
+\multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continuación de la página anterior}} \\
 \hline
-\textbf{Esquema Pieza} & \textbf{Referencia} & \textbf{Cantidad} & \textbf{Peso Estimado} \\
+\textbf{Num} & \textbf{Esquema Pieza} & \textbf{Referencia} & \textbf{Cantidad} & \textbf{Descripción} & \textbf{Peso Estimado}$^1$ \\
 \hline
 \endhead
-\hline \multicolumn{4}{r}{\textit{Continua en la página siguiente}} \\
+\multicolumn{5}{l}{\begin{minipage}{.8\linewidth}
+	%do not draw the footnoterule
+	\footnotesize{$^1$ El peso estimado se obtiene con el programa Cura \completar aplicando los parámetros de la tabla \ref{tab:listadoPiezas:param_impresion}. Este peso incluye el de los soportes necesarios para su impresión.}
+\end{minipage}} \\ 
+\hline \multicolumn{5}{r}{\textit{Continua en la página siguiente}} \\
 \endfoot
 \hline
+%\insertTableNotes
 \endlastfoot
-a & a & a & a \\ 
+1 & \iconoImagen{Base} & blah & 1  & blah & 193g \\
+\hline
+2 & \iconoImagen{RailA} & blah & 1 & blah & 24g \\
+\hline
+3 & \iconoImagen{RailB} & blah & 1 & blah & 24g \\
+\hline
+4 & \iconoImagen{PoleaMotor} & blah & 2 & blah & 3g \\
+\hline
+5 & \iconoImagen{EncajeTuboInterior} & blah & 1 & blah & 54g \\
+\hline
+6 & \iconoImagen{EncajeTuboExterior} & blah & 1 & blah & 128g \\
+\hline
+7 & \iconoImagen{FijacionBarraPieB} & blah & 1 & blah & blah \\
+\hline
+8 & \iconoImagen{FijacionBarraPie} & blah & 1 & blah & blah \\
+\hline
+10 & \iconoImagen{RuedaMotorGiroZ} & blah & 1 & blah & 18g \\
+\hline
+19 & \iconoImagen{AdaptadorPoleaNegra} & blah & 2 & blah & 1g \\
+\hline
+19 & \iconoImagen{AdaptadorPoleaNegra} & \completarCon{SeparadorPoleas} & 2 & blah & 20g \\
+\hline
+9 & \iconoImagen{SoportePlaca} & blah & 1 & 10g \\
+\hline
+11 & \iconoImagen{UnionBarrasIntermediasA} & blah & 1 & blah & blah \\
+\hline
+12 & \iconoImagen{UnionBarrasIntermediasB} & blah & 1 & blah & blah \\
+\hline
+13 & \iconoImagen{RuedaTransmisionSuperior} & blah & 1 & blah & 8g \\
+\hline
+14 & \iconoImagen{TapaPotenciometro} & blah & 1 & blah & blah \\
+\hline
+15 & \iconoImagen{TapaPotenciometro} & \completarCon{Engranaje1} & 1 & blah & blah \\
+\hline
+16 & \iconoImagen{TapaPotenciometro} & \completarCon{Engranaje2} & 1 & blah & blah \\
+\hline
+17 & \iconoImagen{UnionBarrasSuperiorA} & blah & 1 & blah & blah \\
+\hline
+18 & \iconoImagen{PoleaColumpioRedir} & blah & 3 & blah & blah \\
+\hline
+19 & \iconoImagen{CubrePoleaColumpio} & blah & 2 & blah & 6g \\
+\hline
+20 & \iconoImagen{CubrePoleaColumpioB} & blah & 2 & blah & blah \\
+\hline
+21 & \iconoImagen{CubrePoleaRedireccionB} & blah & 1 & blah & blah \\
+\hline
+22 & \iconoImagen{CubrePoleaRedireccion} & blah & 1 & blah & blah \\
+\hline
+23 & \iconoImagen{PiezaRodamientosSandwich} & blah & 2 & blah & 39g \\
+\hline
+24 & \iconoImagen{PiezaRodamientosSandwichB} & blah & 1 & blah & 39g \\
+\hline
+25 & \iconoImagen{PiezaRodamientosSandwichPotenciometro} & blah & 1 & blah & 44g \\
+\hline 
+26 & \iconoImagen{PiezaRodamientosSandwichPotenciometro} & \completarCon{Falta tapa potenciometro} & 1 & 1 & 2g \\
+\hline
+27 & \iconoImagen{PiezaMetacrilato} & blah & 2 & blah & - \\
+\hline
+28 & \iconoImagen{PiezaUnionSandwich} & blah & 4 & blah & 9g \\
+\hline
+29 & \iconoImagen{RealimentacionSandwich} & blah & 1 & blah & 24g \\
+\hline
+30 & \iconoImagen{SandwichAcoplamientoRodamientoBarra} & blah & 1 & blah & blah \\
+\hline
 \end{longtable}
+
 \end{center}
 
 
@@ -28,7 +97,8 @@ a & a & a & a \\
     \begin{minipage}{\textwidth}
     \begin{tabular}{ |c|c|c|c| }
     \hline
-    \completar & \completar & \completar & \completar \\
+    a & a & a & a \\ 
+    %1 & \iconoImagen{Base}{0.2} & blah & \completar \\
     \hline
     \end{tabular}
     \end{minipage}
