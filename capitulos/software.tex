@@ -5,10 +5,18 @@
     En este capítulo se hace una descripción detallada del \ingles{software} involucrado en este proyecto. Primeramente se hace un repaso de la estructura de directorios, que es característica y viene previamente marcada por el software utilizado. Una vez explicado se pasará a describir las diferentes librerías que se han desarrollado (sección \ref{sec:SW:lib}) y del directorio de fuentes principal SRC (sección \ref{sec:SW:src}). Se deja para una sección posterior la interacción e integración de estos objetos así como una explicación más detallada del flujo de la información, funcionamiento del sistema como ejemplos de uso (sección \ref{sec:SW:interacion_informacion_proced}). Finalmente se exponen los test realizados sobre el software (sección \ref{sec:SW:test}) así como la gestión de la complejidad (sección \ref{sec:SW:gestion_complejidad}) del proyecto.
     \\ 
 
-    Para el desarrollo y test del software se ha utilizado el editor \glosario{Atom} ampliando su funcionalidad con el paquete \glosario{PlatformIO}, que expande las capacidades del editor base para permitir trabajar con diferentes placas, entre ellas las de la gama de \glosario{Arduino}.
+    Para el desarrollo y test del software se ha utilizado el editor \glosario{Atom} ampliando su funcionalidad con el paquete \glosario{PlatformIO}, que expande las capacidades del editor base para permitir trabajar con diferentes placas \completar, entre ellas las de la gama de \glosario{Arduino}.
     \\ 
     
-    La elección de esta herramienta conlleva un formato en el árbol de directorios en los que se separa el código determinado. Concretamente queda de la siguiente manera:
+    La elección de esta herramienta conlleva un formato en el árbol de directorios en los que se separa el código debido a la forma que tiene de compilar y lincar los diferentes ficheros. De esta manera y para mantener el orden los ficheros de código se separan en distintos directorios:
+    
+    \begin{itemize}
+    	\item lib: directorio donde se introducen, en carpetas, las librerías que se van a utilizar.
+    	\item src: directorio donde se introduce el fichero o ficheros de código principales.
+    	\item test: directorio donde se introducen los ficheros donde se codifican los test. Estos irán metidos dentro de directorios con el nombre de cada test.
+    \end{itemize}
+    
+    Concretamente, en el caso de este proyecto, queda el siguiente árbol de directorios en el cual se han expandido hasta el nivel de ficheros en algunos casos de modo que sirvan de ejemplo:
 
     \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
         %Introducir label y caption
@@ -16,22 +24,27 @@
         
      -- Sw
      |-- lib
-     |  |-- debug
-     |  |-- joint_handler
-     |  |-- joint_rha
-     |  |-- rha_types
-     |  |-- robot_rha
-     |  |-- servo_rha
-     |  |-- chuck_handler
-     |  |-- readme.txt
+     |   |-- debug
+     |   |   | + debug.cpp
+     |   |   | + debug.h
+     |   |-- joint_handler
+     |   |   | + joint_handler.cpp
+     |   |   | + joint_handler.h
+     |   |-- joint_rha
+     |   |-- rha_types
+     |   |-- robot_rha
+     |   |-- servo_rha
+     |   |-- chuck_handler
+     |   |-- readme.txt
      |-- src  
-     |  |-- main.cpp
-     |  |-- utilities.cpp
-     |  |-- utilities.h
+     |   |-- main.cpp
+     |   |-- utilities.cpp
+     |   |-- utilities.h
      |-- test
-     |  |-- test_cytrong_g15_servo
-     |  |-- test_servo_mock
-     |  |-- test_servo_real
+     |   |-- a_test_servo_rha
+     |   |   | + test_servo_rha.cpp
+     |   |-- b_ttest_servo_realest_joint_rha
+     |   |-- c_test_joint_handler_mock
      |-- platformio.ini
      -------
      |-- code_analysis
