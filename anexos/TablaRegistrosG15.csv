@@ -1,0 +1,52 @@
+&&&&&&
+Area&Address (Hex)&Parameter&Read only /Read Write& Factory default value (Hex)&Minimum value (Hex)&Maximum value (Hex)
+EEPROM&0 (0x00)&Model (L)&R&‘G’ (0x0F)&-&-
+&1 (0x01)&Model(H)&R&15 (0x47)&-&-
+&2 (0x02)&Firmware Revision&R&&-&-
+&3 (0x03)&ID&RW&1 (0x01)&0 (0x00)&253 (0xFD)
+&4 (0x04)&Baud Rate&RW&103 (0x67)&3 (0x03)&255 (0xFF)
+&5 (0x05)&Return Delay&RW&250 (0xFA) &1 (0x01) &255 (0xFF)
+&6 (0x06)&CW Angle Limit (L)&RW&0 (0x0000)& 0 (0x0000) &1087 (0x043F)
+&7 (0x07)&CW Angle Limit (H)&RW&&&
+&8 (0x08)&CCW Angle Limit (L)&RW&1087 (0x043F)& 0 (0x0000) &1087 (0x043F)
+&9 (0x09)&CCW Angle Limit (H)&RW&&&
+&10 (0x0A)&Reserved&-&-&-&-
+&11 (0x0B)&Temperature Limit&RW&70 (0x46)&0 (0x00)&
+&12 (0x0C)&Lowest Voltage Limit&RW&65 (0x41)&65 (0x41)&178 (0xB2)
+&13 (0x0D)&Highest Voltage Limit&RW&150 (0x96) &&
+&14 (0x0E)&Max Torque (L)&RW&1023 (0x03FF)& 0 (0x0000) &1023 (0x03FF)
+&15 (0x0F)&Max Torque (H)&RW&&&
+&16 (0x10)&Return Packet Enable&RW&2 (0x02)&0 (0x00)&2 (0x02)
+&17 (0x11)&Alarm LED&RW&36 (0x24)&0 (0x00)&127 (0x7F)
+&18 (0x12)&Alarm Shutdown&RW&36 (0x24)&0 (0x00)&127 (0x7F)
+&19 (0x13)&Reserved&-&-&-&-
+&20 (0x14)&Down Calibration (L)&R&&&
+&21 (0x15)&Down Calibration (H)&R&&&
+&22 (0x16)&Up Calibration (L)&R&&&
+&23 (0x17)&Up Calibration (H)&R&&&
+RAM&24 (0x18)&Torque Enable&RW&0 (0x00)&0 (0x00)&1 (0x01)
+&25 (0x19)&LED&RW&0 (0x00)&0 (0x00)&1 (0x01)
+&26 (0x1A)&CW Compliance Margin&RW&1 (0x01)&0 (0x00)&
+&27 (0x1B)&CCW Compliance&RW&1 (0x01)&0 (0x00)&
+&28 (0x1C)&CW Compliance Slope&RW&&1 (0x01)&
+&29 (0x1D)&CCW Compliance Slope&RW&&1 (0x01)&
+&30 (0x1E)&Goal Position (L)&RW&Address 36& 0 (0x0000) &1087 (0x043F)
+&31 (0x1F)&Goal Position (H)&RW&Address 37&&
+&32 (0x020)&Moving Speed (L)&RW& 0 (0x0000) & 0 (0x0000) &1023 (0x03FF)
+&33 (0x21)&Moving Speed (H)&RW&&&
+&34 (0x22)&Torque Limit (L)&RW&Address 14& 0 (0x0000) &1023 (0x03FF)
+&35 (0x23)&Torque Limit (H)&RW&Address 15&&
+&36 (0x24)&Present Position (L)&R&&&
+&37 (0x25)&Present Position (H)&R&&&
+&38 (0x26)&Present Speed (L)&R&&&
+&39 (0x27)&Present Speed (H)&R&&&
+&40 (0x28)&Present Load (L)&R&&&
+&41 (0x29)&Present Load (H)&R&&&
+&42 (0x2A)&Present Voltage&R&&&
+&43 (0x2B)&Present Temperature&R&&&
+&44 (0x2C)&Registered&R&0 (0x00)&0 (0x00)&1 (0x01)
+&45 (0x2D)&Reserved&-&-&-&-
+&46 (0x2E)&Moving&R&0 (0x00)&0 (0x00)&1 (0x01)
+&47 (0x2F)&Lock&RW&0 (0x00)&1 (0x01)&1 (0x01)
+&48 (0x30)&Punch (L)&RW&32 (0x0020)&0 (0x0000)&1023 (0x03FF)
+&49 (0x31)&Punch (H)&RW&&&

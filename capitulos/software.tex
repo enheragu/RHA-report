@@ -197,6 +197,38 @@
 
 \section{Interacción entre objetos, flujo de la información y de procedimientos} \label{sec:SW:interacion_informacion_proced}
 
+	Como se ha visto en los apartados anteriores (sección \ref{sec:SW:lib}) el control de la información está separado entre los diferentes objetos. Primeramente se va a detallar como se distribuye y gestiona la información para el control de velocidad, revisando como se construyen los paquetes necesarios para satisfacer los requerimientos del protocolo de comunicación de los servos.
+	\\ 
+	Como se ha visto es el objeto de tipo \ingles{JointRHA} el encargado de almacenar la información concreta de cada articulación. Aúna la información de la realimentación de posición del potenciómetro con la contenida en el objeto \ingles{ServoRHA} que contiene. Este último almacena la información referente al servo, tanto el estado como la acción de control de velocidad así como la próxima consigna de velocidad (traducida a par) que se va a enviar.
+	\\ 
+	
+	La información fluye entre los diferentes objetos en forma de paquetes (vectores o arrays de \ingles{bytes}) que se van completando por el responsable de cada operación.
+	\\ 
+
+	El objeto JoingHandler es el encargado de adecuar la información al protocolo de comunicación concreto de los servos. Para ello pide a los servos la información concreta que se va a enviar a cada en cada caso. Se exponen a continuación dos ejemplos:
+	\begin{enumerate}
+		\item Un primer caso de lectura de información (actualizar la información de los servos)
+		\item Un ejemplo de una operación de escritura (enviar una consigna de velocidad a los servos).
+	\end{enumerate} 
+	
+	En el primer caso será el objeto \ingles{JointHandler} quien pase un paquete vacío al objeto \ingles{JointRHA} (en este caso se pretende actualizar la información del objeto \ingles{ServoRHA} por lo que se accederá al mismo directamente) con una petición de que se almacene en dicho paquete la información referente a la lectura: cuantos bytes se quieren leer y a partir de que dirección de memoria en los registros de los servos (se puede ver una tabla con todas las direcciones de memoria disponibles en los servos en el Anexo \ref{app:registros_g15}).
+	\\ 
+	
+	De esta forma el Servo recibe un paquete vacío que rellena con la información correspondiente y lo devuelve al objeto \ingles{JointHandler}, que, a partir de esa información monta un paquete acorde con el protocolo de los servos añadiendo la cabecera correspondiente, la comprobación del error y la orden para que se realice una operación de lectura, entre otros datos.
+	\\ 
+	
+	Una vez enviado, y tratándose de una operación de lectura se espera la respuesta por parte del servo correspondiente, en caso de ser satisfactoria (no se haya producido ningún error durante la operación) se filtra nuevamente la cabecera y demás información propia del protocolo de comunicación para volver a enviar, ahora lleno, el paquete de información con los bytes pedidos al objeto ServoRHA.
+	
+	\completarCon{Incluir diagrama con el flujo de información y ejemplo}
+	
+	El segundo caso será equivalente. El servo rellena en el \ingles{buffer} la información propia como es el ID del servo, la posición sobre la que se quiere escribir, el número de bytes a escribir y la información que se escribirá.
+	\\ 
+	El objeto \ingles{JointHandler} se encarga de rellenar los datos propios del protocolo añadiendo en este caso una orden de escritura en el paquete.
+	\\ 
+	\completarCon{Incluir diagrama con el flujo de la información y ejemplo}
+	
+	\completarCon{Comentar el resto del software}
+	
 \section{Test y verificación del software} \label{sec:SW:test}
     Como parte del proyecto se han desarrollado una serie de test para verificar el correcto funcionamiento de las diferentes librerías. El \ingles{testing} del \ingles{software} se ha utilizado como herramienta implémentandose solo en aquellos casos en que facilita la verificación y comprobación del correcto funcionamiento del código implementado. El \ingles{testing} del código no forma parte del núcleo del proyecto por lo que no se han establecido porcentajes mínimos de cobertura (cantidad de código que se está evaluando a través de las pruebas) ni objetivos mínimos. Los test son puramente funcionales desarrollándose los necesario y no forzando el desarrollo de los distintos niveles de \ingles{test}: test unitarios, test de integración y test de sistemas. \completarCon{Alguna cita que hable de los niveles de test}
 
@@ -233,7 +265,7 @@
         \item Número de ficheros.
         \item Número de funciones.
         \item Media de métodos por fichero.
-        \item Complejidad ciclomática (media entre todos los métodos así como valores extremos).
+        \item Complejidad ciclomática \completarCon{Comentar que es la complejidad ciclomática...¿Glosario o directamente aquí?} (media entre todos los métodos así como valores extremos).
     \end{enumerate}
     
     Las métricas de la uno a la cinco de la lista anterior permiten controlar un desarrollo paralelo y equilibrado entre el código así como la documentación del mismo. De igual forma, aunque menos importante, permiten ver el desarrollo paralelo de métodos de \ingles{debugging}. Este se considera menos importante ya que en su mayoría se ha implementado, más que como metodología de desarrollo, cuando las pruebas del software lo requieren.

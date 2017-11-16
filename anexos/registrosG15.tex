@@ -1,0 +1,63 @@
+
+
+\begin{table}[htbp]
+	\caption{Características mas importantes de los Servos G15 de Cytron. Tabla traducida y resumida a los puntos más importantes del Cytron G15 Cube servo User Manual \cite{CytronTechnologies2012} \completarCon{¿esto está bien, hay que poner paginas involucradas?}}
+	\label{tab:g15_catact}
+	\begin{adjustwidth}{-1.9cm}{-1.5cm}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\textbf{Area} & \textbf{\shortstack{Address\\ (Hex)}} & \textbf{Parameter} & \textbf{\shortstack{Read only \\ /Read Write}} & \textbf{\shortstack{Factory\\ default\\ value (Hex)}} & \textbf{\shortstack{Minimum\\ value (Hex)}} & \textbf{\shortstack{Maximum\\ value (Hex)}} \\ \hline
+		\multicolumn{ 1}{|c|}{EEPROM} & 0 (0x00) & Model (L) & R & ‘G’ (0x0F) & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 1 (0x01) & Model(H) & R & 15 (0x47) & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 2 (0x02) & Firmware Revision & R &  & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 3 (0x03) & ID & RW & 1 (0x01) & 0 (0x00) & 253 (0xFD) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 4 (0x04) & Baud Rate & RW & 103 (0x67) & 3 (0x03) & 255 (0xFF) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 5 (0x05) & Return Delay & RW & 250 (0xFA)  & 1 (0x01)  & 255 (0xFF) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 6 (0x06) & CW Angle Limit (L) & RW & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1087 (0x043F)} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 7 (0x07) & CW Angle Limit (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 8 (0x08) & CCW Angle Limit (L) & RW & \multicolumn{ 1}{c|}{1087 (0x043F)} & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1087 (0x043F)} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 9 (0x09) & CCW Angle Limit (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 10 (0x0A) & Reserved & - & - & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 11 (0x0B) & Temperature Limit & RW & 70 (0x46) & 0 (0x00) &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 12 (0x0C) & Lowest Voltage Limit & RW & 65 (0x41) & 65 (0x41) & 178 (0xB2) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 13 (0x0D) & Highest Voltage Limit & RW & 150 (0x96)  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 14 (0x0E) & Max Torque (L) & RW & \multicolumn{ 1}{c|}{1023 (0x03FF)} & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1023 (0x03FF)} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 15 (0x0F) & Max Torque (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 16 (0x10) & Return Packet Enable & RW & 2 (0x02) & 0 (0x00) & 2 (0x02) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 17 (0x11) & Alarm LED & RW & 36 (0x24) & 0 (0x00) & 127 (0x7F) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 18 (0x12) & Alarm Shutdown & RW & 36 (0x24) & 0 (0x00) & 127 (0x7F) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 19 (0x13) & Reserved & - & - & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 20 (0x14) & Down Calibration (L) & R &  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 21 (0x15) & Down Calibration (H) & R &  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 22 (0x16) & Up Calibration (L) & R &  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 23 (0x17) & Up Calibration (H) & R &  &  &  \\ \hline
+		\multicolumn{ 1}{|c|}{RAM} & 24 (0x18) & Torque Enable & RW & 0 (0x00) & 0 (0x00) & 1 (0x01) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 25 (0x19) & LED & RW & 0 (0x00) & 0 (0x00) & 1 (0x01) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 26 (0x1A) & CW Compliance Margin & RW & 1 (0x01) & 0 (0x00) & 254(0xFE) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 27 (0x1B) & CCW Compliance & RW & 1 (0x01) & 0 (0x00) & 254(0xFE) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 28 (0x1C) & CW Compliance Slope & RW & 32 (0x0020) & 1 (0x01) & 254(0xFE) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 29 (0x1D) & CCW Compliance Slope & RW & 32 (0x0020) & 1 (0x01) & 254(0xFE) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 30 (0x1E) & Goal Position (L) & RW & Address 36 & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1087 (0x043F)} \\ \cline{ 2- 5}
+		\multicolumn{ 1}{|c|}{} & 31 (0x1F) & Goal Position (H) & RW & Address 37 & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 32 (0x020) & Moving Speed (L) & RW & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1023 (0x03FF)} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 33 (0x21) & Moving Speed (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 34 (0x22) & Torque Limit (L) & RW & Address 14 & \multicolumn{ 1}{c|}{ 0 (0x0000) } & \multicolumn{ 1}{c|}{1023 (0x03FF)} \\ \cline{ 2- 5}
+		\multicolumn{ 1}{|c|}{} & 35 (0x23) & Torque Limit (H) & RW & Address 15 & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 36 (0x24) & Present Position (L) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 37 (0x25) & Present Position (H) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 38 (0x26) & Present Speed (L) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 39 (0x27) & Present Speed (H) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 40 (0x28) & Present Load (L) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 41 (0x29) & Present Load (H) & R & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 42 (0x2A) & Present Voltage & R &  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 43 (0x2B) & Present Temperature & R &  &  &  \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 44 (0x2C) & Registered & R & 0 (0x00) & 0 (0x00) & 1 (0x01) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 45 (0x2D) & Reserved & - & - & - & - \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 46 (0x2E) & Moving & R & 0 (0x00) & 0 (0x00) & 1 (0x01) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 47 (0x2F) & Lock & RW & 0 (0x00) & 1 (0x01) & 1 (0x01) \\ \cline{ 2- 7}
+		\multicolumn{ 1}{|c|}{} & 48 (0x30) & Punch (L) & RW & \multicolumn{ 1}{c|}{32 (0x0020)} & \multicolumn{ 1}{c|}{0 (0x0000)} & \multicolumn{ 1}{c|}{1023 (0x03FF)} \\ \cline{ 2- 4}
+		\multicolumn{ 1}{|c|}{} & 49 (0x31) & Punch (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \hline
+	\end{tabular}
+\end{adjustwidth}
+\end{table}	
+
