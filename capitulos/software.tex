@@ -105,7 +105,7 @@
         
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.8\textwidth]{figuras/SW/class_diagram_TRHA.png}   
+            \includegraphics[width=0.8\textwidth]{figuras/Imagenes_SW/class_diagram_TRHA.png}   
             \caption{Estructuras de datos auxiliares}
             \label{fig:SW:class_diagram_TRHA}
         \end{figure}
@@ -124,7 +124,7 @@
         
         \begin{figure}[H]
         \centering
-        \includegraphics[width=0.45\textwidth]{figuras/SW/joint_handler_loop.png}   
+        \includegraphics[width=0.45\textwidth]{figuras/Imagenes_SW/joint_handler_loop.png}   
         \caption{Esquema de ejecución de bucle de control de joint\_handler}
         \label{fig:SW:joint_handler_loop}
         \end{figure}
@@ -133,14 +133,14 @@
         
         \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\textwidth]{figuras/SW/servo_control_loop.png}   
+        \includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/servo_control_loop.png}   
         \caption{Lazo de control de la velocidad del servo. Cálculos realizados por el objeto \ingles{ServoRHA}.}
         \label{fig:SW:servo_control_loop}
         \end{figure}
             
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.95\textwidth]{figuras/SW/class_diagram_JH.png}   
+            \includegraphics[width=0.95\textwidth]{figuras/Imagenes_SW/class_diagram_JH.png}   
             \caption{Atributos y métodos más relevantes del objeto \textit{JointHandler}}
             \label{fig:SW:class_diagram_JH}
         \end{figure}
@@ -152,7 +152,7 @@
         
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.5\textwidth]{figuras/SW/class_diagram_JRHA.png}   
+            \includegraphics[width=0.5\textwidth]{figuras/Imagenes_SW/class_diagram_JRHA.png}   
             \caption{Atributos y métodos más relevantes del objeto \textit{JointRHA}}
             \label{fig:SW:class_diagram_JRHA}
         \end{figure}
@@ -166,14 +166,14 @@
         Gestiona además una parte importante referente al lazo de control de velocidad del servo vista en el apartado \ref{subsec:SW:lib:joint_handler}. El objeto \ingles{ServoRHA} contiene los datos del regulador utilizado así como el offset a aplicar. De esta forma, recibiendo el error realiza las operaciones para calcular y empaquetar el \ingles{torque} deseado. En la Figura \ref{fig:SW:servo_control_loop_servo_part} se representa, recuadrado, la parte correspondiente del lazo de control de velocidad (representado anteriormente en la Figura \ref{fig:SW:servo_control_loop}) que efectúa el objeto en cuestión.
         \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\textwidth]{figuras/SW/servo_control_loop_servo_part.png}   
+        \includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/servo_control_loop_servo_part.png}   
         \caption{Lazo de control de la velocidad del servo. Cálculos realizados por el objeto \textit{ServoRHA}.}
         \label{fig:SW:servo_control_loop_servo_part}
         \end{figure}
         
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.65\textwidth]{figuras/SW/class_diagram_SRHA.png}   
+            \includegraphics[width=0.65\textwidth]{figuras/Imagenes_SW/class_diagram_SRHA.png}   
             \caption{Atributos y métodos más relevantes del objeto \textit{ServoRHA}}
             \label{fig:SW:class_diagram_SRHA}
         \end{figure}
@@ -192,6 +192,13 @@
         
     \subsection{chuck\_handler} \label{subsec:SW:lib:chuck_handler}
         La librería \ingles{chuck\_handler} codifica el objeto de tipo ChuckHandler que se encarga de implementar todo lo necesario para realizar lecturas del mando \ingles{Nunchuck} de la \ingles{Wii} y devolver comandos de velocidad con un periodo establecido. Se llamará al método correspondiente de forma continuada devolviendo este los valores de velocidad cuando se cumpla el tiempo mínimo establecido.
+
+        \begin{figure}[H]
+          	\centering
+          	\includegraphics[width=0.65\textwidth]{figuras/Imagenes_SW/class_diagram_CHH.png}   
+          	\caption{Atributos y métodos más relevantes del objeto \textit{ChuckHandler}}
+          	\label{fig:SW:class_diagram_CHH}
+        \end{figure}
         
 \section{SRC. Fichero de código principal} \label{sec:SW:src}
 
@@ -199,6 +206,14 @@
 
 	Como se ha visto en los apartados anteriores (sección \ref{sec:SW:lib}) el control de la información está separado entre los diferentes objetos. Primeramente se va a detallar como se distribuye y gestiona la información para el control de velocidad, revisando como se construyen los paquetes necesarios para satisfacer los requerimientos del protocolo de comunicación de los servos.
 	\\ 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\textwidth]{figuras/Imagenes_SW/class_relation.png}   
+		\caption{Relaciones entre las diferentes Clases \completarCon{Hacer imagen con el mismo estilo que anteriormente}}
+		\label{fig:SW:class_relation}
+	\end{figure}
+	
 	Como se ha visto es el objeto de tipo \ingles{JointRHA} el encargado de almacenar la información concreta de cada articulación. Aúna la información de la realimentación de posición del potenciómetro con la contenida en el objeto \ingles{ServoRHA} que contiene. Este último almacena la información referente al servo, tanto el estado como la acción de control de velocidad así como la próxima consigna de velocidad (traducida a par) que se va a enviar.
 	\\ 
 	
@@ -277,7 +292,7 @@
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{figuras/SW/analisis_codigo.png}   
+        \includegraphics[width=0.75\textwidth]{figuras/Imagenes_SW/analisis_codigo.png}   
         \caption{Análisis del código del proyecto}
         \label{fig:SW:code_analysis}
     \end{figure}

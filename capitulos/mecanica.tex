@@ -15,20 +15,44 @@ En este capítulo se describen los aspectos mecánicos y se valoran diferentes c
     
     De esta forma aseguramos que el usuario, en cualquier momento, podrá desplazar el robot superando el rozamiento de esta cadena de transmisión anulando, en caso de estar en proceso, el movimiento que pueda estar efectuando el \glosario{servo}.
 	\\ 
-	En la figura \completar se puede ver en detalle el montaje de dicha estructura. Las piezas de la imagen se encuentran, con la misma referencia, en el Anexo \ref{app:listadoPiezas}.
+	En la figura \ref{fig:Mecanica:giro_z} se puede ver en detalle el montaje de dicha estructura. Las piezas de la imagen se encuentran, con la misma referencia, en el Anexo \ref{app:listadoPiezas}.
 	
-	\completarCon{Añadir imagen}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{figuras/Imagenes_Mecanica/RuedasGiroZ.png}   
+		\caption{Montaje de la transmisión del movimiento del servo a la articulación encargada de girar en Z}
+		\label{fig:Mecanica:giro_z}
+	\end{figure}
+
 \section{Articulaciones dos y tres. Posicionamiento en el plano sagital} \label{sec:Mecanica:articulacion_dostres}
     Estas dos articulaciones son las encargadas de posicionar el extremo en el plano sagital del robot.
-    
-    Están formadas por dos mecanismos de cuatro barras acoplados en serie. Tienen la particularidad de que las barras son iguales dos a dos, de forma que las barras se mantienen siempre en paralelo. Esta particularidad asegura que el extremo se mantenga siempre perpendicular al plano del suelo, de forma que se desacopla la orientación del extremo de la posición del mismo.
+    \\ 
     
     \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{figuras/mecanismos_4_barras.png}   
-    \caption{Esquema de la cadena cinemática correspondiente a los \completarCon{Glosario a GDL} dos y tres}
-    \label{fig:Mecanica:4_bar_mecanism}
+       	\centering
+       	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras_triangulo.png}   
+       	\caption{Esquema de la cadena cinemática correspondiente a los \completarCon{Glosario a GDL} dos y tres. Idea preliminar}
+       	\label{fig:Mecanica:4_bar_mecanism_triangle}
     \end{figure}
+    
+    Están formadas por dos mecanismos de cuatro barras acoplados en serie. Tienen la particularidad de que las barras son iguales dos a dos, de forma que las barras se mantienen siempre en paralelo. Esta particularidad asegura que el extremo se mantenga siempre perpendicular al plano del suelo, de forma que se desacopla la orientación del extremo de la posición del mismo.
+    \\ 
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras.png}   
+    	\caption{Esquema de la cadena cinemática correspondiente a los \completarCon{Glosario a GDL} dos y tres}
+    	\label{fig:Mecanica:4_bar_mecanism}
+    \end{figure}
+    
+    Como se puede ver en la figura \ref{fig:Mecanica:4_bar_mecanism} la actuación se realiza sobre cada articulación en los puntos marcados. El movimiento se transmite desde los servos ubicados en la base de la articulación 1 hasta las mismas a través de un hilo de \ingles{kevlar}. Un sistema de poleas amplifica y redirige el par hasta los mismos. En la figura \ref{fig:Mecanica:transmision_poleas_cuerda} se puede ver como se redirecciona el hilo desde la base en dirección hacia las articulaciones superiores.
+    
+   	\begin{figure}[H]
+   		\centering
+   		\includegraphics[width=0.6\textwidth]{figuras/Imagenes_Mecanica/TransmisionMotorArticulacion.png}   
+   		\caption{Montaje de la transmisión del movimiento de los servos a las articulaciones 2 y tres.}
+   		\label{fig:Mecanica:transmision_poleas_cuerda}
+   	\end{figure}
 
 \section{Posicionamiento de sensores y actuadores} \label{sec:Mecanica:sensores_actuadore}
 
