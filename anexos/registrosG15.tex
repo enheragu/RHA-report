@@ -46,9 +46,9 @@
 			\hline
 			iWRITE\_DATA & 0x03 & Escribe información en la memoria del servo \\
 			\hline
-			iREG\_WRITE & 0x04 & Escribe sobre la memoria y hasta que llega la acción \ingles{ACTION} para ejecutar dichos cambios \\
+			iREG\_WRITE & 0x04 & Escribe sobre la memoria y hasta que llega la acción \\ &&  \ingles{ACTION} para ejecutar dichos cambios \\
 			\hline
-			iACTION & 0x05 & Activa la acción codificada con la instrucción \ingles{REG\_WRITE} \\
+			iACTION & 0x05 & Activa la acción codificada con la instrucción \\ && \ingles{REG\_WRITE} \\
 			\hline
 			iRESET & 0x06 & Resetea la memoria a los valores por defecto \\
 			\hline
@@ -259,13 +259,105 @@
 		 Se debe tener en cuenta, que aunque el mensaje de retorno responda con el valor inicial, una vez ejecutado el reset de la memoria el ID del servo valdrá 1 y el \ingles{baud rate} será de $19.2kb/s$
 	
 	\subsection{Operaciones de escritura sobre múltiples servos}
-	
+		De igual forma que se puede escribir sobre varios servos para activar la acción al mismo tiempo, se puede encapsular la información de todos los servos en un solo paquete de información. Este caso presenta la limitación de que la dirección de memoria a la que se quiere acceder y la longitud de parámetros a escribir son iguales para todos los servos.
+		\\
+		
+		La comunicación será parecida a los casos anteriores. En este caso se utilizará siempre el ID genérico (0xFE). La instrucción a utilizar será la \ingles{iSYNC\_WRITE} (0x83, de la tabla \ref{tab:g15_instructions}). La longitud del paquete será:
+		
+		\begin{equation}
+		\label{ec:regG15:Syncwritelength}
+			Longitud total = (L+1) * N + 4
+		\end{equation}
+		
+		Siendo L la longitud del mensaje a cada servo y N el número de servos en la ecuación \ref{ec:regG15:Syncwritelength}.
+		\\ 
+		
+		Los parámetros necesarios serán:
+		\\ 
+		
+		\begin{itemize}
+			\item Parámetro 1: dirección de memoria a partir de la cual se quiere escribir.
+			\item Parámetro 2: longitud de los datos a escribir, L en la ecuación \ref{ec:regG15:Syncwritelength} (distinto de la longitud del paquete).
+			\item Parámetro 3: ID del servo al que se quiere escribir.
+			\item Parámetro 4: primer byte de los datos a enviar al servo con el ID marcado en el parámetro 3.
+			\item Parámetro 5: segundo byte de los datos a enviar al servo con el ID marcado en el parámetro 3.
+			\item ...
+			\item Parámetro L+3: ID del segundo servo sobre el que se quiere escribir.
+			\item Parámetro L+4: primer byte a escribir sobre el mismo.
+			\item ...
+		\end{itemize}
+		
+		Se puede ver en la tabla \ref{tab:syncwrite_paquet} un ejemplo de como se construye un paquete con este propósito; en este caso concreto se comunicará con cuatro servos para enviarle objetivos de posición y velocidad (orientarse a un cierto ángulo con una velocidad dada):
+		\\ 
+		
+		\begin{itemize}
+			\item G15 con ID 0 a la posición 0x010 con velocidad 0x150
+			\item G15 con ID 1 a la posición 0x220 con velocidad 0x360
+			\item G15 con ID 2 a la posición 0x030 con velocidad 0x170
+			\item G15 con ID 3 a la posición 0x220 con velocidad 0x380
+		\end{itemize}
+			
+		\begin{table}[htbp]
+			\caption{Ejemplo paquete con la instrucción \ingles{iSYNC\_WRITE}}
+			\label{tab:syncwrite_paquet}
+		 \begin{center}
+				 	\begin{tabular}{|c|c|c||c|c|c|}
+				 	
+				 		\hline
+				 		Byte & Contenido & Exp & Byte & Contenido & Exp \\
+				 		\hline
+				 		1 & 0xFF & Encabezado & 16 & 0x60 & Param 2 \\
+				 		2 & 0xFF & Encabezado & 17 & 0x03 & Param 2 \\
+				 		3 & 0xFE & ID genérico & 18 & 0x02 & ID tercer servo \\
+				 		4 & 0x18 & Longitud total & 19 & 0x30 & Param 1 \\
+				 		5 & 0x83 & Instrucción & 20 & 0x00 & Param 1 \\
+				 		6 & 0x1E & Dirección & 21 & 0x70 & Param 2 \\
+				 		7 & 0x04 & Longitud para cada servo & 22 & 0x01 & Param 2 \\
+				 		8 & 0x00 & ID primer servo & 23 & 0x03 & ID cuarto servo \\
+				 		9 & 0x10 & Param 1 & 24 & 0x20 & Param 1 \\
+				 		10 & 0x00 & Param 1 & 25 & 0x02 & Param 1  \\
+				 		11 & 0x50 & Param 2 & 26 & 0x80 & Param 2 \\
+				 		12 & 0x01 & Param 2 & 27 & 0x03 & Param 2 \\
+				 		13 & 0x01 & ID segundo servo & 28 & 0x12 & CheckSum \\
+				 		14 & 0x20 & Param 1 &  &  & \\
+				 		15 & 0x02 & Param 1 &  &  &   \\
+				 		\hline
+				 	\end{tabular}
+		 \end{center}
+		\end{table}
+					 
+		Aun siguiendo las indicaciones del manual de usuario no se ha conseguido efectuar este tipo de comunicación de forma efectiva. Se ha desarrollado una estructura de funciones para aplicarlo (en la librería original no estaba dicha funcionalidad implementada) que están a la espera de completarse.
+				 
 	\subsection{Aspectos interesantes a tener en cuenta}
-		\completarCon{Cambiar de wheel mode a no wheel mode, control de velocidad que es falso, es torque lo que se pasa en wheel mode...
-		¿Leer el torque que significa?}
+				
+		Los servos aceptan dos modos de funcionamiento: un modo para controlarlo en posición y otro modo de rotación continua. Se darán mas detalles sobre el modo de giro continuo ya que es sobre el que se vasa el funcionamiento del prototipo.
+		\\
+		
+		Para cambiar de un modo a otro se deberá modificar los cuatro bytes correspondientes a los límites de giro (cuatro bytes a partir de la dirección 0x06, CW Angle Limit (L), se puede ver la información más detallada en la tabla \ref{tab:g15_register}). Es necesario recordar que el valor debe escribirse en hexadecimal respetando el byte inferior y superior tal y como se muestra en la tabla mencionada.
+		
+		\begin{itemize}
+			\item Para activar el modo de giro contínuo se pondrán ambos valores a 0.
+			\item Para salir del modo de giro conínuo se pondrá el \ingles{CW Angle Limit} a 0 y el \ingles{CCW Angle Limit} a 1087.
+		\end{itemize}
+		
+		Es importante tener en cuenta que cuando se controla en modo rueda, aunque el registro sobre el que se escribe hace referencia a la velocidad del servo (dirección 0x020, Moving Speed (L)) e realidad lo que se está enviando es el par que ejercerá el servo, con valores discretizados entre 0 y 1023. En vacío los servos son capaces de alcanzar una velocidad de $65rpm$. A un mismo valor de par enviado la velocidad variará en función de la carga que soporte el servo.
+		\\ 
+		
+		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) si contiene el dato de velocidad en revoluciones por minuto. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es igual a lo guardado sobre la dirección correspondiente a Present Load (0x28 y 0x29). 
+		\\
+		
+		Estos datos se pueden obtener de la siguiente forma, expresada mediante pseudocódigo c++. Se obtiene la información de ambos bytes, en este caso concreto de los datos de velocidad: \completarCon{Definir en algun sitio que es el pseudocodigo}
+		\begin{lstlisting}[frame=single]
+	velocidad = byte(L) \\
+	velocidad |= (byte(H) << 8)
+	velocidad_direction = ((velocidad & 0x0400) >> 10)
+	velocidad = velocidad & inverso(0x0400)
+		\end{lstlisting}
+		
+		\completarCon{¿Que significa leer el torque de los servos?}
 
 \begin{table}[htbp]
-	\caption{Características mas importantes de los Servos G15 de Cytron. Tabla traducida y resumida a los puntos más importantes del Cytron G15 Cube servo User Manual \cite{CytronTechnologies2012} \completarCon{¿esto está bien, hay que poner paginas involucradas?}}
+	\caption{Direcciones de memoria de los servos con los diferentes parámetros a ajustar. Incluye valores mínimos y máximos así como valores por defecto para cada parámetro}
 	\label{tab:g15_register}
 	\begin{adjustwidth}{-1.9cm}{-1.5cm}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
