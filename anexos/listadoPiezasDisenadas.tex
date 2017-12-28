@@ -33,14 +33,14 @@ Nota 2: la miniatura de las piezas no sigue ninguna escala concreta. Es una repr
 \endhead
 \multicolumn{5}{l}{\begin{minipage}{.8\linewidth}
 	%do not draw the footnoterule
-	\footnotesize{$^1$ El peso estimado se obtiene con el programa Cura \completar aplicando los parámetros de la tabla \ref{tab:listadoPiezas:param_impresion}. Este peso incluye el de los soportes necesarios para su impresión.}
+	\footnotesize{$^1$ El peso estimado se obtiene con el programa Cura \completar aplicando los parámetros de la tabla \ref{tab:listadoPiezas:param_impresion}. Este peso incluye el de los soportes necesarios para su impresión. Excepto en los casos donde se especifique lo contrario el juego de Parámetros utilizados es el 1.}
 \end{minipage}} \\ 
 \hline \multicolumn{5}{r}{\textit{Continua en la página siguiente}} \\
 \endfoot
 \hline
 %\insertTableNotes
 \endlastfoot
-1 & \iconoImagen{Base} & \begin{minipage}[t]{.09\linewidth} RHAB1001 \end{minipage}  & 1  & \begin{minipage}[t]{.35\linewidth} Es la base sobre la que se colocan los servos de los tres primeros grados de libertad. También fija la rueda para efectuar el giro en Z \end{minipage} & 193g \\
+1 & \iconoImagen{Base} & \begin{minipage}[t]{.09\linewidth} RHAB1001 \end{minipage}  & 1  & \begin{minipage}[t]{.35\linewidth} Es la base sobre la que se colocan los servos de los tres primeros grados de libertad. También fija la rueda para efectuar el giro en Z \end{minipage} & \completarCon{Corregir con peso al 90\%}193g \\
 \hline
 2 & \iconoImagen{RailA} & RHAB1002 & 1 & \begin{minipage}{.35\linewidth} blah \end{minipage} & 24g \\
 \hline
@@ -104,19 +104,28 @@ Nota 2: la miniatura de las piezas no sigue ninguna escala concreta. Es una repr
 \hline
 30 & \iconoImagen{SandwichAcoplamientoRodamientoBarra} & RHAA3008 & 1 & \begin{minipage}{.35\linewidth} blah \end{minipage} & blah \\
 \hline
+31 & \completarCon{Piezas del extremo provisionales} & blah & blah & blah & blah \\
+\hline
 \end{longtable}
 \end{center}
 \end{landscape}
 \end{adjustwidth}
 
+Se han utilizado diferentes juegos de parámetros según las piezas, se pueden ver los parámetros principales que influyen en el peso final de la pieza en la tabla \ref{tab:listadoPiezas:param_impresion} a continuación:
 \begin{center}
 	\begin{table}[H]
 		\caption{Parámetros de las piezas para la estimación de peso}
 		\label{tab:listadoPiezas:param_impresion}
 		\begin{minipage}{\textwidth}
-			\begin{tabular}{ |c|c|c|c| }
+			\begin{tabular}{ |c|c|c| }
 				\hline
-				a & a & a & a \\ 
+				 & Parámetros 1 & Parámetros 2 \\
+				\hline
+				\begin{minipage} Grosor capa inferior\\ y superior \end{minipage}& 1.2 mm & 1.2mm \\ 
+				\hline
+				Grosor de pared & 1.2 mm & 1.2mm \\
+				\hline
+				Densidad interna & 30\% & 90\% \\
 				%1 & \iconoImagen{Base}{0.2} & blah & \completar \\
 				\hline
 			\end{tabular}
