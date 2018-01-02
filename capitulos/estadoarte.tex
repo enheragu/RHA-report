@@ -2,25 +2,111 @@
 \hrule
 \vspace{3mm}
 
-En este capítulo se hace un repaso de diferentes modelos de robots comerciales existentes en la actualidad relacionados con el campo asistencial robot-paciente. En el caso que nos ocupa no hay constancia de robots diseñados específicamente para la función que este proyecto propone, por lo que el estudio del estado del arte se ha centrado más en la situación y entorno que ocupará el robot más que en su utilización. Cualquiera de los robots mencionados a continuación podría adaptarse con poco trabajo para realizar la tarea de posicionar y orientar una \ingles{tablet} ante el usuario.
+En este capítulo se hace un repaso de diferentes soluciones comerciales destinadas al soporte y posicionamiento de monitores, ordenadores o tablets. Dentro de todas las soluciones comerciales se centrará el estudio en las que están específicamente pensadas para su instalación en entornos médicos siempre que sea posible.
+\\ 
+
+Según el apoyo así como los tipos de grados de libertad hay diferentes configuraciones posibles, en este capítulo se verán algunos modelos concretos de cada caso evaluando sus características, ventajas e inconvenientes de los mismos de forma que se pueda generalizar a modelos equivalentes. De igual manera se podrán encontrar modelos motorizados y modelos sin motorizar, clasificación por la que serán agrupados a continuación.
+\\ 
+
+\section{Soportes articulados sin motorizar}
+
+Dentro del grupo de soportes articulados sin motorizar se pueden clasificar según el tipo de anclaje que tienen, ya se enganchen al techo, pared, suelo, etc. 
 \\
 
-Las características comunes de estos dispositivos, entre otras son: \begin{itemize}
-    \item Están diseñados para una interacción directa entre humano y robot. Concretamente estarán en contacto constante y directo con pacientes o personas con diversidad funcional. Esto deberá verse reflejado en su diseño y medidas de seguridad aplicadas.
-    \item Son de dimensiones relativamente pequeñas, normalmente no muy superiores al alcance de las extremidades de un ser humano.
-    \item Tienen interfaces sencillas y limpias para que usuarios poco experimentados puedan utilizarlos aprovechando al máximo las ventajas que ofrecen sin necesidad de pasar por una curva de aprendizaje que desmotive su uso.
-\end{itemize}
+Dentro de cada tipo de anclaje los soportes comerciales disponibles son bastante parecidos por lo que se presentará un modelo concreto que encaje dentro de las dimensiones y capacidad de carga requeridas para la aplicación que se pretende explotar para sacar conclusiones generales sobre cada tipo de soporte.
+\\ 
+ 
+\subsection{Anclaje a la pared: Cotytech MW-M13P}
 
+Dentro de esta gama (Cotytech MW-M*) se pueden encontrar modelos para soportar diferentes cargas. Concretamente se ha elegido el modelo con menores prestaciones y que soporta menos carga por ser suficiente para la aplicación que se pretende dar\footnote{Precios e información consultados en la página de compra online a 02 de Enero 2018 (\url{http://www.ergodirect.com/product_info.php?products_id=16881}) Precio a pasado a Euros según el cambio oficial en el día consultado.}. Otros modelos pueden incluir soporte para teclado, caja y cobertura para cables y enganche a pared, entre otros, suponiendo un incremento sobre el precio de este modelo.
 
-\section{Lorem ipsum}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare erat nisl, a laoreet purus pellentesque id. Duis laoreet ipsum posuere est hendrerit, quis ornare nisi iaculis. Quisque imperdiet gravida egestas. Maecenas in mauris felis. Quisque quis imperdiet enim. Curabitur dignissim eget nisi lobortis placerat. Donec et magna rutrum, tempor magna a, consectetur tortor. Donec faucibus sodales sem, eu iaculis leo eleifend id. Nam semper lectus nisl, sed molestie erat pharetra quis. Quisque vestibulum metus elit, id interdum ligula dignissim a.
+\begin{minipage}{0.35\textwidth}
+	\includegraphics[width=\linewidth]{figuras/Imagenes_EstadoArte/Cotytech_MW-M13P.jpg}
+\end{minipage}
+\begin{minipage}{0.65\textwidth}\raggedright
+	\hspace{1cm}
+	\begin{itemize}
+		\item Tipo de anclaje: Anclaje a la pared.
+		\item Tipo de articulación: Articulaciones rotacionales.
+		\item Capacidad de carga: entre $1kg$ y $6kg$.
+		\item Extensión máxima: $185.7cm$.
+		\item Número de grados de libertad: 5.
+		\item Ángulos articulaciones: $370^o$ (brazo posición), $270^o$ (muñeca posición), $180^o$ (pared) $^1$. %fake footnote
+		\item Ángulos de orientación: Tilt: $20^o$/- $35^o$ (muñeca orientación) and $20^o$/- $60^o$ (brazo orientación).
+		\item Peso del soporte: $4.76 kg$.
+		\item Precio estándar: 686.98\euro.
+	\end{itemize}
+\end{minipage}
+\\
 
-Praesent eu velit ac lectus tristique tristique vitae et tellus. Mauris dignissim feugiat orci, vitae luctus dolor finibus ut. Ut congue bibendum lectus, vitae congue ligula. Donec commodo, lacus ac iaculis scelerisque, nunc purus finibus diam, at lacinia sem justo non quam. Aenean tempor urna vitae quam pretium porta. Sed in lacinia ipsum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer ut tristique est. Nam vitae interdum ligula, ac sodales dolor. Nulla mollis bibendum urna, sit amet interdum est aliquet at. Sed sagittis mi vel tellus posuere, eu rutrum arcu tristique.
+\begin{center}
+\begin{minipage}{1\textwidth}
+	\footnotesize{$^1$En la imagen se pueden ver tres puntos articulados diferenciados, el punto que se fija a la pared con un grado de libertad, el punto central del brazo, que tiene dos grados de libertad (se separarán entre orientación y posición, aunque su efecto no está desacoplado)y la muñeca, que incluye la articulación que se aprecia justo encima de la pantalla como la rotacional sobre la que queda enganchada la misma (con una clasificación análoga al caso intermedio).}
+\end{minipage}
+\end{center}
+ 
+ Paralelamente a este modelo la marca Cotytech tiene, manteniendo el mismo esquema de mecánico, una versión que se podrá anclar al techo a un precio de 853.06\euro \footnote{Modelo Cotytech CM-M13 consultado el día 02 de Enero de 2018 en la página (\url{http://www.ergodirect.com/product_info.php?products_id=16891})}.
+ \\ 
+ 
+ 
+\subsection{Anclaje al techo: Titan Elite T2EQ-C8X5} 
+ 
+ Concretamente se ha tomado el modelo con la montura doblada hacia arriba para un anclaje en el techo\footnote{Precios e información consultados en la página de compra online a 02 de Enero 2018 (\url{http://www.did-plus.com/en/medical-arms/articulated-monitor-mounts.html}). Precio a pasado a Euros según el cambio oficial en el día consultado.} (hay opción de adquirirlo con la tubería del extremo a anclar doblada hacia abajo para anclarlo en la pared).
+ 
+ \begin{minipage}{0.35\textwidth}
+ 	\includegraphics[width=\linewidth]{figuras/Imagenes_EstadoArte/T2EQ.jpg}
+ \end{minipage}
+ \begin{minipage}{0.65\textwidth}\raggedright
+ 	\hspace{1cm}
+ 	\begin{itemize}
+ 		\item Tipo de anclaje: Anclaje al techo.
+ 		\item Tipo de articulación: Articulaciones rotacionales.
+ 		\item Capacidad de carga: hasta $12.7kg$ en diferentes configuraciones.
+ 		\item Extensión máxima: $106cm$ (la longitud vertical del anclaje al techo variará según se elija al comprar).
+ 		\item Número de grados de libertad: 5.
+ 		\item Ángulos articulaciones: $360^o$ para las tres primeras articulaciones que rotan sobre el eje horizontal.
+ 		\item Ángulos de orientación: Tilt: $50^o$.
+ 		 		\item Peso del soporte: $9kg$.
+ 		\item Precio estándar: 628.30\euro.
+ 	\end{itemize}
+ \end{minipage}
+ \\ 
+ 
+ Este mismo modelo cuenta con diferentes enganches y longitudes de los tubos que permiten anclarlo al suelo, al techo o a la pared indistintamente.
+ \\ 
+ 
+ 
+\subsection{Anclaje a una mesa o superficie de trabajo: Ergotron LX Sit-Stand Desk Arm} 
+ 
+%https://www.ergotron.com/en-us/products/product-details/45-360#/
+ 
+ De entre la gama incluida en los modelos de Ergotron LX se ha elegido aquel que tenía unas dimensiones más ajustadas a las necesidades reales\footnote{Precios e información consultados en la página de compra online a 02 de Enero 2018 (\url{https://www.ergotron.com/en-us/products/product-details/45-360\#/}).}. En general el resto de la gama y otros soportes similares tienen unas dimensiones más reducidas.
+ 
+ \begin{minipage}{0.35\textwidth}
+ 	\includegraphics[width=\linewidth]{figuras/Imagenes_EstadoArte/LX_Sit-Stand_Desk_Arm.jpg}
+ 	\\ 
+ 	
+ 	\includegraphics[width=\linewidth]{figuras/Imagenes_EstadoArte/LX_Sit-Stand_Desk_Arm_2.jpg}
+ \end{minipage}
+ \begin{minipage}{0.65\textwidth}\raggedright
+ 	\hspace{1cm}
+ 	\begin{itemize}
+ 		\item Tipo de anclaje: Anclaje a una mesa, camilla o similar.
+ 		\item Tipo de articulación: Primera articulación prismática, resto rotacionales.
+ 		\item Capacidad de carga: hasta $11.3kg$.
+ 		\item Extensión máxima: se puede variar hasta $36cm$ en altura (articulación prismática, esta es susceptible de ser modificada para ajustarla a otras alturas) y alcanza una extensión de $84cm$
+ 		\item Número de grados de libertad: 6 (una prismática y cinco rotacionales).
+ 		\item Ángulos articulaciones: $180^o$ la primera articulación, fija al anclaje; $360^o$ a mitad del brazo y $180^o$ en la muñeca.
+ 		\item Ángulos de orientación: Tilt: (giro sobre el eje medio horizontal de la pantalla) $75^o$; Pan (eje perpendicular a la pantalla): $360^o$.
+ 		\item Peso del soporte: $8.9kg$.
+ 		\item Precio estándar: 247.00\euro – 299.00\euro dependiendo de la tienda y configuración.
+ 	\end{itemize}
+ \end{minipage}
+ \\ 
+ 
+ \vspace{0.1cm} 
+ Este mismo modelo cuenta con diferentes enganches y longitudes de los tubos que permiten anclarlo al suelo, al techo o a la pared indistintamente.
+ 
+ \subsection{Consideraciones generales}
 
-Vestibulum aliquet orci pharetra justo auctor, pharetra viverra felis finibus. Ut ac gravida quam. Donec egestas turpis nisi, nec elementum orci feugiat at. In hac habitasse platea dictumst. Praesent mollis sem in felis feugiat, dapibus finibus metus scelerisque. Aliquam ultricies ante quis nibh laoreet, ac aliquam justo maximus. Etiam rhoncus pharetra imperdiet.
-
-Nullam at libero quis augue tristique luctus eget placerat lorem. Donec pretium, dui scelerisque dapibus feugiat, ex lacus auctor ipsum, in ultricies odio justo in eros. Proin sodales velit non accumsan tempor. Mauris at consectetur est. Donec aliquam porttitor tortor, id malesuada nunc euismod vel. Ut id ullamcorper turpis, nec feugiat sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam tempus tortor, et gravida lectus iaculis non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer non maximus felis. Nullam ac tempor augue. Vestibulum in efficitur mauris. Sed in nulla ultrices, pharetra ligula et, blandit nunc. Quisque dictum magna eget diam maximus, ac pulvinar nisi tempor. Pellentesque quis feugiat elit.
-
-Integer euismod in urna id placerat. Etiam urna elit, tempor et turpis venenatis, volutpat viverra lacus. In luctus arcu sit amet lectus rutrum, id ultricies mi pellentesque. Nulla bibendum, orci in elementum aliquam, mi purus sollicitudin orci, quis ornare nulla arcu placerat urna. Integer consequat, risus ac elementum pellentesque, nulla est lobortis justo, sed mattis nibh ligula nec velit. Integer sem mauris, luctus vitae venenatis a, tincidunt egestas purus. In et lectus semper, dapibus massa sed, ultrices nisi. Ut sit amet dolor porta, accumsan lectus ut, semper tellus. Praesent velit odio, facilisis quis sodales vel, molestie at risus. In sollicitudin mauris risus, ullamcorper ullamcorper ligula commodo sed. Ut libero tortor, rhoncus ut sagittis quis, fringilla nec nunc. Ut efficitur nisi id leo feugiat ultrices. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at malesuada arcu.
-
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed consectetur, justo nec scelerisque accumsan, leo erat dictum odio, id feugiat nibh felis vel ipsum. Duis urna ante, commodo vitae neque varius, congue egestas turpis. Donec condimentum ullamcorper dapibus. Nulla sed sapien eu diam commodo finibus. Nulla fringilla lectus vitae augue rutrum volutpat. Nulla in accumsan orci. Suspendisse eget diam massa.
+\section{Soportes articulados motorizados}

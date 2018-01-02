@@ -13,39 +13,40 @@ En este capítulo se hará una descripción detallada de todos los componentes i
     \begin{table}[H]
     	\caption{Características mas importantes de los Servos G15 de Cytron. Tabla traducida y resumida a los puntos más importantes del Cytron G15 Cube servo User Manual \cite{CytronTechnologies2012} \completarCon{¿esto está bien, hay que poner paginas involucradas?}}
     	\label{tab:g15_catact}
-    	\begin{center}
-    		\begin{minipage}{\textwidth}
-    			\begin{tabular}{ |c|c|c|c| }
-    				\hline
-    				\multicolumn{4}{|c|}{\textbf{Características eléctricas}} \\ 
-    				\hline
-    				\textbf{Parámetro} & \textbf{Valor Mínimo} & \textbf{Valor Típico} & \textbf{Valor Máximo} \\
-    				\hline
-					Voltaje & $6.5V$ & $12V$ & $17.8V$ \\
-    				\hline
-    				Consumo de corriente ($12V$) & & & $1.5A$ \\
-    				\hline
-    				Temperatura de funcionamiento & $0^oC$ & & $80^oC$ \\
-    				\hline
-    				Par capaz de soportar & & & $15km \cdot cm$ \\
-    				\hline
-    				\multicolumn{4}{c}{\textbf{}} \\ 
-    				\hline
-    				\multicolumn{4}{|c|}{\textbf{Especificaciones técnicas}} \\ 
-    				\hline
-    				\multicolumn{2}{|c|}{Peso} & \multicolumn{2}{|c|}{$63g$}\\ 
-    				\hline
-    				\multicolumn{2}{|c|}{Par capaz de realizar (a $12V$)} & \multicolumn{2}{|c|}{$12kg \cdot cm$}\\ 
-    				\hline
-    				\multicolumn{2}{|c|}{Margen angular de operación } & \multicolumn{2}{|c|}{$360^o$ en giro continuo}\\ 
-    				\hline
-    				\multicolumn{2}{|c|}{Máxima velocidad (en vacío a $12V$)} & \multicolumn{2}{|c|}{$63 RPM$ }\\ 
-    				\hline    			
-    				\multicolumn{2}{|c|}{Comunicaciçon} & \multicolumn{2}{|c|}{Half duplex asynchronous serial communication ($7812.5bps-500kbps $)}\\ 
-    				\hline    				 	 
-    			\end{tabular}
-    		\end{minipage}
-    	\end{center}
+   		\begin{minipage}{0.42\textwidth}
+   		\begin{center}
+   		\begin{tabular}{ |c|c|c|c| }
+			\hline
+			\multicolumn{4}{|c|}{\textbf{Características eléctricas}} \\ 
+			\hline
+			\textbf{Parámetro} & \textbf{Valor Mínimo} & \textbf{Valor Típico} & \textbf{Valor Máximo} \\
+			\hline
+			Voltaje & $6.5V$ & $12V$ & $17.8V$ \\
+			\hline
+			Consumo de corriente ($12V$) & & & $1.5A$ \\
+			\hline
+			Temperatura de funcionamiento & $0^oC$ & & $80^oC$ \\
+			\hline
+			Par capaz de soportar & & & $15km \cdot cm$ \\
+			\hline
+			\multicolumn{4}{c}{\textbf{}} \\ 
+			\hline
+			\multicolumn{4}{|c|}{\textbf{Especificaciones técnicas}} \\ 
+			\hline
+			\multicolumn{2}{|c|}{Peso} & \multicolumn{2}{|c|}{$63g$}\\ 
+			\hline
+			\multicolumn{2}{|c|}{Par capaz de realizar (a $12V$)} & \multicolumn{2}{|c|}{$12kg \cdot cm$}\\ 
+			\hline
+			\multicolumn{2}{|c|}{Margen angular de operación } & \multicolumn{2}{|c|}{$360^o$ en giro continuo}\\ 
+			\hline
+			\multicolumn{2}{|c|}{Máxima velocidad (en vacío a $12V$)} & \multicolumn{2}{|c|}{$63 RPM$ }\\ 
+			\hline    			
+			\multicolumn{2}{|c|}{Comunicaciçon} & \multicolumn{2}{|c|}{ \begin{minipage}{1.0\textwidth}\vspace{0.1cm}
+			Half duplex asynchronous serial \\ communication ($7812.5bps-500kbps $)\end{minipage} }\\ 
+    		\hline    				 	 
+    	\end{tabular}
+   		\end{center}
+   		\end{minipage}
     \end{table}
     
 	Estos servos utilizan un protocolo de comunicación basado en una comunicación \ingles{Half Duplex Serial}. En este caso toda la información fluye por un mismo cable. Los servos se conectan en un bus uno a continuación del otro, teniendo tres pines, uno de voltaje positivo, otro de GND y el tercero de datos. Se puede ver en la figura \ref{fig:Electronica:bus-servos} como quedan conectados a la placa, quedando uno de los extremos (el del último servo) libre.
