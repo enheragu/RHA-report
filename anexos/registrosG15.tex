@@ -343,10 +343,10 @@
 		Es importante tener en cuenta que cuando se controla en modo rueda, aunque el registro sobre el que se escribe hace referencia a la velocidad del servo (dirección 0x020, Moving Speed (L)) e realidad lo que se está enviando es el par que ejercerá el servo, con valores discretizados entre 0 y 1023. En vacío los servos son capaces de alcanzar una velocidad de $65rpm$. A un mismo valor de par enviado la velocidad variará en función de la carga que soporte el servo.
 		\\ 
 		
-		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) si contiene el dato de velocidad en revoluciones por minuto. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es igual a lo guardado sobre la dirección correspondiente a Present Load (0x28 y 0x29). 
+		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) contiene el dato de velocidad. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es equivalente a la dirección de memoria correspondiente a Present Load (0x28 y 0x29). 
 		\\
 		
-		Estos datos se pueden obtener de la siguiente forma, expresada mediante pseudocódigo c++. Se obtiene la información de ambos bytes, en este caso concreto de los datos de velocidad: \completarCon{Definir en algun sitio que es el pseudocodigo}
+		Estos datos se pueden obtener de la siguiente forma, expresada mediante pseudocódigo c++. Se obtiene la información de ambos bytes, en este caso concreto de los datos de velocidad: \completarCon{Definir en algún sitio que es el pseudocódigo}
 		\begin{lstlisting}[frame=single]
 	velocidad = byte(L) \\
 	velocidad |= (byte(H) << 8)
@@ -355,7 +355,22 @@
 		\end{lstlisting}
 		
 		\completarCon{¿Que significa leer el torque de los servos?, ¿como se transforma de la velocidad leida a rpm?, ¿como se interpreta la posición?}
-
+		 
+		Además de la velocidad, a través de las posiciones de memoria adecuadas se podrá leer el torque aplicado (Present Load), la posición en la que se encuentra el servo (Present Position), la velocidad (Present Speed) así como el Voltaje, la temperatura o se podrá consultar si el servo se está moviendo o no. Para interpretar algunos de estos valores habrá que tener algunas consideraciones en cuenta:
+		\begin{itemize}
+			\item Posición: El dato de posición viene almacenado en un rango de 0 a 1087, para pasarlo a grados habrá que aplicar la ecuación \ref{eq:registrosG15:postograd}
+				\begin{equation}
+				\label{eq:registrosG15:postograd}
+					Pos(grados) = \dfrac{(PosReg - 0) * (360 - 0)}{(1087-0)+0}
+				\end{equation}
+			\item Velocidad: La velocEl dato de velocidad almacenado en los registros correspondientes viene en una escala de 0 a 1023. Para pasar a revoluciones por minuto (RPM) se deberá aplicar la ecuación \ref{eq:registrosG15:velToRPM}
+			\begin{equation}
+			\label{eq:registrosG15:velToRPM}
+				Vel(RPM) = \dfrac{VelReg * 112.83}{1023}
+			\end{equation}
+			\item Torque aplicado: \completarCon{who knows?¿}
+			\item Detectar movimiento: Este registro se pone a uno cuando el servo se está moviendo a un \completarCon{goal??} de posición y a cero una vez llega. En caso de controlar en modo rueda este byte permanece inalterable.
+		\end{itemize}
 \begin{table}[htbp]
 	\caption{Direcciones de memoria de los servos con los diferentes parámetros a ajustar. Incluye valores mínimos y máximos así como valores por defecto para cada parámetro}
 	\label{tab:g15_register}
