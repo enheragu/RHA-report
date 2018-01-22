@@ -249,19 +249,92 @@
 
     Para el desarrollo y ejecución de dichos test se ha utilizado la funcionalidad de test que viene integrada en \glosario{PlatformIO}: \glosario{PlatformIO_Test}. Esta herramienta, permite definir una serie de test que pueden ser ejecutados en la propia placa. De esta forma se puede automatizar el proceso de test.
 
-    Una completa definición de test (desde test unitarios hasta test de integración) permite controlar de forma continuada el correcto funcionamiento del sistema frente a modificaciones en el código. De forma genérica estos test se dividen en:
+    Una completa definición de test (desde test unitarios hasta test de integración) permite controlar de forma continuada el correcto funcionamiento del sistema frente a modificaciones en el código. De forma genérica estos test se han agrupado bajos los siguientes nombres:
 
     \begin{itemize}
-        \item test\_cytrong\_g15\_servo 
-        \item test\_servo\_mock
-        \item test\_servo\_real
+        \item test\_rha\_types
+        \item test\_pid\_regulator
+        \item test\_servo\_rha
+        \item test\_joint\_rha
+        \item test\_joint\_handler\_mock
     \end{itemize}
 
-    El el directorio SW/test se encuentran definidos los diferentes test que se realizan. Cada fichero de test, destinado a testear de forma parcial o completa una librería, tiene diferentes test definidos en formato de función para los diferentes métodos contenidos en la librería.
+    El el directorio SW/test se encuentran definidos los diferentes test que se realizan. Cada fichero de test, destinado a testear de forma parcial o completa una librería, tiene diferentes funciones de test definidas.
 
-    Para testear un método o grupo de métodos se define una función de test en la que se define la ejecución que se va a realizar, con las entradas predefinidas de forma que se puede comprobar como ciertas salidas o parámetros internos satisfacen las necesidades impuestas. Para la definición de estas condiciones así como de los test se sigue el formato propuesto desde \glosario{PlatformIO_Test} y la API que adjuntan.
+    Para realizar un test sobre un método o grupo de métodos se define una función de test en la que se define la ejecución que se va a realizar, con las entradas predefinidas de forma que se puede comprobar como ciertas salidas o parámetros internos satisfacen las necesidades impuestas. Para la definición de estas condiciones así como de los test se sigue el formato propuesto desde \glosario{PlatformIO_Test} y la API que adjuntan.
+    
+    Una vez codificados los ficheros para testing es necesario especificar su uso en el fichero de código principal \codigo{src/main.cpp} mediante las directivas al preprocesador que se muestran a continuación. De esta forma mientras se realizan los test no se ejecutará el programa principal.
+    
+    \begin{lstlisting}[frame=single]
+    #ifndef UNIT_TEST  // disable program main loop while unit testing in progress
+    ...
+    ...
+    ...
+    #endif
+    \end{lstlisting}
 
-
+    \begin{figure}[H]
+       	\centering
+       	\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_032.png}   
+       	\caption{Salida de Platformio Test para cada caso}
+       	\label{fig:SW:test:standard_output}
+    \end{figure}
+    
+    \begin{figure}[H]
+       	\centering
+       	\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_034.png}   
+       	\caption{Salida de Platformio Test con casos fallidos}
+       	\label{fig:SW:test:error_output}
+    \end{figure}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_036.png}   
+    	\caption{Salida de Platformio Test con el resumen de los casos de test}
+    	\label{fig:SW:test:sum_output}
+    \end{figure}
+	
+	\subsection{Test librería RHATypes}
+	
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_033.png}   
+			\caption{Test satisfactorios RHATypes}
+			\label{fig:SW:test:rha_types_ok}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_033.png}   
+			\caption{Test satisfactorios PIDRegulator (caso dentro de RHATypes)}
+			\label{fig:SW:test:pid_regulator_ok}
+		\end{figure}
+	\subsection{Test librería ServoRHA}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_037.png}   
+			\caption{Test satisfactorios ServoRHA}
+			\label{fig:SW:test:servo_rha_ok}
+		\end{figure}
+	\subsection{Test librería JointRHA}
+	\subsection{Test librería JointHandler}
+		Test para comprobar el correcto funcionamiento de los métodos encargados de gestionar la construcción en interpretación de los paquetes de datos. No hay comunicación real con los servos en esta serie de test.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_035.png}   
+			\caption{Test satisfactorios JointHandler}
+			\label{fig:SW:test:joint_handler_ok}
+		\end{figure}
+	\subsection{Test librería ChuckHandler}
+	\subsection{Test librería RobotRHA}
+	
+	Resumen de los test:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/test/Seleccion_038.png}   
+		\caption{Resumen Test satisfactorios}
+		\label{fig:SW:test:sum_ok}
+	\end{figure}
+	
 \section{Gestión de la complejidad y mantenibilidad:} \label{sec:SW:gestion_complejidad}
     Para controlar el desarrollo del proyecto de forma paralela en todas sus partes asegurando así un control de la complejidad y mantenibilidad se han ido controlando diferentes métricas referentes al software del proyecto. 
     \\ 
@@ -297,3 +370,25 @@
         \label{fig:SW:code_analysis}
     \end{figure}
     
+    \subsection{Reglas de codificación del Código}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.60\textwidth]{figuras/Imagenes_SW/test/codificacion_1.png}   
+    	\caption{Ejemplo de la Salida de cpplint con errores}
+    	\label{fig:SW:test:codif_output}
+    \end{figure}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/codificacion_2.png}   
+    	\caption{Ejemplo de errores con cpplint}
+    	\label{fig:SW:test:error_output_cpplint}
+    \end{figure}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/codificacion_3.png}   
+    	\caption{Salida de cpplint una vez eliminados los errores}
+    	\label{fig:SW:test:cpplint_ok}
+    \end{figure}
