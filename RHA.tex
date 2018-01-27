@@ -83,7 +83,18 @@
 %                            }
 \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
 \newcommand{\iconoImagen}[1]{\includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}
+    
+\usepackage{graphicx,eso-pic}
 
+\newcommand\chapterimage[2][]{%
+	\AddToShipoutPictureBG*{% Add picture to BackGround on this page only
+		\AtPageUpperLeft{% Position at upper left of text block
+			\vspace{2cm}
+			\hspace*{1.2\textwidth}% Move over to upper right of text block
+			\llap{% Ignore horizontal width and overlap to the left
+				\smash{% Ignore vertical height
+					\raisebox{-\height}{% Lower so top touches baseline
+						\includegraphics[#1]{#2}}}}}}}% Include image with options
 %width height
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -130,13 +141,19 @@
 
  %partes finales del trabajo: conclusiones, bibliografia y anexos
 
+ \include{capitulos/requerimientos_generales} %que se quiere
+ 
  \include{capitulos/estadoarte}
+ 
+ \include{capitulos/punto_partida}
 
  \include{capitulos/mecanica}
 
  \include{capitulos/electronica}
 
  \include{capitulos/software}
+ 
+ \include{capitulos/cinematica}
 
  \include{capitulos/control}
 
@@ -160,7 +177,7 @@
 
  %apartado de bibliografía
  \addcontentsline{toc}{chapter}{Bibliografía}
-
+	
  %se incluye la bibliografía. Archivo de tipo .bib (bibtex)
  \bibliography{bibliografia/bibliografia}
 

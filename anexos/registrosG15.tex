@@ -1,17 +1,18 @@
-    En este anexo se describe como se trabaja con el protocolo de comunicación a bajo nivel para codificar el paso de mensajes entre los servos G15 Cube y el microcontrolador. 
+    
+    En este anexo se describe como se trabaja con el protocolo de comunicación a bajo nivel para codificar el paso de mensajes entre los servos G15 Cube y el microcontrolador.
     \\
-    
+
     Antes de describir el formato de la información cabe destacar que en todo momento la información enviada irá codificada en formato hexadecimal, para los paquetes enviados como recibidos desde el microcontrolador. Todos los paquetes, tanto los enviados a los servos como la respuesta por parte de los mismos tendrán en común la siguiente información:
-    
+
     \begin{itemize}
     	\item Encabezado: Los primeros dos bytes del mensaje estarán compuestos por encabezado que será el que marque el inicio del mensaje. Estos bytes serán: 0xFF 0xFF
     	\item Un fin de mensaje: El último byte del mensaje estará marcado por un valor llamado \ingles{CheckSum} que será el encargado de verificar que todo el paquete ha llegado correctamente. El \ingles{CheckSum} es el inverso del valor binario de la suma de todos los bytes enviados a excepción del encabezado y el propio \ingles{CheckSum}. En la figura \completar se puede ver un ejemplo de como se calcula dicho valor.
     \end{itemize}
-    
+
     \completarCon{Ejemplo de como se calcula el checksum}
-    
+
     En los paquetes que se envíen a los servos la información se codificará de la siguiente manera concreta:
-    
+
     \begin{itemize}
     	\item Bytes 0 y 1: reservados para el encabezado.
     	\item Byte 2: codifica el ID del servo al que se quiere enviar la acción. De forma general se puede utilizar la dirección 0xFE (en hexadecimal) para enviar el mensaje a todos los servos conectados.
@@ -20,16 +21,16 @@
     	\item Bytes del 5 al N: Parámetros que se quieran enviar al servo.
     	\item Byte N+1: \ingles{CheckSum}
     \end{itemize}
-    
-    En la figura \ref{fig:app:registrosg15:comunicacion_mensaje} se puede ver representado, a modo de resumen gráfico, este esquema de información genérico.	
-    
+
+    En la figura \ref{fig:app:registrosg15:comunicacion_mensaje} se puede ver representado, a modo de resumen gráfico, este esquema de información genérico.
+
     \begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/Packet_G15.png}   
+    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/Packet_G15.jpg}
     	\caption{Paquete de información genérico para comunicar con los Servos G15 Cube}
     	\label{fig:app:registrosg15:comunicacion_mensaje}
     \end{figure}
-	
+
 
 	\begin{table}[htbp]
 		\centering
@@ -56,8 +57,8 @@
 			\hline
 			\end{tabular}
 		\end{center}
-	\end{table}	
-	
+	\end{table}
+
 	La respuesta por parte de los servos tiene también una estructura general que se detalla a continuación byte a byte:
 	\begin{itemize}
 		\item Bytes 0 y 1 de encabezado. Igual que en el caso anterior.
@@ -67,16 +68,16 @@
 		\item Bytes del 5 al N: Parámetros que envía el servo.
 		\item Byte N+1: \ingles{CheckSum}.
 	\end{itemize}
-	
-	 En la figura \ref{fig:app:registrosg15:comunicacion_mensaje_from_servo} se puede ver representado, a modo de resumen gráfico, este esquema de información genérico que se ha expuesto previamente.	
-	 
+
+	 En la figura \ref{fig:app:registrosg15:comunicacion_mensaje_from_servo} se puede ver representado, a modo de resumen gráfico, este esquema de información genérico que se ha expuesto previamente.
+
 	 \begin{figure}[H]
 	    	\centering
-	    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/Packet_From_G15.png}   
+	    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/Packet_From_G15.jpg}   
 	    	\caption{Paquete de información genérico de retorno de los Servos G15 Cube}
 	    	\label{fig:app:registrosg15:comunicacion_mensaje_from_servo}
 	 \end{figure}
-	
+
 	\begin{table}[htbp]
 		\centering
 		\caption{Codificación del error de los servos G15 Cube en cada bit del byte de error.}
@@ -105,10 +106,10 @@
 			\end{tabular}
 		\end{center}
 	\end{table}
-	
+
 	Aunque como se ha visto anteriormente y se ha detallado en la tabla \ref{tab:g15_error} el servo devuelve un solo byte de error, al leer la información recibida el error, tanto en la librería de Cytron como en la estructura desarrollada para este proyecto este byte se amplia a dos bytes para añadir la posibilidad de nuevos errores en la recepción del paquete de datos. Se pueden ver de forma detallada en la tabla \ref{tab:g15_error_second}, nuevamente junto a la máscara que se aplicará a dicho byte para cada caso. En el byte más bajo queda la información que devuelve el servo y en el más alto la información añadida.
-	\\ 
-	
+	\\
+
 	\begin{table}[htbp]
 		\centering
 		\caption{Codificación del error de comunicación en cada bit del segundo byte de error.}
@@ -140,10 +141,10 @@
 	\section{Distintos tipos de instrucciones}
 	A continuación se detallan las distintas instrucciones que aceptan los Servos, presentadas en la tabla \ref{tab:g15_instructions}.
 	\subsection{Petición del estado del servo}
-	
+
 	Se hace una petición del estado o una operación de tipo \ingles{PING} cuando se quiere conocer la existencia y estado de un servo con un ID específico. Adicionalmente si se envía utilizando el ID comodín (0xFE, para todos los servos) se podrá recoger el ID del servo conectado (cuando solo haya uno).
-	\\ 
-	
+	\\
+
 	Un paquete para una operación \ingles{PING} podría tener el siguiente aspecto (\ingles{iPING} al servo con ID 1. El mensaje enviado tendrá una longitud de dos bytes a leer. Las diferentes instrucciones se han visto en la tabla \ref{tab:g15_instructions}):
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|}
@@ -152,10 +153,10 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
+
 	Como se puede ver este mensaje no lleva parámetros.
-	\\ 
-	
+	\\
+
 	El mensaje de retorno podría ser, por ejemplo el siguiente. Respondiendo el servo con ID 1 dos bytes a leer, el error que es 0 (todo correcto) y el \ingles{CheckSum}:
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|}
@@ -164,14 +165,14 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
-	\subsection{Operaciones de lectura} 
-	
+
+	\subsection{Operaciones de lectura}
+
 	Las operaciones de lectura, con la instrucción \ingles{iREAD\_DATA} vista en la tabla \ref{tab:g15_instructions} están pensadas para leer la memoria interna de los servos. Los parámetros enviados serán la dirección de memoria a partir de la cual se quiere leer y el número de bytes a leer. Se puede ver en la tabla \ref{tab:g15_register} las posibles direcciones de memoria a las que acceder, el tipo de acceso que tienen (lectura/escritura o ambos) así como los valores típicos (por defecto, máximos y mínimos).
-	\\ 
-	
+	\\
+
 	Un ejemplo de este tipo de mensajes puede ser una petición de lectura de la temperatura (0x2B en la tabla \ref{tab:g15_register}). En este caso sobre el servo con ID 1. La temperatura ocupa un solo byte.
-		
+
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c|}
 			\hline
@@ -179,9 +180,9 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
+
 	Como en el caso anterior el paquete de retorno devolverá el ID del servo que responde, la longitud, que en este caso será de 3 bytes, y el error, el parámetro leido (un byte con la temperatura) y el \ingles{CheckSum}:
-	
+
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
@@ -189,14 +190,14 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
+
 	\subsection{Operaciones de escritura} \label{subsec:registros:operaciones:escritura}
-	
+
 	Las operaciones de escritura tienen un funcionamiento análogo al de lectura. La instrucción \ingles{iWRITE\_DATA} vista en la tabla \ref{tab:g15_instructions} envía una cadena de bytes a escribir a partir de una dirección de memoria dada. Nuevamente se pueden ver las direcciones de memoria en la tabla \ref{tab:g15_register}.
-	\\ 
-	
+	\\
+
 	Como ejemplo se escribirá, sobre el servo con ID 1 un ángulo objetivo (empieza en la dirección 0x1E). Como se puede ver ocupa dos bytes, empezando por el de más bajo y a continuación el más alto. A la hora de enviar el mensaje hay que tener en cuenta estos aspectos para que los parámetros vayan ordenados de igual manera:
-	
+
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 			\hline
@@ -204,7 +205,7 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
+
 	El paquete de retorno en este caso devolverá el posible error en la comunicación, sin parámetros.
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|}
@@ -213,15 +214,15 @@
 			\hline
 		\end{tabular}
 	\end{center}
-	
+
 	\subsection{Operaciones de escritura con activación desacoplada}
-		
+
 		La idea de este tipo de operación es la de enviar a distintos servos operaciones de escritura pero que queden pendientes de ejecutarse. De esta forma, utilizando la instrucció \ingles{iACTION} se podrán activar todos a la vez.
-		\\ 
-		
+		\\
+
 		Para la operación de escritura en memoria se seguirá un formáto análogo al descrito en el apartado \ref{subsec:registros:operaciones:escritura}. El único cambio es que la instrucción utilizada, en vez de ser \ingles{iWRITE\_DATA} como se ha descrito en dicho apartado, se utilizará la instrucción \ingles{iREG\_WRITE} (se puede consultar en la tabla \ref{tab:g15_instructions}).
-		\\ 
-		
+		\\
+
 		Una vez enviada la información a escribir a todos los servos, se procederá a enviar el mensaje de activación. En este caso se enviará a todos los servos conectados (ID genérico de 0xFE):
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|c|c|}
@@ -230,14 +231,14 @@
 				\hline
 			\end{tabular}
 		\end{center}
-		
+
 		Por norma general, en los casos en los que se utiliza el ID genérico (menos en el caso de la instrucción \ingles{iPING} en los que hay un servo conectado) no se recogerá mensaje de retorno alguno.
-		
+
 	\subsection{Resetear la memoria de los servos a los valores de fábrica}
-	
+
 		La instrucción \ingles{iRESET} devolverá la memoria al estado por defecto. Se pueden ver los valores por defecto en la tabla \ref{tab:g15_register}.
 		\\
-		
+
 		Para efectuarla se enviará dicha instrucción al servo correspondiente, en este caso al servo cuyo ID es 0:
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|c|c|}
@@ -246,7 +247,7 @@
 				\hline
 			\end{tabular}
 		\end{center}
-		
+
 		 Nuevamente el mensaje de error contendrá unicamente el posible error en la comunicación.
 		 \begin{center}
 		 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -255,26 +256,26 @@
 		 		\hline
 		 	\end{tabular}
 		 \end{center}
-		 
+
 		 Se debe tener en cuenta, que aunque el mensaje de retorno responda con el valor inicial, una vez ejecutado el reset de la memoria el ID del servo valdrá 1 y el \ingles{baud rate} será de $19.2kb/s$
-	
+
 	\subsection{Operaciones de escritura sobre múltiples servos}
 		De igual forma que se puede escribir sobre varios servos para activar la acción al mismo tiempo, se puede encapsular la información de todos los servos en un solo paquete de información. Este caso presenta la limitación de que la dirección de memoria a la que se quiere acceder y la longitud de parámetros a escribir son iguales para todos los servos.
 		\\
-		
+
 		La comunicación será parecida a los casos anteriores. En este caso se utilizará siempre el ID genérico (0xFE). La instrucción a utilizar será la \ingles{iSYNC\_WRITE} (0x83, de la tabla \ref{tab:g15_instructions}). La longitud del paquete será:
-		
+
 		\begin{equation}
 		\label{ec:regG15:Syncwritelength}
 			Longitud total = (L+1) * N + 4
 		\end{equation}
-		
+
 		Siendo L la longitud del mensaje a cada servo y N el número de servos en la ecuación \ref{ec:regG15:Syncwritelength}.
-		\\ 
-		
+		\\
+
 		Los parámetros necesarios serán:
-		\\ 
-		
+		\\
+
 		\begin{itemize}
 			\item Parámetro 1: dirección de memoria a partir de la cual se quiere escribir.
 			\item Parámetro 2: longitud de los datos a escribir, L en la ecuación \ref{ec:regG15:Syncwritelength} (distinto de la longitud del paquete).
@@ -286,23 +287,23 @@
 			\item Parámetro L+4: primer byte a escribir sobre el mismo.
 			\item ...
 		\end{itemize}
-		
+
 		Se puede ver en la tabla \ref{tab:syncwrite_paquet} un ejemplo de como se construye un paquete con este propósito; en este caso concreto se comunicará con cuatro servos para enviarle objetivos de posición y velocidad (orientarse a un cierto ángulo con una velocidad dada):
-		\\ 
-		
+		\\
+
 		\begin{itemize}
 			\item G15 con ID 0 a la posición 0x010 con velocidad 0x150
 			\item G15 con ID 1 a la posición 0x220 con velocidad 0x360
 			\item G15 con ID 2 a la posición 0x030 con velocidad 0x170
 			\item G15 con ID 3 a la posición 0x220 con velocidad 0x380
 		\end{itemize}
-			
+
 		\begin{table}[htbp]
 			\caption{Ejemplo paquete con la instrucción \ingles{iSYNC\_WRITE}}
 			\label{tab:syncwrite_paquet}
 		 \begin{center}
 				 	\begin{tabular}{|c|c|c||c|c|c|}
-				 	
+
 				 		\hline
 				 		Byte & Contenido & Exp & Byte & Contenido & Exp \\
 				 		\hline
@@ -325,27 +326,27 @@
 				 	\end{tabular}
 		 \end{center}
 		\end{table}
-					 
+
 		Aun siguiendo las indicaciones del manual de usuario no se ha conseguido efectuar este tipo de comunicación de forma efectiva. Se ha desarrollado una estructura de funciones para aplicarlo (en la librería original no estaba dicha funcionalidad implementada) que están a la espera de completarse.
-				 
+
 	\subsection{Aspectos interesantes a tener en cuenta}
-				
+
 		Los servos aceptan dos modos de funcionamiento: un modo para controlarlo en posición y otro modo de rotación continua. Se darán mas detalles sobre el modo de giro continuo ya que es sobre el que se vasa el funcionamiento del prototipo.
 		\\
-		
+
 		Para cambiar de un modo a otro se deberá modificar los cuatro bytes correspondientes a los límites de giro (cuatro bytes a partir de la dirección 0x06, CW Angle Limit (L), se puede ver la información más detallada en la tabla \ref{tab:g15_register}). Es necesario recordar que el valor debe escribirse en hexadecimal respetando el byte inferior y superior tal y como se muestra en la tabla mencionada.
-		
+
 		\begin{itemize}
 			\item Para activar el modo de giro contínuo se pondrán ambos valores a 0.
 			\item Para salir del modo de giro conínuo se pondrá el \ingles{CW Angle Limit} a 0 y el \ingles{CCW Angle Limit} a 1087.
 		\end{itemize}
-		
+
 		Es importante tener en cuenta que cuando se controla en modo rueda, aunque el registro sobre el que se escribe hace referencia a la velocidad del servo (dirección 0x020, Moving Speed (L)) e realidad lo que se está enviando es el par que ejercerá el servo, con valores discretizados entre 0 y 1023. En vacío los servos son capaces de alcanzar una velocidad de $65rpm$. A un mismo valor de par enviado la velocidad variará en función de la carga que soporte el servo.
-		\\ 
-		
-		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) contiene el dato de velocidad. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es equivalente a la dirección de memoria correspondiente a Present Load (0x28 y 0x29). 
 		\\
-		
+
+		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) contiene el dato de velocidad. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es equivalente a la dirección de memoria correspondiente a Present Load (0x28 y 0x29).
+		\\
+
 		Estos datos se pueden obtener de la siguiente forma, expresada mediante pseudocódigo c++. Se obtiene la información de ambos bytes, en este caso concreto de los datos de velocidad: \completarCon{Definir en algún sitio que es el pseudocódigo}
 		\begin{lstlisting}[frame=single]
 	velocidad = byte(L) \\
@@ -353,23 +354,22 @@
 	velocidad_direction = ((velocidad & 0x0400) >> 10)
 	velocidad = velocidad & inverso(0x0400)
 		\end{lstlisting}
-		
-		\completarCon{¿Que significa leer el torque de los servos?, ¿como se transforma de la velocidad leida a rpm?, ¿como se interpreta la posición?}
-		 
+
+	
 		Además de la velocidad, a través de las posiciones de memoria adecuadas se podrá leer el torque aplicado (Present Load), la posición en la que se encuentra el servo (Present Position), la velocidad (Present Speed) así como el Voltaje, la temperatura o se podrá consultar si el servo se está moviendo o no. Para interpretar algunos de estos valores habrá que tener algunas consideraciones en cuenta:
 		\begin{itemize}
 			\item Posición: El dato de posición viene almacenado en un rango de 0 a 1087, para pasarlo a grados habrá que aplicar la ecuación \ref{eq:registrosG15:postograd}
-				\begin{equation}
-				\label{eq:registrosG15:postograd}
-					Pos(grados) = \dfrac{(PosReg - 0) * (360 - 0)}{(1087-0)+0}
-				\end{equation}
-			\item Velocidad: La velocEl dato de velocidad almacenado en los registros correspondientes viene en una escala de 0 a 1023. Para pasar a revoluciones por minuto (RPM) se deberá aplicar la ecuación \ref{eq:registrosG15:velToRPM}
+			\begin{equation}
+			\label{eq:registrosG15:postograd}
+			Pos(grados) = \dfrac{(PosReg - 0) * (360 - 0)}{(1087-0)+0}
+			\end{equation}
+			\item Velocidad: El dato de velocidad almacenado en los registros correspondientes viene en una escala de 0 a 1023. Para pasar a revoluciones por minuto (RPM) se deberá aplicar la ecuación \ref{eq:registrosG15:velToRPM}
 			\begin{equation}
 			\label{eq:registrosG15:velToRPM}
-				Vel(RPM) = \dfrac{VelReg * 112.83}{1023}
+			Vel(RPM) = \dfrac{VelReg * 112.83}{1023}
 			\end{equation}
-			\item Torque aplicado: \completarCon{who knows?¿}
-			\item Detectar movimiento: Este registro se pone a uno cuando el servo se está moviendo a un \completarCon{goal??} de posición y a cero una vez llega. En caso de controlar en modo rueda este byte permanece inalterable.
+			\item Torque aplicado: Es el torque efectuado por el servo en el momento actual (valor entre 0 y 1023). En el caso de control por par el valor es el mismo que se ha enviado.
+			\item Detectar movimiento: Este registro se pone a uno cuando el servo se está moviendo a un objetivo de posición y a cero una vez llega. En caso de controlar en modo rueda este byte permanece inalterable.
 		\end{itemize}
 \begin{table}[htbp]
 	\caption{Direcciones de memoria de los servos con los diferentes parámetros a ajustar. Incluye valores mínimos y máximos así como valores por defecto para cada parámetro}
@@ -430,5 +430,4 @@
 		\multicolumn{ 1}{|c|}{} & 49 (0x31) & Punch (H) & RW & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} & \multicolumn{ 1}{c|}{} \\ \hline
 	\end{tabular}
 \end{adjustwidth}
-\end{table}	
-
+\end{table}
