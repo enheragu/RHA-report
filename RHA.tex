@@ -42,6 +42,7 @@
  \usepackage{tabularx}
  \usepackage{multirow}
  \usepackage{rotating}
+ %\usepackage{pdfpages}
 
 \usepackage[xindy,toc,acronyms,nonumberlist]{glossaries}
  %\usepackage[xindy,acronym,toc,nonumberlist,sort=use]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
@@ -83,7 +84,7 @@
 %                            }
 \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
 \newcommand{\iconoImagen}[1]{\includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}
-    
+
 \usepackage{graphicx,eso-pic}
 
 \newcommand\chapterimage[2][]{%
@@ -131,7 +132,7 @@
  %\glsaddall
  %\printglossary[type={main,acronym}]
  %\printglossary[type=\acronymtype]
- \printglossaries 
+ \printglossaries
 % TODO: \glsaddall
 
  %empieza la parte descriptiva del trabajo
@@ -140,11 +141,9 @@
  \include{capitulos/introduccion}
 
  %partes finales del trabajo: conclusiones, bibliografia y anexos
-
- \include{capitulos/requerimientos_generales} %que se quiere
  
  \include{capitulos/estadoarte}
- 
+
  \include{capitulos/punto_partida}
 
  \include{capitulos/mecanica}
@@ -152,7 +151,7 @@
  \include{capitulos/electronica}
 
  \include{capitulos/software}
- 
+
  \include{capitulos/cinematica}
 
  \include{capitulos/control}
@@ -177,7 +176,7 @@
 
  %apartado de bibliografía
  \addcontentsline{toc}{chapter}{Bibliografía}
-	
+
  %se incluye la bibliografía. Archivo de tipo .bib (bibtex)
  \bibliography{bibliografia/bibliografia}
 

@@ -2,7 +2,7 @@
 \hrule
 \vspace{3mm}
 
-En este capítulo no deben faltar los siguientes apartados:
+En este capítulo se perfila la estructura, organización y contenidos principales del documento así como la motivación y objetivos del proyecto.
 
 
 \section{Motivación del proyecto}
@@ -11,82 +11,72 @@ En este capítulo no deben faltar los siguientes apartados:
 
 \section{Objetivos}
 
-El objetivo que este Trabajo de Fin de Grado persigue es el del diseño, construcción y control de brazo robótico. Este proyecto está enmarcado bajo el proyecto Robohealth, proyecto financiado por el Ministerio de Economía y Competitvidad con el objetivo del diseño de sistemas robóticos y domóticos para entornos hospitalarios que mejoren el sistema de salud actual. (\completar http://robohealth.es/)
-\\ 
-
-El brazo robótico llevará en su extremo una \ingles{tablet} que, mediante visión artificial será capaz de reconocer gestos del paciente para llevar a cabo diferentes acciones. El brazo tendrá que ubicar la \ingles{tablet} en todo momento a una distancia y posición respecto del paciente que posibilite su correcto funcionamiento.
-\\ 
-
-El sistema estará en constante contacto con diferentes usuarios por lo que la seguridad de los mismos será prioritario, incluso desde la fase de diseño del prototipo. 
-\\ 
-
-Otra característica importante será el coste económico del prototipo, se busca desarrollar una solución de bajo coste que aumente la viabilidad de su implementación a gran escala.
+El objetivo que este Trabajo de Fin de Grado persigue es el del diseño, construcción y control de brazo robótico previo estudio de las opciones comerciales disponibles y su posible adaptación. Este proyecto está enmarcado bajo el proyecto Robohealth, proyecto financiado por el Ministerio de Economía y Competitvidad con el objetivo del diseño de sistemas robóticos y domóticos para entornos hospitalarios que mejoren el sistema de salud actual. (\completar http://robohealth.es/)
 \\
 
-Para alcanzar estos objetivos se probarán diferentes estructuras y materiales que maximicen los recursos estructurales del prototipo. Una vez se tenga una estructura básica se procederá a añadir los actuadores y sensores para posteriormente implementar el software que lo controle.
+El  prototipo debe estar diseñado para una completa adaptación a un entorno hospitalario en el que deberá estar en concacto constante con usuarios a los que deberá respetar.
+\\
 
-\section{Materiales y software utilizados}\label{sec:Introduccion:materiales_software} 
+El objetivo del brazo robótico es el de hubicar ante un paciente una \ingles{tablet}. Ésta llevará montado un dispositivo de seguimiento de vista de forma que, a través del movimiento de las pupilas, el paciente podrá interactuar con el resto de dispositivos de la habitación así como el personal médico. Es necesario motorizar el dispositivo para mantener el dispositivo de seguimiento siempre a una distancia y ángulo, respecto a la cara del paciente, mínima para facilitar el funcionamiento del mismo. Está pensado principalmente para pacientes con movilidad reducida o sin movilidad (temporal o permanente), aunque también podría agilizar la interfaz humano-habitación para el resto de pacientes.
+\\
 
-Para la realización de las diferentes etapas del proyecto son necesarios los siguientes materiales. En este apartado se listan sin entrar en mucho detalle ya que se verán en capítulos posteriores.
+Así pues, algunos aspectos claves del prototipo deben ser:
+\begin{itemize}
+    \item El Objetivo del prototipo será el de permitir una interacción más cómoda y automatizada entre los pacientes cuya capacidad de interacción se ha visto coartada por la causa que sea.
+    \item Se debe tener en cuenta es que el prototipo estará en constante contacto con gran variedad de usuarios: pacientes, médicos, familiares, etc. El diseño debe proteger en todo momento la seguridad de dichos usuarios
+\end{itemize}
 
-\textbf{Elementos para el montaje Mecánico}:
-    \begin{itemize}
-        \item Barras de aluminio de sección cuadrada de 1/2"x1m (lado de la sección x longitud).
-        \item Rodamientos 4x13?
-        \item Rodamientos 3x13?
-        \item Barras de acero cilíndricas de 4mm de diámetro
-        \item Barras de acero cilíndricas de 3mm de diámetro
-        \item Piezas impresas en impresora 3D. (Listado detallado en el Anexo \ref{app:listadoPiezas}.)
-        \item Piezas de metacrilato cortadas con láser. (Listado detallado en el Anexo \ref{app:listadoPiezas}.)
-        \item Tornillería: tornillos y tuercas
-        \item Hilo de kevlar
-        \item 2x - Poleas (LAS NEGRAS)
-    \end{itemize}
-    
-    Se puede ver un análisis más detallado en el Anexo \ref{app:montajePiezas}, donde se detalla el montaje de las diferentes piezas que componen el brazo robótico.
+\subsection{Objetivos derivados}
 
-\textbf{Electrónica}:
-    \begin{itemize}
-        \item 1x - Placa Arduino Uno
-        \item 1x - Cytron G15 shield
-        \item 3x - Servos G15 cube (Cytron)
-        \item 2x - Potenciómetros
-    \end{itemize}
-
-\textbf{Software externo utilizado}:
-    \begin{itemize}
-        \item Autodesk Inventor 2016: Utilizado para el diseño y ensamblaje de la parte física del proyecto. 
-        \item Atom con PlatformIO instalado: Utilizado para el desarrollo y verificación del software del proyecto.
-        \item Lizard: Se trata de un software de análisis de la complejidad del código. Se compone de una serie de scripts en python que, al ser ejecutados devuelven un fichero con información referente a los ficheros de código sobre los que se invoca.
-        \item Cloc: Herramienta para realizar el conteo de líneas en los ficheros de código. Permite diferenciar las lineas en blanco, comentarios, líneas de código, etc.
-        \item cpplint: Análisis del cumplimiento de las reglas de codificación en el software. Es una herramienta desarrollada en python por Google para asegurar que los proyectos cumplen con sus reglas de codificación, que también se han seguido en este proyecto. Se pueden ver los aspectos más relevantes de las reglas de codificación en el Anexo \ref{app:codificacionSW}.
-        \item doxygen:
-    \end{itemize}
-
+La realización de dicho prototipo implica el cumplimiento de otros objetivos secundarios o derivados del principal. Se pueden listar algunos como:
+\begin{itemize}
+    \item Prueba de diferentes tipos de estructuras y materiales como base física del brazo robótico.
+    \item Adquisición de conocimientos sobre modelado 3D digital así como diferentes métodos de fabricación como son la impresión 3D, el corte láser, fresado CNC así como el uso de otras herramientas de mecanizado más tradicionales.
+    \item Diseño e implementación de un sistema de control en cascada, que permita un control en posición y en velocidad del brazo robótico.
+\end{itemize}
 
 
 \section{Estructura del documento}
 
-    A continuación y para facilitar la lectura del documento, se detalla el contenido de cada capítulo.
-    
-    \begin{itemize}
-    \item En el capítulo \ref{chap:Introduccion} se realiza una introducción. \completar
-    \item En el capítulo \ref{chap:estadoarte} se hace un repaso del actual estado del arte recogiendo algunas ideas que han inspirado el proyecto que aquí se describe.
-    \item En el capítulo \ref{chap:Mecanica} se hace una descripción detallada del proceso de diseño de la parte mecánica del proyecto. Se resaltan algunos aspectos importantes así como consideraciones para su montaje.
-    \item En el capítulo \ref{chap:Electronica} se habla sobre la electrónica involucrada en el proyecto. En ella se describe y justifica la utilización de sensores y actuadores, así como la placa utilizada y la etapa de potencia.
-    \item En el capítulo \ref{chap:SW} se expone de forma extensiva el software desarrollado.
-    \item El capítulo \ref{chap:Control} expone de forma detallada los distintos aspectos de diseño y desarrollo del control del brazo.
-    \item En el capítulo \ref{chap:Resultados} se hace un repaso sobre los resultados generales a los que se ha llegado.
-    \item En el capítulo \ref{chap:Gestion} se hace un análisis de la gestión del proyecto.
-    \item Finalmente, en el capítulo \ref{chap:Conclusiones} se repasan las conclusiones y desarrollos futuros.
-    \end{itemize}
-    
-    Como contenido adicional, al final del documento también se tienen los siguientes anexos:
-    
-    \begin{itemize}
-    \item En el Anexo \ref{app:listadoPiezas} se listan las piezas impresas que se requieren para montar el prototipo así como algunas características importantes.
-    \item En el Anexo \ref{app:codificacionSW} se concretan las reglas de codificación más relevantes que se han aplicado en el desarrollo del código.
-    \item En el Anexo \ref{app:documentacion_software} se adjunta la documentación del software generada con la herramienta \glosario{doxygen}
-    \end{itemize}
-    
-    Además es interesante repasar los términos que se incluyen en el Glosario y que aparecerán referenciados a lo largo del documento.
+El documento está organizado de tal forma que irá introduciendo al lector progresivamente en los diferentes aspectos del diseño y montaje del prototipo mencionado, desde aspectos más generales hasta los más técnicos.
+\\
+
+Los capítulos están a su vez organizados en el orden que se seguiría de cara a montar el prototipo empezando por una base física, añadiendo a posteriori los componentes electromecánicos para finalizar con los aspectos de control. Concretamente los capítulos contienen la siguiente información:
+
+\begin{itemize}
+    \item Como continuación de los requerimientos generales se encuentra descritos en la introducción, en el capítulo \ref{chap:estadoarte}, un estudio de diferentes modelos y diseños comerciales que podrían adaptarse para cumplir los objetivos presentados.
+    \item El estudio del estado del arte ayuda a definir las ideas más importantes que regirán el diseño del prototipo. Éstas consideraciones se presentan en el capítulo \ref{chap:Punto_partida}.
+    \item El capítulo \ref{chap:Mecanica} entra de lleno en los aspectos mecánicos del brazo robótico, pasando por una valoración de distintas posibilidades para llegar al diseño definitivo.
+    \item Continuando con la decripción de soporte físico, el capítulo \ref{chap:Cinematica} supone un cambio de perspeftiva que guiará al lector desde la parte mecáica y física expuesta anteriormente a la decripción matemática y cinemático del modelo.
+    \item Una vez descrito el soporte físico del brazo robótico se detalla el hardware escogido para su puesta en marcha. En el capítulo \ref{chap:Electronica} presentan los coponentes eletromecánicos que se han integrado en prototipo; sus características principales así como su hubicación en el montaje.
+    \item El análisis de la estructura software diseñado queda cubierto en el capítulo \ref{chap:SW}. Este apartado anticipa además algunas ideas sobre el sistema de control diseñado.
+    \item Continuando con las pinceladas aportadas en el apartado anterio, el capítulo \ref{chap:Control} expone de forma detallada los distintos aspectos de diseño y desarrollo del control del brazo.
+    \item Una vez alcanzado este punto, habiendo cubierto los aspectos del diseño del brazo, el capítulo \ref{chap:Resultados} recoge los resultados de funcionamiento de prototipo para ser analizados.
+    \item No se dejan de lado aspectos de gestión, costes y viabilidad del prototipo que se detallan en el capítulo \ref{chap:Gestion}.
+    \item Finalmente, el capítulo \ref{chap:Conclusiones} expone las conclusiones finales del trabajo así como posibles dearrollos futuros.
+\end{itemize}
+
+Como complemento a la información que exponen los apartados de esta memoria se añaden al final diferentes anexos:
+
+\begin{itemize}
+    \item Se adjunta un listado de todas las piezas diseñadas con información relevante sobre su uso y fabricación en el anexo \ref{app:listadoPiezas}.
+    \item Vistas las piezas que conforman el prototipo es importante localizarlas para entender su uso y diseño. El anexo \ref{app:montajePiezas} detalla unas pautas y orden para el ensamblado dl prototipo. Además permite localizar en su contexto las piezas listadas en el anexo \ref{app:lisadoPiezas}.
+    \item Volviendo sobre los aspectos del software, en el Anexo \ref{app:codificacionSW} se concretan las reglas de codificación, mencionadas en el capítulo \ref{chap:SW}, más relevantes que se han aplicado en el desarrollo del código.
+    \item De igual forma se amplia la información sobre el software desarrollado en el anexo \ref{app:documentacion_software}. En él se encuentra la documentación del software generada a través de la herramienta \glosario{doxygen}.
+    \item El desarrollo del proyecto conlleva la utilización de diferentes herramientas software cuya instalación y puesta apunto se detalla en el anexo \ref{app:instalacion_software}.
+\end{itemize}
+
+\section{Software utilizado}
+
+Aunque en el anexo \ref{app:instalacion_software} se detalla la instalación del software en más detalle no está de más conocer las herramientas a utilizar de antemano, ya que éstas marcan unas pautas en la ideología de diseño y una estructura a la hora de ordenar y desarrollar el proyecto.
+
+\begin{itemize}
+    \item Autodesk Inventor 2016: Es un software de modelado paramétrico 3D de la compañía Autodesk Inc.
+    \item Atom: Se trata de un editor de texto \ingles{open source}. Permite la instalación de diferentes extensiones para ampliar sus utilidades, entre otras será necesario instalar \glosario{PlatformIO}, que convierte el editor en un \glosario{IDE} completo para el desarrollo de software para diferentes placas como Arduino, que será la base de este proyecto.
+    \item Lizard: Software que permite el análisis de la complejidad de código. Se compone de una serie de scripts en python que, al ser ejecutados devuelven un fichero con métricas de complejidad referentes a los ficheros de código sobre los que se invoca: complejidad ciclomática, número de funciones en cada fichero, líneas de código en cada función y fichero, entre otras..
+    \item Cloc: Es una herramienta sencilla que cuenta, de forma más precisa, el número de líneas de código, comentarios y línesas en blanco de los ficheros de código.
+    \item cpplint: Análisis del cumplimiento de las reglas de codificación en el software. Es una herramienta desarrollada en python por Google LLC para asegurar que los proyectos cumplen con sus reglas de codificación, que se han seguido de forma parcial en este proyecto. Se pueden ver los aspectos más relevantes de las reglas de codificación en el Anexo \ref{app:codificacionSW}.
+    \item doxygen: Permite la generación de documentación para código de diferentes lenguajes, c++ en este caso, de forma automática. La herramienta obtiene comentarios del código, escritos con una sintaxis determinada, para documentar los diferentes métodos, objetos y estructura del software.
+\end{itemize}
+
+Además es interesante repasar los términos que se incluyen en el Glosario y que aparecerán referenciados a lo largo del documento. \completar
