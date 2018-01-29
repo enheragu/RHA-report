@@ -55,7 +55,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \end{itemize}
 
     En el capítulo \ref{chap:Gestion}, concretamente en la tabla \ref{tab:presupuesto}, están reflejados los detalles técnicos de estos materiales así como las referencias de compra, cantidades necesarias y precios.
- 
+
 \section{Filosofía y justificación de diseño} \label{sec:Mecanica:filosofia_diseno}
 
     Tal y como se ha adelantado en el capítulo introductorio el software empleado para modelar el brazo robótico es Autodesk Inventor. Este programa es especialmente potente para modelado paramétrico; esto significa que permite definir una serie de parámetros que serán utilizados para definir las medidas de los bocetos. Un diseño bien modelado parametricamente permite mucha flexibilidad a la hora de modificar ciertas medidas como pueden ser agujeros para tornillería, ejes u holguras.
@@ -89,79 +89,185 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \end{figure}
 
 \section{Articulación uno. Giro en el eje Z} \label{sec:Mecanica:articulacion_uno}
-    Junto con las articulaciones dos y tres, descritas en la Sección \ref{sec:Mecanica:articulacion_dostres} están consideradas como los grados de libertad que gestionan la posición del extremo del robot en un espacio tridimensional. En adelante se las podrá denominar también "grados de libertad de posición".
+
+    Volviendo sobre el diseño mecánico, la primera articulación que se encuentra subiendo desde la base es la encargada de girar todo el robot en el eje Z.
+
+    Esta articulación está actuada por un Servo motor (descrito en detalle en el Capítulo \ref{chap:Electronica}. Como se ha anticipado el movimiento de este serde se transmite a través de un juego de ruedas que, solidarias a la parte superior (parte móvil), y por rozamiento, transmiten el movimiento de giro con respecto a la parte inferio (parte fija o base).
     \\
 
-    Esta articulación está actuada por un \ingles{Servo G15 Cube} (descrito en la Sección \ref{sec:Introduccion:materiales_software}. El movimiento de dicho servo se transmite a la articulación a través de un juego de ruedas que, solidarias a la parte superior (parte móvil) de la articulación y por rozamiento, transmiten el movimiento hasta la pista inferior (parte fija a la base del robot).
-    \\
-
-    De esta forma aseguramos que el usuario, en cualquier momento, podrá desplazar el robot superando el rozamiento de esta cadena de transmisión anulando, en caso de estar en proceso, el movimiento que pueda estar efectuando el \glosario{servo}.
+    Una de las ruedas gira solidaria al servo motor, haciendo contacto firme con la rueda a continuación (rueda transmisora). Ésta será la encargada de transmitir el par sobre la superficie sobre la que apoya. El peso del brazo sobre dicho apoyo es suficiente como para asegurar que en condiciones normales de funcionamiento la articulación gire con normalidad; en caso de chocar contr aun usuario la fuerza será mayor y la rueda transmisora deslizará sobre la superficie inferior evitando daños al usuario.
 	\\
-	En la figura \ref{fig:Mecanica:giro_z} se puede ver en detalle el montaje de dicha estructura. Las piezas de la imagen se encuentran, con la misma referencia, en el Anexo \ref{app:listadoPiezas}.
+	En la figura \ref{fig:Mecanica:giro_z} se puede ver en detalle el montaje de dicha estructura. Las piezas que aparecen en la imagen se pueden encontrar en mayor detalle descritas en el Anexo \ref{app:listadoPiezas}.
 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\textwidth]{figuras/Imagenes_Mecanica/RuedasGiroZ.png}
-		\caption{Montaje de la transmisión del movimiento del servo a la articulación encargada de girar en Z}
+		\caption{Montaje de la transmisión del movimiento del servo a la articulación encargada de girar en Z \completarCon{cambiar por foto buena}}
 		\label{fig:Mecanica:giro_z}
 		\immagesource{Autor}
 	\end{figure}
 
-	El apoyo del peso en la última versión se hace sobre un rodamiento \completarCon{coaxial? o como se llamaba?} para conseguir un apoyo completo. Previamente se contempló la posibilidad de utilizar ruedas sobre un carril, de forma que se mantenía una estructura similar a la rueda motriz. En este caso tras probar ambas opciones se optó por colocar la rueda motriz en el lado sobre el que cae la carga del brazo al extenderse para maximizar el apoyo. Este aspecto se ha mantenido al integrar el rodamiento, que asegura un mayor apoyo que las ruedas aun reduciendo el diámetro de dicho apoyo (dificultando la distribución de cargas).
+	Una vez vista la transmisión del movimiento queda otro punto importante, el apoyo del peso del brazo sobre la articulación. Referente a este punto se han explorado dos líneas del desarrollo posibles:
+    \begin{itemize}
+        \item Apoyo sobre ruedas: Además de la rueda transmisora se fijan a la parte móvil de la articulación una serie de ruedas sobre las que apoyará el brazo. Inicialmente puede parecer que el apoyo será más estable cuantos más puntos tenga; desde el punto de vista práctico incluir apoyos redundantes genera más problemas a la larga. Tres puntos son suficientes para definir un plano y es el número de ruedas óptimo a utilizar: dos ruedas de apoyo más la rueda de transmisión. Se puede ver en detalle como queda el montaje en la figura \ref{fig:Mecanica:apoyo_ruedas}. Como se puede ver el diseño incluye unas piezas en metacrilato, en concreto la pieza solidaria a la parte fija del robot cuenta con una la superficie ranurada (realizado a modo de grabado con la máquina de corte láser) para aumentar el rozamiento con la rueda de transmisión. Las ruedas de apoyo están ubicadas a la misma distancia del eje de giro que la rueda transmisora.
+        \item Apoyo sobre rodamiento: El apoyo se realiza sobre un rodamiento axial; quedando junto a ambas piezas, superior e inferior, incrustados entre si. Sobre este punto se apoya el peso del brazo y el encaje entre las piezas impide que el eje del brazo se muva de la vertical. El uso de un rodamiento implica reducir la distancia sobre la que se apoya el peso, aunque permite fijar por ambos lados las pizas al rodamiento de forma más firme. Finalmente ésta es la opción adoptada para el brazo robótico por aportar una mayor solidez y estabilidad al aportar puto de apoyo contínuo en los $360^o$ al rededor del eje.
+    \end{itemize}
 
-	\completarCon{Imagen de las ruedas con las distintas configuraciones de carga y rueda motriz}
+    \begin{minipage}{0.47\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_12.jpg}
+            \caption{Apoyo basado en un rodamiento Axial}
+            \label{fig:Mecanica:apoyo_rodamiento_axial}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.47\textwidth}\raggedright
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_anterior_1.jpg}
+            \caption{Apoyo basado en ruedas}
+            \label{fig:Mecanica:apoyo_ruedas}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
 
-	\completarCon{Imagen de como afecta el cambio de diámetro del apoyo}
+    Además del tipo de apoyo se debe valorar en qué lado se sitúa la rueda de transmisión. Anticipándo siguientes apartados la estructura del brazo sobresale por uno de los lados. En caso de ubicar la rueda motriz en el lado opuesto la carga dificulta el apoyo de la misma. En el caso de apoyo con ruedas además se apoya todo el peso sobre un voladizo, la distancia entre las dos ruedas de apoyo contrarias a la rueda de transmisión. Aunque en el caso del apoyo mediante rodamiento axial este efecto se suaviza, ya no apoya sobre un voladizo, el diseño final aprovecha la carga del brazo para asegurar el apoyo de la rueda de transmisión. En caso de que la explicación textual no sea suficientemente explicativa, se puede ver una representación gráfica de las diferentes situaciones en la figura \ref{fig:Mecanica:apoyo_carga}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/comparacion_apoyos.jpg}
+        \caption{Comparación de como afecta el punto de apoyo de la carga superior sobre los diferentes apoyos}
+        \label{fig:Mecanica:apoyo_carga}
+        \immagesource{Autor}
+    \end{figure}
+
+    Toda esta estructura va montada sobre una base que ejerce de contrapeso para evitar que el eje central del brazo (eje Z) se incline. Como se ha visto anteriormente para esta base se ha adaptado un contrapeso de sombrilla sobre el que encaja el brazo. Este apoyo podría modificarse e incluso adaptar una fijación a otra superficie en caso de montar el brazo en otro entorno.
+
+    \completarCon{¿Debería añadir una imagen con el pie y esta articulación o ya es pasarse de imágenes? La tengho hecha realmente así que...}
 
 \section{Articulaciones dos y tres. Posicionamiento en el plano sagital} \label{sec:Mecanica:articulacion_dostres}
-    Estas dos articulaciones son las encargadas de posicionar el extremo en el plano sagital del robot.
+
+    Las articulaciones dos y tres, representadas de forma esquématica en la figura \ref{fig:Mecanica:convenciones_generales} son las encargadas de posicionar el robot en el plano sagital del robot. Este plano girará al rededor del eje Z gracias a la articulación primera, vista en la sección anterior. Como se ha anticipado en el capítulo \ref{chap:Punto_partida} estas dos articulaciones están conformadas por dos mecanismos de cuatro barras acopladas en serie.
     \\
+
+    La figura \ref{fig:PuntoPartida:maquetas} del capítulo \ref{chap:Punto_partida} ya anticipaba diferentes métodos de acople entre los mecanismos , cada uno presentando sus virtudes y desventajas.
+    \\
+
+    La primera forma de acoplar ambos mecanismos es mediante una unión triangular (representada en la figura \ref{fig:Mecanica:4_bar_mecanism_triangle}). En este caso se plantea fijar el segundo mecanismo, situado en el extremo a modo de estructura fija trasladando la responsabilidad de manejar ambos grados de libertad desde la primera articulación. El movimiento del extremo vendrá determinado por la combinación del giro de ambas articulaciones. LLevar ambos grados de libertad a un mismo punto de actuación supone una gran ventaja al evitar alargar la transmisión del movimiento del motor. Según se varie la relacion entr el tamaño de las barras así como los ángulos del acople se podrán conseguir diferentes relaciones de movimientos.
 
     \begin{figure}[H]
        	\centering
-       	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras_triangulo.png}
-       	\caption{Esquema de la cadena cinemática correspondiente a los \completarCon{Glosario a GDL} dos y tres. Idea preliminar}
+       	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras_triangulo.jpg}
+       	\caption{Esquema de las articulaciones dos y tres. Estructura de unión triangular}
        	\label{fig:Mecanica:4_bar_mecanism_triangle}
        	\immagesource{Autor}
     \end{figure}
 
-    Están formadas por dos mecanismos de cuatro barras acoplados en serie. Tienen la particularidad de que las barras son iguales dos a dos, de forma que las barras se mantienen siempre en paralelo.
+    El segundo tipo de acople, lineal, libera los puntos articulares del segundo mecanismo. En este caso ambos mecanismos presentan las mismas dimensiones siendo sus barras iguales dos a dos. Una cadena de eslabones configurada de esta manera, aunque alarga la necesidad de transmitir el movimiento hasta cada eje de giro, tiene la particularidad de que mantiene la orientación del extremo del brazo siempre paralela a la de la barra de acople y en este caso, al eje Z. En la figura \ref{fig:Mecanica:4_bar_mecanism} se pueden ver los puntos sobre los que se actuan ambas articulaciones.
     \\
 
     \begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras.png}
-    	\caption{Esquema de la cadena cinemática correspondiente a los \completarCon{Glosario a GDL} dos y tres}
+    	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras.jpg}
+    	\caption{Esquema de las articulaciones dos y tres. Estructura de unión lineal}
     	\label{fig:Mecanica:4_bar_mecanism}
     	\immagesource{Autor}
     \end{figure}
 
-    Como se puede ver en la figura \ref{fig:Mecanica:4_bar_mecanism} y \ref{fig:Mecanica:4_bar_mecanism_triangle} la actuación se realiza sobre cada articulación en los puntos marcados. El movimiento se transmite desde los servos ubicados en la base de la articulación 1 hasta las mismas a través de un hilo de \ingles{kevlar}. Un sistema de poleas amplifica y redirige el par hasta los mismos. En la figura \ref{fig:Mecanica:transmision_poleas_cuerda} se puede ver como se redirecciona el hilo desde la base en dirección hacia las articulaciones superiores.
+    Se ha adelantado en el capítulo \ref{chap:Punto_partida} la importancia de compensar el peso. En \cite{Rahman_asimple} se puede encontrar una demostración matemática de como se puede compensar, mediante el uso de muelles, el peso del los eslabones. Ambas estructuras expuestas permiten este tipo de compensación de la carga. Finalmente se ha optado por la segunda opción (acoplamiento lineal) ya que mantiene la orientación del extremo siempre constante y perpendicular al plano del suelo. Esta característica resulta muy últil ya que simplifica el análisis matemático y posterior control del brazo robótico en gran medida.
+    \\
 
-   	\begin{figure}[H]
-   		\centering
-   		\includegraphics[width=0.6\textwidth]{figuras/Imagenes_Mecanica/TransmisionMotorArticulacion.png}
-   		\caption{Montaje de la transmisión del movimiento de los servos a las articulaciones 2 y tres.}
-   		\label{fig:Mecanica:transmision_poleas_cuerda}
-   		\immagesource{Autor}
-   	\end{figure}
+    Aunque sobre el esquema sobre el papel cuadre bien un acoplamiento lineal, en la realidad esto supone el apilamiento de muchos componentes sobre la misma barra. En ese caso la estructura resultante va engrosando y alejándose del plano sagital, lo que a futuro puede provocar fuerzas transversales indeseadas. Para el montaje este acoplamiento lineal se ha separado formando una geometría de tipo paralelogramo, concretamente romboide. Está conformado por una base de metacrilato con piezas de apoyo impresas en plástico que atrapan, a modo de \texit{sandwich}, las barras estructurales de aluminio.
 
-   	En las figuras \ref{fig:Mecanica:4_bar_mecanism} y \ref{fig:Mecanica:4_bar_mecanism_triangle} se muestran dos posibles configuraciones mecánicas que se han probado. En la primera, ubicada al principio de la sección (figura \ref{fig:Mecanica:4_bar_mecanism_triangle}) se cuenta con la ventaja de actuar ambas articulaciones sobre el mismo punto de actuación, facilitando la realimentación así como el paso de cables (tanto eléctricos como de transmisión mecánica). Como se puede ver la orientación del extremo depende de los ángulos del triángulo ubicado en el equivalente a la tercera articulación, donde se redirecciona el giro. En este caso las barras a partir de dicho triángulo se encuentran soldadas para hacer la actuación sobre el punto ya mencionado. Otra configuración posible, mostrada en la figura \ref{fig:Mecanica:4_bar_mecanism}, aprovecha esta propiedad de mantener la orientación del extremo a lo largo de la cadena cinemática haciendo que, desde el inicio todas estas conexiones se hagan de forma perpendicular al plano del suelo. De esta forma se puede asegurar que el extremo de dicha cadena mecánica siempre se mantendrá perpendicular al suelo consiguiendo un desacople absoluto de los grados de posición del robot de los grados de libertado que controlan la orientación. En este caso, las barras del extremo no se encuentran soldadas como en el primer caso por lo que el control de la tercera articulación no se puede hacer sobre el mismo punto, como se hacía antes si no que se lleva a la unión de ambos mecanismos. Se ha dado finalmente más peso a la característica de mantener la orientación por facilitar mucho el desarrollo matemático y de control futuros.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/acoplamiento_romboide.jpg}
+        \caption{Imagen del acoplamiento \textit{romboide}}
+        \label{fig:Mecanica:acoplamiento_romboide}
+        \immagesource{Autor}
+    \end{figure}
 
-\section{Posicionamiento de sensores y actuadores} \label{sec:Mecanica:sensores_actuadore}
+    Volviendo sobre la compensación del peso del robot, se ha seguido una estrategia similar aunque simplificada a la planteada por \cite{Rahman_asimple}. El propósito de los muelles, uno para cada mecanismo, es el de compensar el peso de toda la estructura del brazo de forma que, en vacío, el brazo tenderá a elevarse. Será el peso de la \ingles{tablet} una vez se acople el culpable del funcionamiento del brazo tal y como se ha planteado: el manipulador asciende gracias al par aportado por los servomotores; y desciende por gravedad.
+    \\
 
-	Como e ha anticipado en secciones anteriores los tres motores correspondientes al giro en el eje Z así como el posicionamiento en el plano sagital están ubicados sobre la primera articulación uno encima de otro formando una torre. Desde ahí se dirige a través de hilos el par motor del primer y tercer servo hasta las articulaciones que dos y tres y a través de fricción por ruedas hasta el giro en el eje Z. En la figura \completar se puede ver en detalle dicho montaje así como la fijación a la base de giro.
-	\\
+    En la figura \ref{brazo_con_muelles} se puede ver el montaje de las barras con los muelles que, de forma cruzada, se oponen al peso de la estructura. En esta imagen se anticipa algunos conceptos y servirá como mapa general para localizar diferentes componentes del brazo robótico sobre los que se focalizará a continuación.
 
-	\completarCon{Imagen en detalle de la torre de motores}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_10.jpg}
+        \caption{Imagen del acoplamiento \textit{romboide}}
+        \label{fig:Mecanica:brazo_con_muelles}
+        \immagesource{Autor}
+    \end{figure}
 
-	Las articulaciones realimentadas son la articulación dos y la articulación tres, que llevan una realimentación de posición articular a través de un potenciómetro en cada una. El primer grado de libertad, el encargado del giro en el eje Z no está realimentado externamente. En este caso se cuenta con la información proporcionada por el servo y finalmente, la proporcionada por la tablet en el extremo.
-	\\
 
-	En el caso de la segunda articulación el potenciómetro se conecta con la propia articulación a través de un juego de engranajes con una relación de \completar que maximiza el uso del potenciómetro, ajustando el rango de movimiento del mismo (\completarCon{cuantos grados gira?}) con el ángulo de giro de la articulación (\completarCon{cuantos grados gira?}). En el caso de la tercera articulación el eje del potenciómetro se encuentra en la misma línea que el eje de giro que se pretende realimentar, el giro es solidario a dicha barra por lo que la relación de giro es unitaria. En la figura \completar se pueden ver ambos montajes: a la derecha la articulación dos con el juego de engranajes; a la izquierda la articulación tres con la transmisión solidaria.
+    La transmisión del movimiento para estos dos grados de libertad se ha realizado a través de hilos que van desde los servomotores hasta la articulación. Esos hilos están configurados de forma que no retornan hasta la polea de salida, polea acoplada al giro del motor. La transmisión está preparada para tirar de la carga de forma activa cuando se quiere subir la muñeca del robot, soltando cuerda en el caso contrario para dejarlo descender poco a poco.
 
-	\completarCon{Añadir fotos de como se enganchan ambos potenciómetros}
+    En el caso de ambas articulaciones la carga recibida por el motor ha sido reducida a través de elementos mecánicos sencillos. El enganche para ambas articulaciones hace uso de la misma filosofía. Se ha alejado el punto de actuación del eje de giro para conseguir una palanca sobre la que se actua maximizando así la fuerza realizada por el servo.
+    \\
 
-\section{Estudio de la cadena cinemática completa} \label{sec:Mecanica:cadena_cinematica}
+    A su vez se ha aprovechado el concepto de \textit{polipasto} ampliamente utilizado en actividades de trabajo vertical en las que sea necesario elevar cargas demasiado pesadas para ser manipuladas por una persona. Descritas en detalle por \cite{granvertical} basan su funcionamiento en combinar el uso de poleas fijas y móviles de forma que, el cable que las recorre, queda conectado a un punto fijo. De esta manera se reduce la fuerza necesaria para desplazar la carga, que estará acoplada a una de las poleas móviles.
 
-\completarCon{Hablar de como se reduce la carga hasta los servos: columpios, poleas dobles, palancas, etc}
+    \begin{minipage}{0.30\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/pmovil.png}
+            \caption{Polea Movil}
+            \label{fig:Mecanica:pmovil}
+            \immagesource{\cite{granvertical}}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.65\textwidth}\raggedright
+        La figura \ref{fig:Mecanica:pmovil} representa una polea movil de forma similar a como se ha aplicado en el proyecto. Como puntualiza \cite{granvertical} siempre y cuando las cuerdas se mantengan paralelas se obtiene una reducción de la fuerza necesaia para mover la carga \textbf{P} del 50\%. Esta sencilla demostración se puede ver en \ref{eq:Mecanica:polipasto}, que se deduce de un punto de equilibrio estático:
+        \begin{equation}
+            \caption{eq:Mecanica:polipasto}
+            P = T1 + T2 --> T1 = T2 --> T1 = dfrac{P}{2}
+        \end{equation}
+        Es importante remarcar que esta relación es una relación matemática; en la práctica, como bien apunta \cite{granvertical}, el rozamiento supondrá pérdida del rendimiento. En función de la calidad de los rodamientos de la polea se obtendrán rendimientos de entre el 70\% y el 97\%.
+    \end{minipage}
+
+    Volviendo sobre el diseño del brazo se ha diseñado de forma que en todo momento ambas cuerdas se mantendrán paralelas; además las poleas están montadas sobre dos rodamientos que aseguran un mayor rendimiento de la amplificación mecánica. Se pueden ver ambos montajes (palanca y polipasto) en las figuras \ref{fig:Mecanica:columpio_art_uno} y \ref{fig:Mecanica:columpio_art_dos} el montaje de estos \textit{columpios} para ambas articulaciones.
+
+    \begin{minipage}{0.38\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_7.jpg}
+            \caption{Transmisión hasta la primera articulación}
+            \label{fig:Mecanica:columpio_art_uno}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.58\textwidth}\raggedright
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_9.jpg}
+            \caption{Transmisión del movimiento hasta la segunda articulación}
+            \label{fig:Mecanica:columpio_art_dos}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+
+    Para conducir los cables de forma controlada hasta los puntos de actuación se ha hecho uso de poleas de redirección, cuyo ensamblaje puede verse en las figuras \ref{fig:Mecanica:redireccion_1} y \ref{fig:Mecanica:redireccion_2}.
+
+    \begin{minipage}{0.47\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_6.jpg}
+            \caption{Redirección a la salida de los servomotores}
+            \label{fig:Mecanica:redireccion_1}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.47\textwidth}\raggedright
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_8.jpg}
+            \caption{Redirección superior. Eje de la primera articulación}
+            \label{fig:Mecanica:redireccion_2}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+
+\section{Grados de libertad de la orientación}
+\completarCon{¡TBD!}
