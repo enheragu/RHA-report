@@ -1,4 +1,5 @@
 \chapter{Diseño del brazo robótico: Punto de inicio} \label{chap:Punto_partida}
+\chapterimage{figuras/ImagenesPortada/PortadaDisenoGeneral.jpg}
 
 En este capítulo se continuará perfilando los aspectos de diseño generales del prototipo. Una vez repasado el estado del arte en el capítulo \ref{chap:estadoarte} ya se tiene una idea de las soluciones disponibles y sus deficiencias y fortalezas. Este capítulo vuelve sobre los objetivos presentados en el capítulo \ref{chap:Introduccion} para ofrecer un marco más completo sobre el que se apoye todo el desarrollo del proyecto así como posteriores capítulos.
 \\
@@ -8,25 +9,23 @@ Es importante recordar que el prototipo debe estar en constante interacción con
 \begin{itemize}
     \item Se impone el uso de motores con bajo par de trabajo. De esta manera se vuelve físicamente imposible que los mismos puedan suponer un riesgo para los usuarios ya que la fuerza que son capaces de realizar no es suficiente para suponer un peligro para los mismos.
     \item El uso de motores de bajo par implica una compensación del peso del propio brazo de forma que los motores deban cargar con el meonr peso posible. Eso se consigue a través de mecanismos de cuatro barras acoplados, de igual forma que se hace en diferetnes lupas y lámparas comerciales como se puede ver en la figura \ref{fig:PuntoPartida:CuatroBarras}. Como demuestra \cite{Rahman_asimple} compensar este tipo de estructuras mediante el uso de muelles es bastante sencillo sea cual sea el número de articulaciones que acopladas.
-
-    \begin{figure}[H]
-           \centering
-           \includegraphics[width=1\textwidth]{figuras/Imagenes_PuntoPartida/CuatroBarras.jpg}
-           \caption{Ejemplos de como se acoplan y compensan estructuras basadas en mecanismos de cuatro barras.}
-           \label{fig:PuntoPartida:CuatroBarras}
+    \begin{figure}
+    	\centering
+    	\includegraphics[width=1\textwidth]{figuras/Imagenes_PuntoPartida/CuatroBarras.jpg}
+    	\caption{Ejemplos de como se acoplan y compensan estructuras basadas en mecanismos de cuatro barras.}
+    	\label{fig:PuntoPartida:CuatroBarras}
+    	\immagesource{A la izquierda imagen de internet. A la derecha es una captura de \cite{Rahman_asimple}}
     \end{figure}
-
-    \item Además la elección de dichos motores implica una amplificación mecánica a lo largo de la transmisión del movimiento en el diseño del prototipo. Los motores estarán hubicados en la base y el par de los mismos será transmitido a las articulaciones. Se ha optado por una transmisión mediante hilos que, como dice \cite{LeonardoCodice} será siempre más silenciosa y suave, permitirá hacer la transmisión solo en un sentido, es decir, para subir el extremo del brazo. El sentido de bajada se hara soltando dicho hilo dejando que la gravedad y el peso del brazo lo hagan descender. De esta manera en caso de que se encuentre un usuario en la trayectoria del brazo éste no podrá ejercer una fuerza activa contra el mismo. El paciente sentirá como mucho como el peso del brazo, compensado en su mayoría mediante los muelles, se apoya sobre si mismo.
-
+    \item Además la elección de dichos motores implica una amplificación mecánica a lo largo de la transmisión del movimiento en el diseño del prototipo. Los motores estarán hubicados en la base y el par de los mismos será transmitido a las articulaciones. Se ha optado por una transmisión mediante hilos que, como dice \cite{LeonardoCodice} será siempre más silenciosa y suave, permitirá hacer la transmisión solo en un sentido, es decir, para subir el extremo del brazo (figura \ref{fig:PuntoPartida:leonardo}). El sentido de bajada se hara soltando dicho hilo dejando que la gravedad y el peso del brazo lo hagan descender. De esta manera en caso de que se encuentre un usuario en la trayectoria del brazo éste no podrá ejercer una fuerza activa contra el mismo. El paciente sentirá como mucho como el peso del brazo, compensado en su mayoría mediante los muelles, se apoya sobre si mismo.
     \begin{figure}[H]
     \begin{adjustwidth}{-1.9cm}{-1.5cm}
            \centering
            \includegraphics[width=1.1\textwidth]{figuras/Imagenes_PuntoPartida/Leonardo.jpg}
            \caption{Captura del documento original digitalizado de \cite{LeonardoCodice}.}
            \label{fig:PuntoPartida:leonardo}
+           \immagesource{Captura de \cite{LeonardoCodice}}
        \end{adjustwidth}
     \end{figure}
-
     \item El uso de hilos para la transmisión permitirá además una reversibilidad en el control efectuado.
 \end{itemize}
 
@@ -39,6 +38,7 @@ Como en cualquier proyecto de prototipado se sigue en este caso una metodología
        \includegraphics[width=1.1\textwidth]{figuras/Imagenes_PuntoPartida/Rob-volution.pdf}
        \caption{Esquema de la evolución de diferentes versiones del diseño mecánico}
        \label{fig:PuntoPartida:rovbolution}
+       \immagesource{Autor}
    \end{adjustwidth}
 \end{figure}
 

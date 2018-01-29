@@ -42,6 +42,7 @@
  \usepackage{tabularx}
  \usepackage{multirow}
  \usepackage{rotating}
+ \usepackage{caption}
  %\usepackage{pdfpages}
 
 \usepackage[xindy,toc,acronyms,nonumberlist]{glossaries}
@@ -87,7 +88,7 @@
 
 \usepackage{graphicx,eso-pic}
 
-\newcommand\chapterimage[2][]{%
+\newcommand{\chapterimage}[1]{
 	\AddToShipoutPictureBG*{% Add picture to BackGround on this page only
 		\AtPageUpperLeft{% Position at upper left of text block
 			\vspace{2cm}
@@ -95,14 +96,17 @@
 			\llap{% Ignore horizontal width and overlap to the left
 				\smash{% Ignore vertical height
 					\raisebox{-\height}{% Lower so top touches baseline
-						\includegraphics[#1]{#2}}}}}}}% Include image with options
+						\includegraphics[width=12cm]{#1}}}}}}}% Include image with options
 %width height
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newcommand{\immagesource}[1]{
+	\vspace{-10pt}
+	\captionsetup{font={footnotesize,bf,it}}
+	\caption*{\hfill Fuente: #1}
+	}
 
 %empieza el documento
 \begin{document}
-
 % %elementos antes del trabajo en sí se meten dentro de frontmatter
  \frontmatter
 

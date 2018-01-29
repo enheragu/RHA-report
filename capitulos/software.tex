@@ -1,4 +1,5 @@
 \chapter{Diseño del software} \label{chap:SW}
+\chapterimage{figuras/ImagenesPortada/PortadaSW.jpg}
 \hrule
 \vspace{3mm}
 
@@ -108,6 +109,7 @@
             \includegraphics[width=1\textwidth]{figuras/Imagenes_SW/class_diagram_TRHA.jpg}
             \caption{Estructuras de datos auxiliares}
             \label{fig:SW:class_diagram_TRHA}
+            \immagesource{Autor}
         \end{figure}
 
         Se puede consultar información de más bajo nivel referente a estos tipos de datos en el Anexo \ref{app:documentacion_software} sección \completar.
@@ -123,10 +125,11 @@
         \end{enumerate}
 
         \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{figuras/Imagenes_SW/joint_handler_loop.png}
-        \caption{Esquema de ejecución de bucle de control de joint\_handler}
-        \label{fig:SW:joint_handler_loop}
+	        \centering
+	        \includegraphics[width=0.45\textwidth]{figuras/Imagenes_SW/joint_handler_loop.png}
+	        \caption{Esquema de ejecución de bucle de control de joint\_handler}
+	        \label{fig:SW:joint_handler_loop}
+	        \immagesource{Autor}
         \end{figure}
 
         Como se puede intuir es en este objeto donde realmente se implementa el lazo de control de velocidad para todos los \glosarioPlural{servo} conectados al bus. Esta serie de operaciones descrita anteriormente constituye, de forma discretizada, el lazo de control representado en la Figura \ref{fig:SW:servo_control_loop} para cada servo y asegura su correcto funcionamiento y sincronismo.
@@ -143,6 +146,7 @@
             \includegraphics[width=1\textwidth]{figuras/Imagenes_SW/class_diagram_JH.jpg}
             \caption{Atributos y métodos más relevantes del objeto \textit{JointHandler}}
             \label{fig:SW:class_diagram_JH}
+            \immagesource{Autor}
         \end{figure}
 
         Se puede consultar información de más bajo nivel referente al objeto \ingles{JointHandler} así como a sus atributos y métodos en el Anexo \ref{app:documentacion_software} sección \completar.
@@ -155,6 +159,7 @@
             \includegraphics[width=0.100\textwidth]{figuras/Imagenes_SW/class_diagram_JRHA.jpg}
             \caption{Atributos y métodos más relevantes del objeto \textit{JointRHA}}
             \label{fig:SW:class_diagram_JRHA}
+            \immagesource{Autor}
         \end{figure}
 
         Se puede consultar información de más bajo nivel referente al objeto \ingles{JointRHA} así como a sus atributos y métodos en el Anexo \ref{app:documentacion_software} sección \completar.
@@ -176,6 +181,7 @@
             \includegraphics[width=0.8\textwidth]{figuras/Imagenes_SW/class_diagram_SRHA.jpg}
             \caption{Atributos y métodos más relevantes del objeto \textit{ServoRHA}}
             \label{fig:SW:class_diagram_SRHA}
+            \immagesource{Autor}
         \end{figure}
 
         Se puede consultar información de más bajo nivel referente al objeto \ingles{ServoRHA} así como a sus atributos y métodos en el Anexo \ref{app:documentacion_software} sección \completar.
@@ -198,6 +204,7 @@
           	\includegraphics[width=0.65\textwidth]{figuras/Imagenes_SW/class_diagram_CHH.jpg}
           	\caption{Atributos y métodos más relevantes del objeto \textit{ChuckHandler}}
           	\label{fig:SW:class_diagram_CHH}
+          	\immagesource{Autor}
         \end{figure}
 
 \section{SRC. Fichero de código principal} \label{sec:SW:src}
@@ -212,6 +219,7 @@
 		\includegraphics[width=0.45\textwidth]{figuras/Imagenes_SW/class_relation.png}
 		\caption{Relaciones entre las diferentes Clases \completarCon{Hacer imagen con el mismo estilo que anteriormente}}
 		\label{fig:SW:class_relation}
+		\immagesource{Autor}
 	\end{figure}
 
 	Como se ha visto es el objeto de tipo \ingles{JointRHA} el encargado de almacenar la información concreta de cada articulación. Aúna la información de la realimentación de posición del potenciómetro con la contenida en el objeto \ingles{ServoRHA} que contiene. Este último almacena la información referente al servo, tanto el estado como la acción de control de velocidad así como la próxima consigna de velocidad (traducida a par) que se va a enviar.
@@ -278,6 +286,7 @@
        	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/SWTest_1.jpg}
        	\caption{Salida de Platformio Test para cada caso}
        	\label{fig:SW:test:standard_output}
+       	\immagesource{Autor}
     \end{figure}
 
     \begin{figure}[H]
@@ -285,6 +294,7 @@
        	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/SWTest_3.jpg}
        	\caption{Salida de Platformio Test con casos fallidos}
        	\label{fig:SW:test:error_output}
+       	\immagesource{Autor}
     \end{figure}
 
     \begin{figure}[H]
@@ -292,6 +302,7 @@
     	\includegraphics[width=0.75\textwidth]{figuras/Imagenes_SW/test/SWTest_6.jpg}
     	\caption{Salida de Platformio Test con el resumen de los casos de test}
     	\label{fig:SW:test:sum_output}
+    	\immagesource{Autor}
     \end{figure}
 
 	\subsection{Test librería RHATypes}
@@ -301,12 +312,14 @@
 			\includegraphics[width=0.95\textwidth]{figuras/Imagenes_SW/test/SWTest_2.jpg}
 			\caption{Test satisfactorios RHATypes}
 			\label{fig:SW:test:rha_types_ok}
+			\immagesource{Autor}
 		\end{figure}
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/SWTest_9.jpg}
 			\caption{Test satisfactorios PIDRegulator (caso dentro de RHATypes)}
 			\label{fig:SW:test:pid_regulator_ok}
+			\immagesource{Autor}
 		\end{figure}
 	\subsection{Test librería ServoRHA}
 		\begin{figure}[H]
@@ -314,6 +327,7 @@
 			\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/SWTest_4.jpg}
 			\caption{Test satisfactorios ServoRHA}
 			\label{fig:SW:test:servo_rha_ok}
+			\immagesource{Autor}
 		\end{figure}
 	\subsection{Test librería JointRHA}
 	\subsection{Test librería JointHandler}
@@ -323,6 +337,7 @@
 			\includegraphics[width=0.95\textwidth]{figuras/Imagenes_SW/test/SWTest_5.jpg}
 			\caption{Test satisfactorios JointHandler}
 			\label{fig:SW:test:joint_handler_ok}
+			\immagesource{Autor}
 		\end{figure}
 	\subsection{Test librería ChuckHandler}
 	\subsection{Test librería RobotRHA}
@@ -333,6 +348,7 @@
 		\includegraphics[width=0.95\textwidth]{figuras/Imagenes_SW/test/SWTest_8.jpg}
 		\caption{Resumen Test satisfactorios}
 		\label{fig:SW:test:sum_ok}
+		\immagesource{Autor}
 	\end{figure}
 
 \section{Gestión de la complejidad y mantenibilidad:} \label{sec:SW:gestion_complejidad}
@@ -368,6 +384,7 @@
         \includegraphics[width=0.75\textwidth]{figuras/Imagenes_SW/analisis_codigo.png}
         \caption{Análisis del código del proyecto}
         \label{fig:SW:code_analysis}
+        \immagesource{Autor}
     \end{figure}
 
     \subsection{Reglas de codificación del Código}
@@ -377,6 +394,7 @@
     	\includegraphics[width=0.65\textwidth]{figuras/Imagenes_SW/test/ReadibilityTest.jpg}
     	\caption{Ejemplo de la Salida de cpplint con errores}
     	\label{fig:SW:test:codif_output}
+    	\immagesource{Autor}
     \end{figure}
 
     \begin{figure}[H]
@@ -384,6 +402,7 @@
     	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/ReadibilityTest_2.jpg}
     	\caption{Ejemplo de errores con cpplint}
     	\label{fig:SW:test:error_output_cpplint}
+    	\immagesource{Autor}
     \end{figure}
 
     \begin{figure}[H]
@@ -391,4 +410,5 @@
     	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/ReadibilityTest_3.jpg}
     	\caption{Salida de cpplint una vez eliminados los errores}
     	\label{fig:SW:test:cpplint_ok}
+    	\immagesource{Autor}
     \end{figure}
