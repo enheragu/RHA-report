@@ -5,15 +5,88 @@
 
 Una vez vistas algunas ideas previas generales que deberá tener el prototipo diseñado este capítulo entra de lleno en la descripción de la solución mecánica obtenida así como una comparación con ideas previas.
 
-\section{Visión general} \label{sec:Mecanica:vision_general}
+\section{Visión general y materiales estructurales} \label{sec:Mecanica:vision_general}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/modelo_esquematico.jpg}
-    \caption{Modelo de los grados de libertad de posición. Convencionalismos tomados}
-    \label{fig:Mecanica:convenciones_generales}
-    \immagesource{Autor}
-\end{figure}
+    Antes de empezar a repasar los detalles concretos es necesario establecer unos convencionalismos respecto al uso de nomenclatura.
+    \\
+
+    Como se ha descrito en el capítulo \ref{chap:Punto_partida} el movimiento de las articulaciones encargadas de posicionar el extremo del robot se transmitirá de forma mecánica desde los motores hasta la propia articulación. Aunque no viene impuesto por ningún requisito funcional, se ha optado por fijar los tres primeros grados de libertad de tipo rotacional. En la figura \ref{fig:Mecanica:convenciones_generales} se puede ver un diagrama esquematizado de un brazo robótico con tres grados de libertad rotacionales. A partir de ahora se hará referencia a los tres primeros grados de libertad como los \ingles{GDL} o articulaciones de posición.
+    \\
+
+    En la imagen se puede ver como serán nombradas las primeras tres articulaciones también se debe aclarar la nomenclatura a utilizar sobre los elementos que unen dichas articulaciones. Serán llamados indistintamente eslabones o barras estando numerando desde la barra cero, que conecta el suelo con el primer grado de libertad, en adelante.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/modelo_esquematico.jpg}
+        \caption{Modelo de los grados de libertad de posición. Convencionalismos tomados}
+        \label{fig:Mecanica:convenciones_generales}
+        \immagesource{Autor}
+    \end{figure}
+
+    Como se ha comentado en secciones anteriores el brazo debe ser capaz de orientar la tablet de forma que ésta sea capaz de \textit{ver} y seguir los ojos del paciente. Aunque el brazo podría anclarse a diferentes estructuras de ahora en adelante se centra la justificación y desarrollo en el caso de uso sobre una camilla. Este caso es el que requiere mayor longitud de trabajo de forma que las dimensiones del brazo deberám permitirle abarcar de un lado a otro de la camilla.
+    \\
+
+    Este espacio de trabajo definido, que deberá abarcar aproximadamente $90cm$ (la mayoría de camas y camillas tienen esta medida), implica unas dimensiones de los eslabones del brazo considerables. Como se ha visto en capítulos anteriores el peso del prototipo es un factor importante tanto para la seguridad del usuario como para que pueda ser desplazado por unos motores de bajo par.
+    \\
+
+    La transimisión mecánica del movimiento debe optimizarse para ser capaz de mover el brazo; este trabajo se verá simplificado a su vez aligerando, cuando sea posible, la estructura del mismo. Como material estructural base se han elegido perfiles de aluminio de sección cuadrada (se describen en detalle en el capítulo \completar junto con el resto de materiales). Estos perfiles presentan una alta resistencia y capacidad de carga a la vez que un peso reducido.
+    \\
+
+    El material estructural definido se complementa con otra serie de piezas diseñadas específicamente para este proyecto (se puede ver el anexo \ref{app:listadoPiezas} para ver estas piezas). En este caso, por su versatilidad se utilizarán piezas modeladas digitalmente e Impresas en 3D posteriormente. De igual manera parte del diseño se apoya en piezas de metacrilato cortado con láser.
+    \\
+
+    Aunque el peso del brazo completo se estima será reducido, la transmisión mediante cuerdas debe ser completamente fiable. Debido a las dimensiones con las que se trabaja se ve inviable el uso de cadenas o cuerdas de gran grosor; es por eso que se ha optado por utilizar hilo de \ingles{kevlar} de un milímetro de grosor.
+    \\
+
+    Aunque supone anticipar parte del desarrollo que se verá a continuación, a modo de lista se pueden resumir los materiales necesarios a nivel constructivo del proyecto en:
+    \begin{itemize}
+        \item Barras de aluminio de sección cuadrada de 1/2"x1m (lado de la sección x longitud).
+        \item Rodamientos de bolas de 4mm x 13mm (diámetro interior X diámetro exterior)
+        \item Rodamientos de bolas de 3mm x 10mm (diámetro interior X diámetro exterior)
+        \item Rodamiento axial de 37.5mm x 52mm (diámetro interior X diámetro exterior)
+        \item Barras de acero macizo cilíndricas de 4mm de diámetro
+        \item Barras de acero macizo cilíndricas de 3mm de diámetro
+        \item Piezas impresas en impresora 3D. (Lista detallada en el Anexo \ref{app:listadoPiezas})
+        \item Piezas de metacrilato cortadas con láser. (Lista detallada en el Anexo \ref{app:listadoPiezas})
+        \item Tornillería: tornillos y tuercas de diferentes métricas.
+        \item Hilo de kevlar.
+        \item Poleas de acetal de 4.9mm x 21.8mm (diámetro interior X diámetro exterior).
+        \item Soporte de sombrilla. La base sobre la que se apoye el brazo debe ser capaz de soportarlo en una posición de trabajo en todo momento. Para no fijar ni imponer ningún tipo de anclaje (a superficie plana, anclaje a una camilla, etc) se ha optado por esta solución para el desarrollo del prototipo.
+    \end{itemize}
+
+    En el capítulo \ref{chap:Gestion}, concretamente en la tabla \ref{tab:presupuesto}, están reflejados los detalles técnicos de estos materiales así como las referencias de compra, cantidades necesarias y precios.
+ 
+\section{Filosofía y justificación de diseño} \label{sec:Mecanica:filosofia_diseno}
+
+    Tal y como se ha adelantado en el capítulo introductorio el software empleado para modelar el brazo robótico es Autodesk Inventor. Este programa es especialmente potente para modelado paramétrico; esto significa que permite definir una serie de parámetros que serán utilizados para definir las medidas de los bocetos. Un diseño bien modelado parametricamente permite mucha flexibilidad a la hora de modificar ciertas medidas como pueden ser agujeros para tornillería, ejes u holguras.
+    \\
+
+    El modelado de todas las piezas ha seguido esta filosofía de parametrización y dependencia entre las piezas de forma que el diseño sea lo más flexible posible en cuanto a modificación de medidas. En la figura \ref{fig:Mecanica:diseno_parametrico} se puede ver a modo de ejemplo parte de la lista de parámetros definida.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/diseno_parametrico.jpg}
+        \caption{Ejemplo de parámetros definidos en Inventor}
+        \label{fig:Mecanica:diseno_parametrico}
+        \immagesource{Autor}
+    \end{figure}
+
+\subsection{Realidad de las formas}
+    Cualquier diseño de producto, incluso desde una más puramente perspectiva técnica incluye a su vez consideraciones sobre el diseño estético del mismo. Para este proyecto se ha intentado respetar la verdad de las formas predominantes tanto a nivel estructural como en el entorno de trabajo.
+    \\
+
+    Como ya se ha visto, la base estructural del prototipo está conformada por barras de aluminio de sección cuadrada. Unido a la predominancia de formas rectangulares y/o cuadradas en una habitación de hospital (figura \ref{fig:Mecanica:verdad_formas}) se ha optado por un diseño basado en prismas rectangulares, con un aspecto más \ingles{retro}.
+    \\
+
+    A nivel bibliográfico y del estado del arte estudiado se puede observar una tendencia a formas más suavizadas en muchos de los casos. En este proyecto se busca un contraste entre las formas que caracterizan al ser humano, más suavizadas y con geometrías complejas, en contraposición con las formas que definen el prototipo, formas geométricas y angulares.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/verdad_de_formas.jpg}
+        \caption{Predominzancia de formas rectangulares en el entorno de trabajo}
+        \label{fig:Mecanica:verdad_formas}
+        \immagesource{Imagen de consalud.es, editada posteriormente por el Autor}
+    \end{figure}
 
 \section{Articulación uno. Giro en el eje Z} \label{sec:Mecanica:articulacion_uno}
     Junto con las articulaciones dos y tres, descritas en la Sección \ref{sec:Mecanica:articulacion_dostres} están consideradas como los grados de libertad que gestionan la posición del extremo del robot en un espacio tridimensional. En adelante se las podrá denominar también "grados de libertad de posición".
