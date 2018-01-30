@@ -2,17 +2,48 @@
 \chapterimage{figuras/ImagenesPortada/PortadaElectronica.jpg}
 \hrule
 \vspace{3mm}
-En este capítulo se hará una descripción detallada de todos los componentes involucrados en el proyecto.
+
+Aunque se han anticipado tanto textualmente como a través de imágenes algunas características de los componentes electrónicos utilizados aún no se han descrito en detalle. Este capítulo se mete de lleno en los aspectos electromecánicos del brazo robótico, haciendo una descripción de los componentes empleados, algunas pautas para su correcto uso así como su integración dentro de la estructura descrita en el capítulo \ref{chap:Mecanica}
 
 \section{Actuadores} \label{sec:Electronica:Actuadores}
 \label{sec:Electronica:Actuadores:G15}
 
-    Para los grados de libertad de posición del prototipo se ha optado por utilizar los \glosarioPlural{smartservo} G15 Cube de la marca Cytron.
+    La imposición de utilizar unos motores de par reducido puede interpretarse como una desventaja, pero en este caso al quedar descartados los motores de corriente contínua y motores paso a paso convencionales queda la alternativa de uso de \glosarioPlural{smartservo} con todas las ventajas que ofrecen.
+    \\
 
-    Algunas características importantes de los mismos se muestran en la tabla \ref{tab:g15_catact}:
+    Los \glosarioPlural{smartservo} elegidos para el proyecto son, concretamente, losG15 Cube de la marca Cytron. Estos servos vienen acompañados de una gran variedad de funcionalidades que facilitarán el control y manejo del brazo robótico. Estos servos, como la mayoría de \glosarioPlural{smartservo}, tienen implementado un sistema de comunicación bidireccional con la placa controladora a través de un tipo de comunicación conocida como \ingles{Half Serial Duplex Communication}. Como se cuenta en \cite{embeddedSystems}, este tipo de comunicación utiliza un solo cable que podrá operar en una u otra dirección cada vez. Puede darse la situación en que varios componentes intenten comunicar al mismo tiempo en ambas direcciones pudiendo ocasionar graves problemas en la electrónica de los mismos. El uso de este tipo de servos implica el uso de electrónica adicional, no solo a modo de etapa de potencia, si no para la gestión de la comunicación entre los mismos y el microcontrolador.
+    \\
+
+    Utilizar un protocolo de comunicación más complejo permite conectar varios servos a un mismo puerto de comunicación, conectando cada servo al anterior, también conocido como conexión \ingles{daisy chain}. En la figura \ref{fig:Electronica:bus-servos} se puede ver representada este tipo de cadena y donde se puede ver el aspecto del modelo de servos seleccionado.
+    \\
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{figuras/Imagenes_Electronica/G15_bus_conection.jpg}
+    	\caption{Esquema de la conexión de los servos formando un bus serie de servos y la placa \ingles{Shield}}
+    	\label{fig:Electronica:bus-servos}
+    	\immagesource{Montaje del Autor a partir de imágenes del fabricante}
+    \end{figure}
+    
+    Para hacer efectiva la comunicación los servos G15 Cube cuentan con dos puertos de tres cambles cada uno. Cada uno cuenta con un conector de aspecto y forma diferente que fuerzan las conexiones en un mismo sentido siempre de forma inequívoca. Estos tres cables, como se puede ver en la imagen \ref{fig:Electronica:conectores-servos}, son utilizados para alimentación, referencia a tierra y canal de información.
+    \\
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.7\textwidth]{figuras/Imagenes_Electronica/conectores_servos.jpg}
+    	\caption{Conectores de los G15 Cube y uso de cada uno de los cables}
+    	\label{fig:Electronica:conectores-servos}
+    	\immagesource{Captura obtenida de \cite{CytronTechnologies2012}}
+    \end{figure}
+    
+    Entre las ventajas de utilizar \glosarioPlural{smartservo} es que se cuenta con información relevante que se podrá \textit{preguntar} al servo cuando sea necesaria. Estos servos tienen diferentes modos de funcionamiento, aunque se utilizará principalmente el modo de \textbf{giro continuo}. Para este caso los servos ofrecen un control en par de manera que se podrán enviar comandos del par que deberá ejercer. Como información relevante a consultar ofrece datos de posición del servo, par realizado y sentido del mismo, temperatura, voltaje de alimentación, velocidad y sentido de movimiento, entre otros.
+    \\
+    
+    Cabe destacar algunas características importantes de los mismos, que se encuentran resumidas en la tabla \ref{tab:g15_catact}. Concretamente es de destacar los $12kg \cdot cm$ de par efectivo; un par relativamente bajo que se aprovechará como medida extra de protección a usuarios del brazo robótico tal y como se ha anticipado en capítulos anteriores.
 
     \begin{table}[H]
-    	\caption{Características mas importantes de los Servos G15 de Cytron. Tabla traducida y resumida a los puntos más importantes del Cytron G15 Cube servo User Manual \cite{CytronTechnologies2012} \completarCon{¿esto está bien, hay que poner paginas involucradas?}}
+    	\caption{Características relevantes de los Servos G15 de Cytron.}
+    	\immagesource{Tabla traducida y resumida de \cite{CytronTechnologies2012}}
     	\label{tab:g15_catact}
    		\begin{minipage}{0.42\textwidth}
    		\begin{center}
@@ -28,8 +59,6 @@ En este capítulo se hará una descripción detallada de todos los componentes i
 			\hline
 			Temperatura de funcionamiento & $0^oC$ & & $80^oC$ \\
 			\hline
-			Par capaz de soportar & & & $15km \cdot cm$ \\
-			\hline
 			\multicolumn{4}{c}{\textbf{}} \\
 			\hline
 			\multicolumn{4}{|c|}{\textbf{Especificaciones técnicas}} \\
@@ -37,6 +66,8 @@ En este capítulo se hará una descripción detallada de todos los componentes i
 			\multicolumn{2}{|c|}{Peso} & \multicolumn{2}{|c|}{$63g$}\\
 			\hline
 			\multicolumn{2}{|c|}{Par capaz de realizar (a $12V$)} & \multicolumn{2}{|c|}{$12kg \cdot cm$}\\
+			\hline
+			\multicolumn{2}{|c|}{Par capaz de soportar} & \multicolumn{2}{|c|}{$15km \cdot cm$} \\
 			\hline
 			\multicolumn{2}{|c|}{Margen angular de operación } & \multicolumn{2}{|c|}{$360^o$ en giro continuo}\\
 			\hline
@@ -50,38 +81,101 @@ En este capítulo se hará una descripción detallada de todos los componentes i
    		\end{minipage}
     \end{table}
 
-	Estos servos utilizan un protocolo de comunicación basado en una comunicación \ingles{Half Duplex Serial}. En este caso toda la información fluye por un mismo cable. Los servos se conectan en un bus uno a continuación del otro, teniendo tres pines, uno de voltaje positivo, otro de GND y el tercero de datos. Se puede ver en la figura \ref{fig:Electronica:bus-servos} como quedan conectados a la placa, quedando uno de los extremos (el del último servo) libre.
+\section{Interfaz servos-microcontrolador} \label{sec:Electronica:Potencia}
+
+	Pasada la descripción de los actuadores, los G15 Cube Servo, se hace patente la necesidad de una etapa intermedia entre la placa controladora y los servos que gestione la comunicación entre ambos de forma segura y que desacople la alimentación del controlador de la alimentación de los servos, que requieren un voltaje de 12V (ver \ref{tab:g15_catact}).
+	\\
+	
+	Es la propia marca que fabrica los servos, Cytron Technologies, la que suministra una placa auxiliar o \ingles{shield} con este propósito. Concretamente se utilizará la segunda generación de dicha placa, vista en la figura \ref{fig:Electronica:bus-servos} de la sección anterior.
+	\\
+	
+	Para la alimentación de los servos se ofrecen dos posibles entradas remarcadas en la figura \ref{fig:Electronica:alimentacion-shield} con los colores azul y rojo. Para alternar de una a otra habrá que, mediante el uso de un soldador, modificar la conexión recuadrada en amarillo para habilitar la opción deseada deshabilitando la contraria.
+	\begin{itemize}
+		\item Alimentación externa (recuadrada en azul): en este caso se conecta la fuente de alimentación directamente a los conectores pasando el voltaje a los cables de alimentación de los servos.
+		\item Alimentación mixta shield-controlador (recuadrada en rojo): en este caso la alimentación se comparte con la placa controladora (que deberá rectificar el voltaje de entrada a valores aceptables para la misma). Por defecto esta es la entrada que viene habilitada; se ha mantenido ya que permite la alimentación simultánea de los servos y de la placa controladora a partir de la misma fuente de alimentación (se verá en secciones posteriores la elección del controlador y otros aspectos). 
+	\end{itemize}
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{figuras/Imagenes_Electronica/alimentacion-shield.jpg}
+		\caption{Posibilidades para la alimentación de los servos}
+		\label{fig:Electronica:alimentacion-shield}
+		\immagesource{Captura obtenida de \cite{CytronTechnologies2012} y editada por el Autor del proyecto}
+	\end{figure}
+		
+	En la figura \ref{fig:Electronica:alimentacion-shield} pueden distinguirse una serie de pines de conexión con las letras RX, TX y CTRL. Esta placa está pensada para funcionar a modo de interfaz entre un puerto serie común (con un cable de emisión y otro de recepción de datos) y un puerto serie de tipo \ingles{Half Duplex} como el empleado por los servos.
+	\\
+	
+	Como se describe en \cite{CytronTechnologies2012} la \ingles{shield} incluye integrada un circuito integrado (concretamente el 74HC126 IC) que resuelve los problemas de comunicación inherentes a la comunicación bidireccional por un solo hilo. A través de un pin de control (CTRL en la shield) se gestiona la conexión entre el hilo del \ingles{Half Duplex} y los hilos del puerto serie alternando de uno a otro en función del estado de la señal de control (alto nivel o bajo nivel).
+	
+\section{Placa controladora}
+	
+	La placa \ingles{shield} descrita en el apartado anterior está especialmente diseñada para encajar en placas tipo Arduino, concretamente el modelo Arduino Uno. En el marco de este proyecto se ha realizado una fase del desarrollo utilizando como base una placa Arduino Uno, aunque posteriormente se ha cambiado a un Arduino Mega. Más adelante se explicará la motivación de dicho cambio, pero merece volver sobre el aspecto de la alimentación de la placa descrito en el apartado anterior. Según se especifica en \cite{arduinoUno} y en \cite{arduinoMega} el voltaje de entrada recomendado abarca desde los 7 a los 12V teniendo como limitación inferior un mínimo de 6V y un máximo de 20V. En este caso se aplicarán 12V, que quedan incluidos dentro del rango recomendado por el fabricante.
+	\\
+	
+	En el caso de la placa Arduino Uno la \ingles{shield} viene preparada para encajar sobre la misma. La comunicación con los servos está pensada para efectuarse de dos formas:
+	\begin{itemize}
+		\item A través de un puerto serie UART hardware: en el caso de la placa Arduino Uno solo dispone del puerto conectado a los pines 0 y 1, que también es el usado para la carga de software y comunicación con el ordenador, por lo que queda descartado.
+		\item Emulando un puerto serie mediante software en otros pines de la placa. La \ingles{shield} trae una serie de \ingles{jumpers} \completarCon{¿Definir o no es necesario?} que permiten cambiar entre una selección de pines para cada caso (RX, TX o CTRL).
+	\end{itemize}
+	
+	Como se puede ver, utilizando una placa Arduino Uno la comunicación con los servos queda relegada a un puerto emulado por software. Esta es la razón principal por la cual se decide cambiar y utilizar una Placa Arduino Mega2560, que además presenta mayores prestaciones respecto a memoria (ver tabla \ref{tab:arduino_comparison}). Para el control del brazo robótico y el diseño y testeo del software es necesario optimizar la velocidad de comunicación entre los dispositivos al máximo. La placa Arduino Mega incluye tres puertos serie hardware adicionales que se podrán puentear a la placa \ingles{shield} para ser utilizados. Esta conexión se puede ver en la figura \ref{fig:Electronica:shield-arduino}. De esta forma se podrá aprovechar todo el potencial de la comunicación a través de un puerto serie hardware. 
+	\\
+	
+	Para hacerse una idea de la importancia que tiene este cambio se ha forzado la comunicación en ambos casos para obtener los máximos en los cuales sería viable trabajar. Los datos presentados en la tabla \ref{tab:comunication_serial} se han obtenido de forma experimental bajo el marco de este proyecto. Entre los mismos se puede apreciar la gran diferencia existente entre las diferentes formas de comunicación. Las velocidades se han ido duplicando (a modo de convencionalismo las velocidades de comunicación estándar para Placas Arduino suelen obtenerse de esta manera) hasta llegar al máximo que permite una comunicación satisfactoria.
+	
+	 \begin{table}[H]
+	 	\caption{Comparativa entre placas Arduino Uno y Arduino Mega2560}
+	 	\immagesource{Tabla con información resumida de \cite{arduinoUno} y \cite{arduinoMega} }
+	 	\label{tab:comunication_serial}
+	 		\begin{center}
+	 			\begin{tabular}{ |c|c|c| }
+	 				\hline
+	 				\textbf{Tipo de comunicación}& \begin{minipage}{.30\linewidth} \textbf{Velocidad máxima  en baudios}  \end{minipage}& \begin{minipage}{.30\linewidth} \textbf{Velocidad máxima en bytes/milisegundo} \end{minipage} \\
+	 				\hline
+	 				\begin{minipage}{.30\linewidth}\vspace{2pt} Puerto Serie \textbf{Sowtware} (AUno):  Shield-controlador \vspace{2pt} \end{minipage} & 57600 bauds & 7.2 bytes/ms \\
+	 				\hline
+	 				\begin{minipage}{.30\linewidth}\vspace{2pt} Puerto Serie \textbf{Hardware} (AMega):  Shield-controlador \vspace{2pt} \end{minipage} & 460800 bauds & 57.6 bytes/ms \\
+	 				\hline
+	 				\begin{minipage}{.30\linewidth}\vspace{2pt} Puerto Serie \textbf{Hardware} (Ambas):  controlador-ordenador \vspace{2pt} \end{minipage} & 921600 bauds & 115.2 bytes/ms \\
+	 				\hline
+	 			\end{tabular}
+	 		\end{center}
+	 \end{table}
+	 
+	 En este proyecto concreto se enlazaran diferentes lazos de control a diferentes frecuencias de refresco (ver capítulo \ref{chap:Control}) que exigirán el máximo de la capacidad comunicativa entre los dispositivos. Los datos máximos obtenidos para la placa Arduino Mega son los utilizados para el funcionamiento del robot.
+	
     \begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.9\textwidth]{figuras/Imagenes_Electronica/G15_bus_conection.png}
-    	\caption{Esquema de la conexión el bus serie de servos y la placa Shield}
-    	\label{fig:Electronica:bus-servos}
-    	\immagesource{Montaje del Autor a partir de imágenes del fabricante}
-    \end{figure}
-
-\section{Etapa de potencia} \label{sec:Electronica:Potencia}
-
-	Para la correcta comunicación entre los servos y la placa se utilizan tres pines de la misma. Dos serán los de entrada (RX) y salida (TX) para comunicar y el tercer pin funcionará a modo de pin de control, gestionando en que momentos se publica información por el pin de salida y en que momento se escucha por el pin de entrada.
-	\\
-
-	Dependiendo de que placa se utilice este puerto serie (el TX y el RX) podrán estar conectados a un puerto serie de tipo Hardware o emular uno por Software.
-	\\
-
-	En primeras versiones del desarrollo se ha estado utilizando un Arduino Uno en el cual se emulaba, por los pines 9 (TX) y 8 (RX) un puerto software quedando el puerto Hardware de los pines 1 y 0 para la comunicación serie con el ordenador.
-	\\
-
-	Debido a los ciclos de funcionamiento del software para aplicar el control al brazo robótico esta comunicación resulta ser demasiado lenta, es por ello que se sustituye el Arduino Uno por un Arduino Mega, con 4 puertos serie Hardware que se podrán aprovechar, para la comunicación con el ordenador (pines 0 y 1) y para la comunicación con los servos (pines 18 y 19).
-	\\
-
-	En la Shield utilizada para comunicar con los servos viene preparado para, mediante unos jumpers \completarCon{definir?¿}, poder seleccionar unos pines u otros. En este caso no está preparado para comunicar con un Arduino Mega directamente, es por ello que se han sacado unos cables para conectar, la parte de la shield que conecta con el puerto de los servos (están los 4 pines cortocircuitados) con los pines de los puertos hardware del Arduino Mega. Se puede ver dicha conexión en la figura \ref{fig:Electronica:shield-arduino}.
-
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[width=0.65\textwidth]{figuras/Imagenes_Electronica/Shield-Arduino-Conection.png}
+    	\includegraphics[width=0.75\textwidth]{figuras/Imagenes_Electronica/Shield-Arduino-Conection.jpg}
     	\caption{Esquema de la conexión entre la placa Shield y Arduino para utilizar los puertos Hardware Serie de la Arduino Mega}
     	\label{fig:Electronica:shield-arduino}
     	\immagesource{Montaje del Autor a partir de imágenes del fabricante}
     \end{figure}
-\section{Procesamiento}
+    
+    \begin{table}[H]
+       	\caption{Comparativa entre placas Arduino Uno y Arduino Mega2560}
+       	\immagesource{Tabla con información resumida de \cite{arduinoUno} y \cite{arduinoMega}}
+       	\label{tab:arduino_comparison}
+       	%\begin{minipage}{0.42\textwidth}
+       		\begin{center}
+       			\begin{tabular}{ |c|c|c| }
+       				\hline
+       				&\textbf{Arduino Uno}&\textbf{Arduino Mega2560} \\
+       				\hline
+       				Número de pines entrada/salida & 14 & 54 \\
+       				\hline
+       				Memoria flash & 32KB & 256 KB \\
+       				\hline
+       				SRAM & 2KB & 8KB \\
+       				\hline
+       				EEPROM & 1KB & 4KB \\
+       				\hline
+       				Velocidad de reloj & 16MHz & 16Mhz \\
+       				\hline
+       			\end{tabular}
+       		\end{center}
+       	%\end{minipage}
+    \end{table}
 
 \section{Sensores} \label{sec:Electronica:Sensores}

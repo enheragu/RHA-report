@@ -178,7 +178,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     Se ha adelantado en el capítulo \ref{chap:Punto_partida} la importancia de compensar el peso. En \cite{Rahman_asimple} se puede encontrar una demostración matemática de como se puede compensar, mediante el uso de muelles, el peso del los eslabones. Ambas estructuras expuestas permiten este tipo de compensación de la carga. Finalmente se ha optado por la segunda opción (acoplamiento lineal) ya que mantiene la orientación del extremo siempre constante y perpendicular al plano del suelo. Esta característica resulta muy últil ya que simplifica el análisis matemático y posterior control del brazo robótico en gran medida.
     \\
 
-    Aunque sobre el esquema sobre el papel cuadre bien un acoplamiento lineal, en la realidad esto supone el apilamiento de muchos componentes sobre la misma barra. En ese caso la estructura resultante va engrosando y alejándose del plano sagital, lo que a futuro puede provocar fuerzas transversales indeseadas. Para el montaje este acoplamiento lineal se ha separado formando una geometría de tipo paralelogramo, concretamente romboide. Está conformado por una base de metacrilato con piezas de apoyo impresas en plástico que atrapan, a modo de \texit{sandwich}, las barras estructurales de aluminio.
+    Aunque sobre el esquema sobre el papel cuadre bien un acoplamiento lineal, en la realidad esto supone el apilamiento de muchos componentes sobre la misma barra. En ese caso la estructura resultante va engrosando y alejándose del plano sagital, lo que a futuro puede provocar fuerzas transversales indeseadas. Para el montaje este acoplamiento lineal se ha separado formando una geometría de tipo paralelogramo, concretamente romboide. Está conformado por una base de metacrilato con piezas de apoyo impresas en plástico que atrapan, a modo de \textit{sandwich}, las barras estructurales de aluminio.
 
     \begin{figure}[H]
         \centering
@@ -196,14 +196,15 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_10.jpg}
-        \caption{Imagen del acoplamiento \textit{romboide}}
+        \caption{Vista genérica de los grados de libertad dos y tres}
         \label{fig:Mecanica:brazo_con_muelles}
         \immagesource{Autor}
     \end{figure}
 
 
     La transmisión del movimiento para estos dos grados de libertad se ha realizado a través de hilos que van desde los servomotores hasta la articulación. Esos hilos están configurados de forma que no retornan hasta la polea de salida, polea acoplada al giro del motor. La transmisión está preparada para tirar de la carga de forma activa cuando se quiere subir la muñeca del robot, soltando cuerda en el caso contrario para dejarlo descender poco a poco.
-
+	\\ 
+	
     En el caso de ambas articulaciones la carga recibida por el motor ha sido reducida a través de elementos mecánicos sencillos. El enganche para ambas articulaciones hace uso de la misma filosofía. Se ha alejado el punto de actuación del eje de giro para conseguir una palanca sobre la que se actua maximizando así la fuerza realizada por el servo.
     \\
 
@@ -218,18 +219,19 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
             \immagesource{\cite{granvertical}}
         \end{figure}
     \end{minipage}
-    \begin{minipage}{0.65\textwidth}\raggedright
+    \begin{minipage}{0.60\textwidth}\raggedright
+
         La figura \ref{fig:Mecanica:pmovil} representa una polea movil de forma similar a como se ha aplicado en el proyecto. Como puntualiza \cite{granvertical} siempre y cuando las cuerdas se mantengan paralelas se obtiene una reducción de la fuerza necesaia para mover la carga \textbf{P} del 50\%. Esta sencilla demostración se puede ver en \ref{eq:Mecanica:polipasto}, que se deduce de un punto de equilibrio estático:
         \begin{equation}
-            \caption{eq:Mecanica:polipasto}
-            P = T1 + T2 --> T1 = T2 --> T1 = dfrac{P}{2}
+            \label{eq:Mecanica:polipasto}
+            P = T1 + T2 ; T1 = T2 ; T1 = frac{P}{2}
         \end{equation}
-        Es importante remarcar que esta relación es una relación matemática; en la práctica, como bien apunta \cite{granvertical}, el rozamiento supondrá pérdida del rendimiento. En función de la calidad de los rodamientos de la polea se obtendrán rendimientos de entre el 70\% y el 97\%.
+        Es importante remarcar que ésta relación es una relación matemática; en la práctica, como bien apunta \cite{granvertical}, el rozamiento supondrá pérdida del rendimiento. En función de la calidad de los rodamientos de la polea se obtendrán rendimientos de entre el 70\% y el 97\%.
     \end{minipage}
 
     Volviendo sobre el diseño del brazo se ha diseñado de forma que en todo momento ambas cuerdas se mantendrán paralelas; además las poleas están montadas sobre dos rodamientos que aseguran un mayor rendimiento de la amplificación mecánica. Se pueden ver ambos montajes (palanca y polipasto) en las figuras \ref{fig:Mecanica:columpio_art_uno} y \ref{fig:Mecanica:columpio_art_dos} el montaje de estos \textit{columpios} para ambas articulaciones.
 
-    \begin{minipage}{0.38\textwidth}
+    \begin{minipage}{0.41\textwidth}
         \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_7.jpg}
@@ -238,7 +240,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
             \immagesource{Autor}
         \end{figure}
     \end{minipage}
-    \begin{minipage}{0.58\textwidth}\raggedright
+    \begin{minipage}{0.56\textwidth}\raggedright
         \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_9.jpg}
@@ -253,7 +255,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \begin{minipage}{0.47\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_6.jpg}
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_6.jpg}
             \caption{Redirección a la salida de los servomotores}
             \label{fig:Mecanica:redireccion_1}
             \immagesource{Autor}
@@ -262,7 +264,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \begin{minipage}{0.47\textwidth}\raggedright
         \begin{figure}[H]
             \centering
-            \includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_8.jpg}
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_8.jpg}
             \caption{Redirección superior. Eje de la primera articulación}
             \label{fig:Mecanica:redireccion_2}
             \immagesource{Autor}
