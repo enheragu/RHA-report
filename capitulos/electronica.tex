@@ -16,7 +16,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 
     Utilizar un protocolo de comunicación más complejo permite conectar varios servos a un mismo puerto de comunicación, conectando cada servo al anterior, también conocido como conexión \ingles{daisy chain}. En la figura \ref{fig:Electronica:bus-servos} se puede ver representada este tipo de cadena y donde se puede ver el aspecto del modelo de servos seleccionado.
     \\
-    
+
     \begin{figure}[H]
     	\centering
     	\includegraphics[width=0.8\textwidth]{figuras/Imagenes_Electronica/G15_bus_conection.jpg}
@@ -24,10 +24,10 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     	\label{fig:Electronica:bus-servos}
     	\immagesource{Montaje del Autor a partir de imágenes del fabricante}
     \end{figure}
-    
+
     Para hacer efectiva la comunicación los servos G15 Cube cuentan con dos puertos de tres cambles cada uno. Cada uno cuenta con un conector de aspecto y forma diferente que fuerzan las conexiones en un mismo sentido siempre de forma inequívoca. Estos tres cables, como se puede ver en la imagen \ref{fig:Electronica:conectores-servos}, son utilizados para alimentación, referencia a tierra y canal de información.
     \\
-    
+
     \begin{figure}[H]
     	\centering
     	\includegraphics[width=0.7\textwidth]{figuras/Imagenes_Electronica/conectores_servos.jpg}
@@ -35,10 +35,10 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     	\label{fig:Electronica:conectores-servos}
     	\immagesource{Captura obtenida de \cite{CytronTechnologies2012}}
     \end{figure}
-    
+
     Entre las ventajas de utilizar \glosarioPlural{smartservo} es que se cuenta con información relevante que se podrá \textit{preguntar} al servo cuando sea necesaria. Estos servos tienen diferentes modos de funcionamiento, aunque se utilizará principalmente el modo de \textbf{giro continuo}. Para este caso los servos ofrecen un control en par de manera que se podrán enviar comandos del par que deberá ejercer. Como información relevante a consultar ofrece datos de posición del servo, par realizado y sentido del mismo, temperatura, voltaje de alimentación, velocidad y sentido de movimiento, entre otros.
     \\
-    
+
     Cabe destacar algunas características importantes de los mismos, que se encuentran resumidas en la tabla \ref{tab:g15_catact}. Concretamente es de destacar los $12kg \cdot cm$ de par efectivo; un par relativamente bajo que se aprovechará como medida extra de protección a usuarios del brazo robótico tal y como se ha anticipado en capítulos anteriores.
 
     \begin{table}[H]
@@ -81,20 +81,22 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
    		\end{minipage}
     \end{table}
 
+    Como curiosidad extra, este modelo de servos presenta la particularidad de estar diseñados de forma modular; así podrán ser apilados de diferentes maneras entre ellos.
+
 \section{Interfaz servos-microcontrolador} \label{sec:Electronica:Potencia}
 
 	Pasada la descripción de los actuadores, los G15 Cube Servo, se hace patente la necesidad de una etapa intermedia entre la placa controladora y los servos que gestione la comunicación entre ambos de forma segura y que desacople la alimentación del controlador de la alimentación de los servos, que requieren un voltaje de 12V (ver \ref{tab:g15_catact}).
 	\\
-	
+
 	Es la propia marca que fabrica los servos, Cytron Technologies, la que suministra una placa auxiliar o \ingles{shield} con este propósito. Concretamente se utilizará la segunda generación de dicha placa, vista en la figura \ref{fig:Electronica:bus-servos} de la sección anterior.
 	\\
-	
+
 	Para la alimentación de los servos se ofrecen dos posibles entradas remarcadas en la figura \ref{fig:Electronica:alimentacion-shield} con los colores azul y rojo. Para alternar de una a otra habrá que, mediante el uso de un soldador, modificar la conexión recuadrada en amarillo para habilitar la opción deseada deshabilitando la contraria.
 	\begin{itemize}
 		\item Alimentación externa (recuadrada en azul): en este caso se conecta la fuente de alimentación directamente a los conectores pasando el voltaje a los cables de alimentación de los servos.
-		\item Alimentación mixta shield-controlador (recuadrada en rojo): en este caso la alimentación se comparte con la placa controladora (que deberá rectificar el voltaje de entrada a valores aceptables para la misma). Por defecto esta es la entrada que viene habilitada; se ha mantenido ya que permite la alimentación simultánea de los servos y de la placa controladora a partir de la misma fuente de alimentación (se verá en secciones posteriores la elección del controlador y otros aspectos). 
+		\item Alimentación mixta shield-controlador (recuadrada en rojo): en este caso la alimentación se comparte con la placa controladora (que deberá rectificar el voltaje de entrada a valores aceptables para la misma). Por defecto esta es la entrada que viene habilitada; se ha mantenido ya que permite la alimentación simultánea de los servos y de la placa controladora a partir de la misma fuente de alimentación (se verá en secciones posteriores la elección del controlador y otros aspectos).
 	\end{itemize}
-		
+
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\textwidth]{figuras/Imagenes_Electronica/alimentacion-shield.jpg}
@@ -102,28 +104,28 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 		\label{fig:Electronica:alimentacion-shield}
 		\immagesource{Captura obtenida de \cite{CytronTechnologies2012} y editada por el Autor del proyecto}
 	\end{figure}
-		
+
 	En la figura \ref{fig:Electronica:alimentacion-shield} pueden distinguirse una serie de pines de conexión con las letras RX, TX y CTRL. Esta placa está pensada para funcionar a modo de interfaz entre un puerto serie común (con un cable de emisión y otro de recepción de datos) y un puerto serie de tipo \ingles{Half Duplex} como el empleado por los servos.
 	\\
-	
+
 	Como se describe en \cite{CytronTechnologies2012} la \ingles{shield} incluye integrada un circuito integrado (concretamente el 74HC126 IC) que resuelve los problemas de comunicación inherentes a la comunicación bidireccional por un solo hilo. A través de un pin de control (CTRL en la shield) se gestiona la conexión entre el hilo del \ingles{Half Duplex} y los hilos del puerto serie alternando de uno a otro en función del estado de la señal de control (alto nivel o bajo nivel).
-	
+
 \section{Placa controladora}
-	
+
 	La placa \ingles{shield} descrita en el apartado anterior está especialmente diseñada para encajar en placas tipo Arduino, concretamente el modelo Arduino Uno. En el marco de este proyecto se ha realizado una fase del desarrollo utilizando como base una placa Arduino Uno, aunque posteriormente se ha cambiado a un Arduino Mega. Más adelante se explicará la motivación de dicho cambio, pero merece volver sobre el aspecto de la alimentación de la placa descrito en el apartado anterior. Según se especifica en \cite{arduinoUno} y en \cite{arduinoMega} el voltaje de entrada recomendado abarca desde los 7 a los 12V teniendo como limitación inferior un mínimo de 6V y un máximo de 20V. En este caso se aplicarán 12V, que quedan incluidos dentro del rango recomendado por el fabricante.
 	\\
-	
+
 	En el caso de la placa Arduino Uno la \ingles{shield} viene preparada para encajar sobre la misma. La comunicación con los servos está pensada para efectuarse de dos formas:
 	\begin{itemize}
 		\item A través de un puerto serie UART hardware: en el caso de la placa Arduino Uno solo dispone del puerto conectado a los pines 0 y 1, que también es el usado para la carga de software y comunicación con el ordenador, por lo que queda descartado.
 		\item Emulando un puerto serie mediante software en otros pines de la placa. La \ingles{shield} trae una serie de \ingles{jumpers} \completarCon{¿Definir o no es necesario?} que permiten cambiar entre una selección de pines para cada caso (RX, TX o CTRL).
 	\end{itemize}
-	
-	Como se puede ver, utilizando una placa Arduino Uno la comunicación con los servos queda relegada a un puerto emulado por software. Esta es la razón principal por la cual se decide cambiar y utilizar una Placa Arduino Mega2560, que además presenta mayores prestaciones respecto a memoria (ver tabla \ref{tab:arduino_comparison}). Para el control del brazo robótico y el diseño y testeo del software es necesario optimizar la velocidad de comunicación entre los dispositivos al máximo. La placa Arduino Mega incluye tres puertos serie hardware adicionales que se podrán puentear a la placa \ingles{shield} para ser utilizados. Esta conexión se puede ver en la figura \ref{fig:Electronica:shield-arduino}. De esta forma se podrá aprovechar todo el potencial de la comunicación a través de un puerto serie hardware. 
+
+	Como se puede ver, utilizando una placa Arduino Uno la comunicación con los servos queda relegada a un puerto emulado por software. Esta es la razón principal por la cual se decide cambiar y utilizar una Placa Arduino Mega2560, que además presenta mayores prestaciones respecto a memoria (ver tabla \ref{tab:arduino_comparison}). Para el control del brazo robótico y el diseño y testeo del software es necesario optimizar la velocidad de comunicación entre los dispositivos al máximo. La placa Arduino Mega incluye tres puertos serie hardware adicionales que se podrán puentear a la placa \ingles{shield} para ser utilizados. Esta conexión se puede ver en la figura \ref{fig:Electronica:shield-arduino}. De esta forma se podrá aprovechar todo el potencial de la comunicación a través de un puerto serie hardware.
 	\\
-	
+
 	Para hacerse una idea de la importancia que tiene este cambio se ha forzado la comunicación en ambos casos para obtener los máximos en los cuales sería viable trabajar. Los datos presentados en la tabla \ref{tab:comunication_serial} se han obtenido de forma experimental bajo el marco de este proyecto. Entre los mismos se puede apreciar la gran diferencia existente entre las diferentes formas de comunicación. Las velocidades se han ido duplicando (a modo de convencionalismo las velocidades de comunicación estándar para Placas Arduino suelen obtenerse de esta manera) hasta llegar al máximo que permite una comunicación satisfactoria.
-	
+
 	 \begin{table}[H]
 	 	\caption{Comparativa entre placas Arduino Uno y Arduino Mega2560}
 	 	\immagesource{Tabla con información resumida de \cite{arduinoUno} y \cite{arduinoMega} }
@@ -142,9 +144,9 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 	 			\end{tabular}
 	 		\end{center}
 	 \end{table}
-	 
+
 	 En este proyecto concreto se enlazaran diferentes lazos de control a diferentes frecuencias de refresco (ver capítulo \ref{chap:Control}) que exigirán el máximo de la capacidad comunicativa entre los dispositivos. Los datos máximos obtenidos para la placa Arduino Mega son los utilizados para el funcionamiento del robot.
-	
+
     \begin{figure}[H]
     	\centering
     	\includegraphics[width=0.75\textwidth]{figuras/Imagenes_Electronica/Shield-Arduino-Conection.jpg}
@@ -152,7 +154,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     	\label{fig:Electronica:shield-arduino}
     	\immagesource{Montaje del Autor a partir de imágenes del fabricante}
     \end{figure}
-    
+
     \begin{table}[H]
        	\caption{Comparativa entre placas Arduino Uno y Arduino Mega2560}
        	\immagesource{Tabla con información resumida de \cite{arduinoUno} y \cite{arduinoMega}}
@@ -179,3 +181,84 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \end{table}
 
 \section{Sensores} \label{sec:Electronica:Sensores}
+    A pesar de la gran cantidad de información que ofrecen los servos escogidos, por las características mecánicas descritas las medidas que proporcionan no son medidas directamente referenciadas a las articulaciones. Desde el punto de vista de control del brazo robótico el objetivo es el control del brazo completo descomponiendo el problema de el control de las articulaciones. Principalmente en las articulaciones dos y tres cuya relación entre las medidas del servo y el comportamiento de la articulación es más compleja es conveniente incluir una realimentación externa, concretamente de posición.
+    \\
+
+    La realimentación se hará efectiva a través del uso de potenciómetros para ambas articulaciones. Aunque aun no se ha tratado en detalle los rangos de movimiento posibles para cada articulación, la explicación de la sección \ref{sec:Mecanica:articulacion_dostres} permite deducir que el rango de movimiento será: para el caso de la segunda articulación menor a $180^o$; para la tercera articulación menor a $90^o$. En capítulos posteriores se tratará en detalle estos aspectos del robot; es necesario anticiparse para la elección de los potenciómetros.
+    \\
+
+    El modelo de potenciómetro elegido es el modelo TW1502KA de la marca TE Connectivity (ver figura \ref{fig:Electronica:potenciometro}). Se pueden ver las carácterísticas principales mostradas en \cite{potenciometroSheet} en la tabla \ref{tab:potenciometro}
+
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\textwidth]{figuras/Imagenes_Electronica/potenciometro.jpg}
+    	\caption{Visual del potenciómetro escogido}
+    	\label{fig:Electronica:potenciometro}
+    	\immagesource{Fotografía del fabricante}
+    \end{figure}
+
+    \begin{table}[H]
+        \caption{Características resumidas del modelo de potenciómetro TW1502KA}
+        \immagesource{Tabla con información resumida de \cite{potenciometroSheet}}
+        \label{tab:potenciometro}
+        %\begin{minipage}{0.42\textwidth}
+            \begin{center}
+                \begin{tabular}{ |c|c| }
+                    \hline
+                    Resistencia & 5K\Omega  \\
+                    \hline
+                    Rotaciñon (rango eléctrico) & $265^o \pm 5^o$\\
+                    \hline
+                    Tolerancia & 10\%  \\
+                    \hline
+                    Tipo de Respuesta & Lineal  \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        %\end{minipage}
+    \end{table}
+
+    Se puede apreciar, que los potenciómetros escogidos cubren por completo el rango de movimiento de las articulaciones que se pretende realimentar.
+    \completarCon{http://docs-europe.electrocomponents.com/webdocs/1360/0900766b813603ca.pdf añadir a bib}
+
+\section{Fuente de alimentación} \label{sec:Electronica:fuente_alimentacion}
+    \completarCon{comprobar la referencia para describir la fuente en un par de párrafos}
+
+\section{Integración de los componentes en la estructura mecánica} \label{sec:Electronica:Integracion}
+
+    Una vez conocisdos los componentes electromecánicos que se van a utilizar pueden ser integrados en la estructura diseñada.
+    \\
+
+    En el caso de los tres servos encargados de los grados de libertad de posición, han sido montados en una torre apoyándose en la modularidad de su diseño. De esta forma la torre queda anclada a ambos lados de la estructura así como a la base.
+    \\
+
+    En el caso de los correspondientes a la segunda y tercera articulación, el eje que fija la polea solidaria al motor que enrolla el cable se apoya en el otro extremo para evitar que el servo tenga que absorber la fuerzas de tracción que proboca el peso del brazo transmitida a través de la cuerda.
+    \completarCon{Imagen en la que se vea este montaje de frente}
+
+    Ambas placas, tanto la \ingles{shield} como la placa Arduino Mega van montadas sobre una plataforma aprovechando los anclajes de los servos.
+    \\
+
+    En el caso de los potenciómetros su montaje difiere de un caso a otro:
+    \begin{itemize}
+        \item Segunda Articulación: El movimiento de la articulación se transmite a través de un juego de engranajes hasta el potenciómetro, que está hubicado sobre el eje de dicha articulación. Se puede ver el montaje en la figura \ref{fig:Mecanica:realimentacion_1}. Se ha aprovechado el uso de engranajes para aumentar la resolución de medida de forma que el movimiento se amplifica para aprovechar en su totalidad los $265^o$ de giro ofrecidos por el potenciómetro.
+        \item Tercera articulación: El eje del potenciómetro se encuentra en la misma línea que el eje de la articulación. Se ha diseñado una pieza a modo de adaptador para unir el eje del potenciómetro al giro de la barra que puede verse en la figura \ref{fig:Mecanica:realimentacion_2} En este caso la lectura leida del potenciómetro (en grados) es equvalente al desplazamiento articular.
+    \end{itemize}
+
+    \begin{minipage}{0.47\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_3.jpg}
+            \caption{Montaje de la realimentación para la segunda articulación}
+            \label{fig:Mecanica:realimentacion_1}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.47\textwidth}\raggedright
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_2.jpg}
+            \caption{Montaje de la realimentación para la tercera articulación}
+            \label{fig:Mecanica:realimentacion_2}
+            \immagesource{Autor}
+        \end{figure}
+    \end{minipage}
