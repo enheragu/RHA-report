@@ -187,7 +187,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     La realimentación se hará efectiva a través del uso de potenciómetros para ambas articulaciones. Aunque aun no se ha tratado en detalle los rangos de movimiento posibles para cada articulación, la explicación de la sección \ref{sec:Mecanica:articulacion_dostres} permite deducir que el rango de movimiento será: para el caso de la segunda articulación menor a $180^o$; para la tercera articulación menor a $90^o$. En capítulos posteriores se tratará en detalle estos aspectos del robot; es necesario anticiparse para la elección de los potenciómetros.
     \\
 
-    El modelo de potenciómetro elegido es el modelo TW1502KA de la marca TE Connectivity (ver figura \ref{fig:Electronica:potenciometro}). Se pueden ver las carácterísticas principales mostradas en \cite{potenciometroSheet} en la tabla \ref{tab:potenciometro}
+    El modelo de potenciómetro elegido es el modelo TW1502KA de la marca TE Connectivity (ver figura \ref{fig:Electronica:potenciometro}). Se pueden ver las características principales mostradas en \cite{potenciometroSheet} en la tabla \ref{tab:potenciometro}
 
     \begin{figure}[H]
     	\centering
@@ -205,9 +205,9 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
             \begin{center}
                 \begin{tabular}{ |c|c| }
                     \hline
-                    Resistencia & 5K\Omega  \\
+                    Resistencia & $5K\Omega$  \\
                     \hline
-                    Rotaciñon (rango eléctrico) & $265^o \pm 5^o$\\
+                    Rotación (rango eléctrico) & $265^o \pm 5^o$\\
                     \hline
                     Tolerancia & 10\%  \\
                     \hline
@@ -219,7 +219,6 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \end{table}
 
     Se puede apreciar, que los potenciómetros escogidos cubren por completo el rango de movimiento de las articulaciones que se pretende realimentar.
-    \completarCon{http://docs-europe.electrocomponents.com/webdocs/1360/0900766b813603ca.pdf añadir a bib}
 
 \section{Fuente de alimentación} \label{sec:Electronica:fuente_alimentacion}
     \completarCon{comprobar la referencia para describir la fuente en un par de párrafos}
@@ -233,6 +232,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \\
 
     En el caso de los correspondientes a la segunda y tercera articulación, el eje que fija la polea solidaria al motor que enrolla el cable se apoya en el otro extremo para evitar que el servo tenga que absorber la fuerzas de tracción que proboca el peso del brazo transmitida a través de la cuerda.
+    
     \completarCon{Imagen en la que se vea este montaje de frente}
 
     Ambas placas, tanto la \ingles{shield} como la placa Arduino Mega van montadas sobre una plataforma aprovechando los anclajes de los servos.
@@ -247,7 +247,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \begin{minipage}{0.47\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_3.jpg}
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Electronica/foto_brazo_3.jpg}
             \caption{Montaje de la realimentación para la segunda articulación}
             \label{fig:Mecanica:realimentacion_1}
             \immagesource{Autor}
@@ -256,7 +256,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \begin{minipage}{0.47\textwidth}\raggedright
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_2.jpg}
+            \includegraphics[width=1.15\textwidth]{figuras/Imagenes_Electronica/foto_brazo_2.jpg}
             \caption{Montaje de la realimentación para la tercera articulación}
             \label{fig:Mecanica:realimentacion_2}
             \immagesource{Autor}

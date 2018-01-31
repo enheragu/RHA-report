@@ -38,7 +38,6 @@ Ejemplo:
 \minititulo{Orden de inclusión de ficheros}
 
     Para evitar problemas en las dependencias de las distintas librerías se incluirán las mismas dejando para el final las librerías propias del proyecto e incluyendo el resto de la más general a la más particular. 
-    \completarCon{Revisar el código!}
     \\ 
     
     \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
@@ -89,7 +88,7 @@ Prohibido el uso de:
     
 \minititulo{Variables Locales}
 
-    Las variables se definirán preferiblemente en el ámbito más bajo \completarCon{¿se dice así?} en que se vayan a utilizar. Preferiblemente la inicialización de las mismas se hará junto a la declaración.
+    Las variables se definirán preferiblemente en el ámbito más local en que se vayan a utilizar. Preferiblemente la inicialización de las mismas se hará junto a la declaración.
     \\ 
     
     Se pueden dar excepciones, como pueden ser vectores sobre los que se iterará dentro de un bucle u otros casos similares. En estos casos se de declarará el objeto fuera del propio ámbito para evitar recursivas llamadas a constructor y destructor de los mismos.
@@ -122,7 +121,7 @@ Ejemplo:
 
 \minititulo{Constructores y métodos de Inicialización}
 
-Para todos los objetos debe haber constructores por defecto sin parámetros de entrada. Aunque se pueden añadir constructores que inicialicen los diferentes parámetros será obligatorio generar métodos que los inicialicen una vez construido el objeto. Arduino, aún estando basado en el lenguaje \codigo{C++} no permite un uso completo de memoria dinámica. Es especialmente importante para declarar estos objetos como miembros de otros. \completarCon{no se si está muy claro :|}
+Para todos los objetos debe haber constructores por defecto sin parámetros de entrada. Aunque se pueden añadir constructores que inicialicen los diferentes parámetros será obligatorio generar métodos que los inicialicen una vez construido el objeto así como constructores por defecto para todos los métodos. Arduino, aún estando basado en el lenguaje \codigo{C++} no permite un uso completo de memoria dinámica. Los objetos se declaran como miembros haciendo uso del constructor por defecto para ser inicializados posteriormente.
 \\ 
 
     \lstset{language=C, breaklines=true, basicstyle=\footnotesize}
@@ -601,4 +600,4 @@ Por lo general se dejaran espacios verticales para una mayor claridad del códig
 \completarCon{Hablar de como se definen las variables, cuando se pueden poner varias en la misma línea y demás}
 
 
-https://google.github.io/styleguide/cppguide.html
+\completarCon{A bibliografía -->} https://google.github.io/styleguide/cppguide.html
