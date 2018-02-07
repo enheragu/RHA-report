@@ -110,7 +110,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 
 	Como se describe en \cite{CytronTechnologies2012} la \ingles{shield} incluye integrada un circuito integrado (concretamente el 74HC126 IC) que resuelve los problemas de comunicación inherentes a la comunicación bidireccional por un solo hilo. A través de un pin de control (CTRL en la shield) se gestiona la conexión entre el hilo del \ingles{Half Duplex} y los hilos del puerto serie alternando de uno a otro en función del estado de la señal de control (alto nivel o bajo nivel).
 
-\section{Placa controladora}
+\section{Placa controladora} \label{sec:Electronica:Placa}
 
 	La placa \ingles{shield} descrita en el apartado anterior está especialmente diseñada para encajar en placas tipo Arduino, concretamente el modelo Arduino Uno. En el marco de este proyecto se ha realizado una fase del desarrollo utilizando como base una placa Arduino Uno, aunque posteriormente se ha cambiado a un Arduino Mega. Más adelante se explicará la motivación de dicho cambio, pero merece volver sobre el aspecto de la alimentación de la placa descrito en el apartado anterior. Según se especifica en \cite{arduinoUno} y en \cite{arduinoMega} el voltaje de entrada recomendado abarca desde los 7 a los 12V teniendo como limitación inferior un mínimo de 6V y un máximo de 20V. En este caso se aplicarán 12V, que quedan incluidos dentro del rango recomendado por el fabricante.
 	\\
@@ -232,7 +232,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \\
 
     En el caso de los correspondientes a la segunda y tercera articulación, el eje que fija la polea solidaria al motor que enrolla el cable se apoya en el otro extremo para evitar que el servo tenga que absorber la fuerzas de tracción que proboca el peso del brazo transmitida a través de la cuerda.
-    
+
     \completarCon{Imagen en la que se vea este montaje de frente}
 
     Ambas placas, tanto la \ingles{shield} como la placa Arduino Mega van montadas sobre una plataforma aprovechando los anclajes de los servos.
