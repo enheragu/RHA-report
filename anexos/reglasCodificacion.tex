@@ -1,4 +1,4 @@
-Las reglas de codificación aplicadas al software del proyecto se han obtenido, por utilizar una referencia, de las reglas aplicadas por Google en sus proyectos libres. Esta guía está ampliamente documentada e incluye su propia herramienta para comprobar su correcta aplicación \completar lo que facilita la revisión del código así como corrección de desviaciones de estilo.
+Las reglas de codificación aplicadas al software del proyecto se han obtenido, por utilizar una referencia, de las reglas aplicadas por Google en sus proyectos libres. Esta guía está ampliamente documentada e incluye su propia herramienta para comprobar su correcta aplicación, Cpplint, lo que facilita la revisión del código así como corrección de desviaciones de estilo.
 \\
 
 En este anexo se traducen y resumen los aspectos más importantes de dicha guía. En algunos casos se han adaptado las reglas al caso concreto de este proyecto.
@@ -53,7 +53,8 @@ Ejemplo orden al incluir cabeceras:
     #include "rha_types.h"     // tipos de datos
     #include "joint_rha.h"     // clase a incluir
     \end{lstlisting}
-    \completarCon{¿def como abreviatura?}
+    
+    Nota: def. se utiliza de aquí en adelante como abreviatura de \ingles{definición}.
     
     Se deben incluir todos los ficheros que definan los símbolos utilizados en el fichero sobre el que se incluyen. Las declaraciones anticipadas de objetos no están permitidas salvo excepciones justificadas.
  
@@ -84,7 +85,6 @@ Prohibido el uso de:
     
     using namespace StepTest;
     \end{lstlisting}
-    \completarCon{¿def como abreviatura?}
     
 \minititulo{Variables Locales}
 
@@ -115,7 +115,6 @@ Ejemplo:
     }
 
     \end{lstlisting}
-    \completarCon{¿def como abreviatura?}
     
 \section{Clases}\label{sec:codificacionSW:clases}
 
@@ -188,7 +187,7 @@ Ejemplos:
 
 \minititulo{Nombre de los directorios}
 
-    Los ficheros de código irán contenidos en diferentes directorios para cada librería o conjunto de test. Estos directorios llevarán el nombre de la librería que contienen, en el mismo formato que la misma, en este caso sin extensión. Los test se ejecutan en el orden en que se ordenan los directorios. En este caso se añadirá un caracter para ordenar los mismos de manera adecuada. 
+    Los ficheros de código irán contenidos en diferentes directorios para cada librería o conjunto de test. Estos directorios llevarán el nombre de la librería que contienen, en el mismo formato que la misma, en este caso sin extensión. Los test se ejecutan en el orden en que se ordenan los directorios. En este caso se añadirá un carácter para ordenar los mismos de manera adecuada. 
     \\ 
     
     Están exentos de esta regla los ficheros principales (que contienen la función \codigo{main()}, ó \codigo{setup()} y \codigo{loop()} en caso de ser ficheros con extensión \codigo{.ino}). 

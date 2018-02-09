@@ -351,7 +351,7 @@
 		Aunque el control se deba efectuar respecto al par, el valor contenido en la dirección 0x24 y 0x25 (Present Speed) contiene el dato de velocidad. Esta información se almacena de la siguiente manera: el 10 bit codifica el sentido de giro mientras que los 9 anteriores la velocidad. Esta codificación es equivalente a la dirección de memoria correspondiente a Present Load (0x28 y 0x29).
 		\\
 
-		Estos datos se pueden obtener de la siguiente forma, expresada mediante pseudocódigo c++. Se obtiene la información de ambos bytes, en este caso concreto de los datos de velocidad: \completarCon{Definir en algún sitio que es el pseudocódigo}
+		Estos datos se pueden obtener de la siguiente forma. Como se puede ver se obtiene la información de ambos bytes recibidos y se ordenan de manera adecuada. En este caso concreto se corresponde a los valores de velocidad:
 		\begin{lstlisting}[frame=single]
 	velocidad = byte(L) \\
 	velocidad |= (byte(H) << 8)

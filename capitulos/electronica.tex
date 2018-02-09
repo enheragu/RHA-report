@@ -118,7 +118,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 	En el caso de la placa Arduino Uno la \ingles{shield} viene preparada para encajar sobre la misma. La comunicación con los servos está pensada para efectuarse de dos formas:
 	\begin{itemize}
 		\item A través de un puerto serie UART hardware: en el caso de la placa Arduino Uno solo dispone del puerto conectado a los pines 0 y 1, que también es el usado para la carga de software y comunicación con el ordenador, por lo que queda descartado.
-		\item Emulando un puerto serie mediante software en otros pines de la placa. La \ingles{shield} trae una serie de \ingles{jumpers} \completarCon{¿Definir o no es necesario?} que permiten cambiar entre una selección de pines para cada caso (RX, TX o CTRL).
+		\item Emulando un puerto serie mediante software en otros pines de la placa. La \ingles{shield} trae una serie de \ingles{jumpers} \footnote{Los \ingles{jumpers} son conectores que sirven para cortocircuitar el par de pines que se desee.} que permiten cambiar entre una selección de pines para cada caso (RX, TX o CTRL).
 	\end{itemize}
 
 	Como se puede ver, utilizando una placa Arduino Uno la comunicación con los servos queda relegada a un puerto emulado por software. Esta es la razón principal por la cual se decide cambiar y utilizar una Placa Arduino Mega2560, que además presenta mayores prestaciones respecto a memoria (ver tabla \ref{tab:arduino_comparison}). Para el control del brazo robótico y el diseño y testeo del software es necesario optimizar la velocidad de comunicación entre los dispositivos al máximo. La placa Arduino Mega incluye tres puertos serie hardware adicionales que se podrán puentear a la placa \ingles{shield} para ser utilizados. Esta conexión se puede ver en la figura \ref{fig:Electronica:shield-arduino}. De esta forma se podrá aprovechar todo el potencial de la comunicación a través de un puerto serie hardware.
@@ -240,8 +240,8 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 
     En el caso de los potenciómetros su montaje difiere de un caso a otro:
     \begin{itemize}
-        \item Segunda Articulación: El movimiento de la articulación se transmite a través de un juego de engranajes hasta el potenciómetro, que está hubicado sobre el eje de dicha articulación. Se puede ver el montaje en la figura \ref{fig:Mecanica:realimentacion_1}. Se ha aprovechado el uso de engranajes para aumentar la resolución de medida de forma que el movimiento se amplifica para aprovechar en su totalidad los $265^o$ de giro ofrecidos por el potenciómetro.
-        \item Tercera articulación: El eje del potenciómetro se encuentra en la misma línea que el eje de la articulación. Se ha diseñado una pieza a modo de adaptador para unir el eje del potenciómetro al giro de la barra que puede verse en la figura \ref{fig:Mecanica:realimentacion_2} En este caso la lectura leida del potenciómetro (en grados) es equvalente al desplazamiento articular.
+        \item Segunda Articulación: El movimiento de la articulación se transmite a través de un juego de engranajes hasta el potenciómetro, que está ubicado sobre el eje de dicha articulación. Se puede ver el montaje en la figura \ref{fig:Mecanica:realimentacion_1}. Se ha aprovechado el uso de engranajes para aumentar la resolución de medida de forma que el movimiento se amplifica para aprovechar en su totalidad los $265^o$ de giro ofrecidos por el potenciómetro.
+        \item Tercera articulación: El eje del potenciómetro se encuentra en la misma línea que el eje de la articulación. Se ha diseñado una pieza a modo de adaptador para unir el eje del potenciómetro al giro de la barra que puede verse en la figura \ref{fig:Mecanica:realimentacion_2} En este caso la lectura leída del potenciómetro (en grados) es equivalente al desplazamiento articular.
     \end{itemize}
 
     \begin{minipage}{0.47\textwidth}
