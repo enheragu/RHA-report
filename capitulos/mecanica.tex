@@ -154,17 +154,9 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     La figura \ref{fig:PuntoPartida:maquetas} del capítulo \ref{chap:Punto_partida} ya anticipaba diferentes métodos de acople entre los mecanismos , cada uno presentando sus virtudes y desventajas.
     \\
 
-    La primera forma de acoplar ambos mecanismos es mediante una unión triangular (representada en la figura \ref{fig:Mecanica:4_bar_mecanism_triangle}). En este caso se plantea fijar el segundo mecanismo, situado en el extremo a modo de estructura fija trasladando la responsabilidad de manejar ambos grados de libertad desde la primera articulación. El movimiento del extremo vendrá determinado por la combinación del giro de ambas articulaciones. Llevar ambos grados de libertad a un mismo punto de actuación supone una gran ventaja al evitar alargar la transmisión del movimiento del motor. Según se varíe la relación ente el tamaño de las barras así como los ángulos del acople se podrán conseguir diferentes relaciones de movimientos.
-
-    \begin{figure}[H]
-       	\centering
-       	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras_triangulo.jpg}
-       	\caption{Esquema de las articulaciones dos y tres. Estructura de unión triangular}
-       	\label{fig:Mecanica:4_bar_mecanism_triangle}
-       	\immagesource{Autor}
-    \end{figure}
-
-    El segundo tipo de acople, lineal, libera los puntos articulares del segundo mecanismo. En este caso ambos mecanismos presentan las mismas dimensiones siendo sus barras iguales dos a dos. Una cadena de eslabones configurada de esta manera, aunque alarga la necesidad de transmitir el movimiento hasta cada eje de giro, tiene la particularidad de que mantiene la orientación del extremo del brazo siempre paralela a la de la barra de acople y en este caso, al eje Z. En la figura \ref{fig:Mecanica:4_bar_mecanism} se pueden ver los puntos sobre los que se actúan ambas articulaciones.
+	\completarCon{Tenía pensado incluir el modo "grua" que provamos al inicio en la descripción, pero puede que alargue y líe el capítulo más}
+	
+	La situación final elegida basa por presentar ambos mecanismos las mismas dimensiones siendo sus barras iguales dos a dos. Una cadena de eslabones configurada de esta manera, aunque alarga la necesidad de transmitir el movimiento hasta cada eje de giro, tiene la particularidad de que mantiene la orientación del extremo del brazo siempre paralela a la de la barra de acople y en este caso, al eje Z. En la figura \ref{fig:Mecanica:4_bar_mecanism} se pueden ver los puntos sobre los que se actúan ambas articulaciones. Concretamente se ha diseñado de forma que tanto el extremo como la barra acopladora se mantienen siempre perpendiculares al plano del suelo como se puede apreciar en la figura \ref{fig:Mecanica:movimiento}.
     \\
 
     \begin{figure}[H]
@@ -174,11 +166,32 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     	\label{fig:Mecanica:4_bar_mecanism}
     	\immagesource{Autor}
     \end{figure}
+    
+    
+    \begin{figure}[H]
+       	\centering
+       	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/movimiento_maqueta.jpg}
+       	\caption{Diferentes posiciones articulares manteniendo la barra acopladora y el extremo perpendiculares}
+       	\label{fig:Mecanica:movimiento}
+       	\immagesource{Autor}
+    \end{figure}
 
     Se ha adelantado en el capítulo \ref{chap:Punto_partida} la importancia de compensar el peso. En \cite{Rahman_asimple} se puede encontrar una demostración matemática de como se puede compensar, mediante el uso de muelles, el peso del los eslabones. Ambas estructuras expuestas permiten este tipo de compensación de la carga. Finalmente se ha optado por la segunda opción (acoplamiento lineal) ya que mantiene la orientación del extremo siempre constante y perpendicular al plano del suelo. Esta característica resulta muy útil ya que simplifica el análisis matemático y posterior control del brazo robótico en gran medida.
     \\
+    
+    En versiones anteriores se ha probado con diferentes tipos de acoplamiento, en la figura \ref{fig:Mecanica:geometria_acopladora} se puede ver como afecta esta pieza a la orientación del extremo en base a maquetas preparadas.
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/transicion_maqueta.jpg}
+    	\caption{Diferentes geometrías de la barra acopladora}
+    	\label{fig:Mecanica:geometria_acopladora}
+    	\immagesource{Autor}
+    \end{figure}
 
-    Aunque sobre el esquema sobre el papel cuadre bien un acoplamiento lineal, en la realidad esto supone el apilamiento de muchos componentes sobre la misma barra. En ese caso la estructura resultante va engrosando y alejándose del plano sagital, lo que a futuro puede provocar fuerzas transversales indeseadas. Para el montaje este acoplamiento lineal se ha separado formando una geometría de tipo paralelogramo, concretamente romboide. Está conformado por una base de metacrilato con piezas de apoyo impresas en plástico que atrapan, a modo de \textit{sándwich}, las barras estructurales de aluminio.
+    Aunque en el esquema sobre el papel cuadre bien un acoplamiento lineal, en la realidad esto supone el apilamiento de muchos componentes sobre la misma barra. En ese caso la estructura resultante va engrosando y alejándose del plano sagital, lo que a futuro puede provocar fuerzas transversales indeseadas. 
+    
+    Para el montaje este acoplamiento lineal se ha separado formando una geometría de tipo paralelogramo (en línea con la representación de la figura \ref{fig:Mecanica:geometria_acopladora}), concretamente romboide. Está conformado por una base de metacrilato con piezas de apoyo impresas en plástico que atrapan, a modo de \textit{sándwich}, las barras estructurales de aluminio.
 
     \begin{figure}[H]
         \centering
@@ -203,8 +216,8 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
 
 
     La transmisión del movimiento para estos dos grados de libertad se ha realizado a través de hilos que van desde los servomotores hasta la articulación. Esos hilos están configurados de forma que no retornan hasta la polea de salida, polea acoplada al giro del motor. La transmisión está preparada para tirar de la carga de forma activa cuando se quiere subir la muñeca del robot, soltando cuerda en el caso contrario para dejarlo descender poco a poco.
-	\\ 
-	
+	\\
+
     En el caso de ambas articulaciones la carga recibida por el motor ha sido reducida a través de elementos mecánicos sencillos. El enganche para ambas articulaciones hace uso de la misma filosofía. Se ha alejado el punto de actuación del eje de giro para conseguir una palanca sobre la que se actúa maximizando así la fuerza realizada por el servo.
     \\
 

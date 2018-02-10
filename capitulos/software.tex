@@ -15,7 +15,7 @@ El capítulo presenta unos aspectos generales así como una filosofía de diseñ
      \begin{figure}[H]
      	\centering
      	\includegraphics[width=1\textwidth]{figuras/Imagenes_SW/diagrama_clases_general.jpg}
-     	\caption{Diagrama de relación entre los diferentes objetos}
+     	\caption{Diagrama de relación entre los diferentes objetos \completarCon{Actualizar}}
      	\label{fig:SW:class_diagram_all}
      	\immagesource{Autor}
      \end{figure}
@@ -58,38 +58,38 @@ Concretamente, en el caso de este proyecto y anticipando los componentes que lo 
     %Introducir label y caption
     \begin{lstlisting}[frame=single]
 
- -- Sw
- |-- lib
- |   |-- chuck_handler
- |   |-- cytron_g15_servo  // A modo de ejemplo
- |   |-- debug
- |   |   | + debug.cpp
- |   |   | + debug.h
- |   |-- joint_handler
- |   |   | + joint_handler.cpp
- |   |   | + joint_handler.h
- |   |-- joint_rha
- |   |-- memory_free
- |   |-- rha_types
- |   |-- robot_rha
- |   |-- servo_rha
- |   |-- utilities
- |   |-- readme.txt
- |-- src
- |   |-- main.cpp
- |   |-- main_utilities.cpp
- |-- test
- |   |-- a_test_rha_types
- |   |   | + test_rha_types.cpp
- |   |-- b_test_pid_regulator
- |   |-- d_test_servo_rha
- |   |-- e_test_joint_rha
- |   |-- f_test_joint_handler_mock
- |-- platformio.ini
- -------  // Hasta aqui la estructura impuesta por la herramienta platformio
- |-- code_analysis
- |-- utilities
- |-- sw_documentation
+	 -- Sw
+	 |-- lib
+	 |   |-- chuck_handler
+	 |   |-- cytron_g15_servo  // A modo de ejemplo
+	 |   |-- debug
+	 |   |   | + debug.cpp
+	 |   |   | + debug.h
+	 |   |-- joint_handler
+	 |   |   | + joint_handler.cpp
+	 |   |   | + joint_handler.h
+	 |   |-- joint_rha
+	 |   |-- memory_free
+	 |   |-- rha_types
+	 |   |-- robot_rha
+	 |   |-- servo_rha
+	 |   |-- utilities
+	 |   |-- readme.txt
+	 |-- src
+	 |   |-- main.cpp
+	 |   |-- main_utilities.cpp
+	 |-- test
+	 |   |-- a_test_rha_types
+	 |   |   | + test_rha_types.cpp
+	 |   |-- b_test_pid_regulator
+	 |   |-- d_test_servo_rha
+	 |   |-- e_test_joint_rha
+	 |   |-- f_test_joint_handler_mock
+	 |-- platformio.ini
+	 -------  // Hasta aqui la estructura impuesta por la herramienta platformio
+	 |-- code_analysis
+	 |-- utilities
+	 |-- sw_documentation
  |-- makeAnalysis.sh
     \end{lstlisting}
 
@@ -123,7 +123,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{figuras/Imagenes_SW/class_diagram_TRHA.jpg}
-            \caption{Estructuras de datos auxiliares}
+            \caption{Estructuras de datos auxiliares \completarCon{Actualizar}}
             \label{fig:SW:class_diagram_TRHA}
             \immagesource{Autor}
         \end{figure}
@@ -142,7 +142,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\textwidth]{figuras/Imagenes_SW/class_diagram_SRHA.jpg}
-            \caption{Atributos y métodos más relevantes del objeto \textit{ServoRHA}}
+            \caption{Atributos y métodos más relevantes del objeto \textit{ServoRHA} \completarCon{Actualizar}}
             \label{fig:SW:class_diagram_SRHA}
             \immagesource{Autor}
         \end{figure}
@@ -158,7 +158,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.85\textwidth]{figuras/Imagenes_SW/class_diagram_JRHA.jpg}
-            \caption{Atributos y métodos más relevantes del objeto \textit{JointRHA}}
+            \caption{Atributos y métodos más relevantes del objeto \textit{JointRHA} \completarCon{Actualizar}}
             \label{fig:SW:class_diagram_JRHA}
             \immagesource{Autor}
         \end{figure}
@@ -176,7 +176,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
             \item Atualización de la información: todos los componentes de cada articulación actualizan su información suministrada por los servos físicos o por la realimentación correspondiente. En el caso del control de posición este paso se omite por asumir que, el lazo más veloz, ya ha actualizado la información.
             \item Realización de los cálculos correspondientes: el manejador va llamando a los componentes correspondientes para que, utilizando la información reunida en el paso anterio actualicen la consigna que se enviará.
             \item Asegurar la seguridad: un paso imprescindible en el cual se asegura que los datos que se van a enviar no ponen en riesgo la integridad del robot ni del paciente. Además se comprueba que los datos recibidos del entorno son coherentes, en caso contrario se almacena un marcador de error.
-            \item Envio de comandos al siguiente nivel: una vez se cumplen los requisitos de seguridad se puede enviar la información al siguiente nivel. En el caso articular se pasa el objetivo de velocidad a los servos; en el caso de los objetos de tipo servo se envía la consigna de par obtenida a los servos físicos a través del puerto serie. En el caso concreto de exisir algún tipo de error se envía una señal de parada para todos los componentes inferiores.
+            \item Envio de comandos al siguiente nivel: una vez se cumplen los requisitos de seguridad se puede enviar la información al siguiente nivel. En el caso articular se pasa el objetivo de velocidad a los servos; en el caso de los objetos de tipo servo se envía la consigna de par obtenida a los servos físicos a través del puerto serie. En el caso concreto de existir algún tipo de error se envía una señal de parada para todos los componentes inferiores.
         \end{enumerate}
         Se puede ver este comportamiento para el caso concreto del control de velocidad implementado para los servos en la figura \ref{fig:SW:joint_handler_loop}.
 
@@ -195,7 +195,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{figuras/Imagenes_SW/class_diagram_JH.jpg}
-            \caption{Atributos y métodos más relevantes del objeto \textit{JointHandler}}
+            \caption{Atributos y métodos más relevantes del objeto \textit{JointHandler} \completarCon{Actualizar}}
             \label{fig:SW:class_diagram_JH}
             \immagesource{Autor}
         \end{figure}
@@ -205,12 +205,12 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         Se ha desarrollado un componente para permitir el control de los tres grados de libertad de posición, tal y como se han descrito en el capítulo \ref{chap:Mecanica}, a través de un mando Nunchuck de la consola Wii de Nintendo. Este componente no se ha incluido ni listado en la descripción de la electrónica por no ser un componente intrínseco al robot. El uso de este componente ha sido con fines puramente de test de las funcionalidades previa definición de una interfaz más estable.
         \\
         
-        Este componente utiliza la librería \ingles{Wire} estandar de Arduino para comunicar con el mando y posteriormente traduce los valores recogidos en consignas de velocidad para las diferentes articulaciones a una frecuencia preestablecida. El diagrama correspndiente a este objeto se encuentra en la figura \ref{fig:SW:class_diagram_CHH}.
+        Este componente utiliza la librería \ingles{Wire} estándar de Arduino para comunicar con el mando y posteriormente traduce los valores recogidos en consignas de velocidad para las diferentes articulaciones a una frecuencia preestablecida. El diagrama correspondiente a este objeto se encuentra en la figura \ref{fig:SW:class_diagram_CHH}.
 
         \begin{figure}[H]
           	\centering
           	\includegraphics[width=0.55\textwidth]{figuras/Imagenes_SW/class_diagram_CHH.jpg}
-          	\caption{Atributos y métodos más relevantes del objeto \textit{ChuckHandler} o manejador del mando Nunchuk}
+          	\caption{Atributos y métodos más relevantes del objeto \textit{ChuckHandler} o manejador del mando Nunchuk \completarCon{Actualizar}}
           	\label{fig:SW:class_diagram_CHH}
           	\immagesource{Autor}
         \end{figure}
@@ -222,7 +222,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         El primer caso se ha adelantado en la descripción del manejador del Nunchuck de forma que se actualizan los comandos de velocidad de los servos a partir de la información obtenida del mando.
         \\
         
-        Para una comunicación y control más complejo este componente implementa un protocolo de comunicación serie a través del cual se podrá establecer una comunicación con el brazo robótico desde componentes externos a través de un puerto serial estandar. En este caso se utiliza uno de los puertos series extra incluidos en la placa Arduino Mega, tal y como se ha descrito en el apartado \ref{sec:Electronica:Placa} dejando el puerto serie por defecto para funciones de carga del software así como \ingles{debug}.
+        Para una comunicación y control más complejo este componente implementa un protocolo de comunicación serie a través del cual se podrá establecer una comunicación con el brazo robótico desde componentes externos a través de un puerto serial estándar. En este caso se utiliza uno de los puertos series extra incluidos en la placa Arduino Mega, tal y como se ha descrito en el apartado \ref{sec:Electronica:Placa} dejando el puerto serie por defecto para funciones de carga del software así como \ingles{debug}.
         \\
         
         La interfaz principal de este componente se puede ver en el diagrama de la figura \completar pudiendo ampliar la información del mismo en el anexo \ref{app:documentacion_software} sección \completar.
@@ -236,7 +236,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
 
 \section{Test y verificación del software} \label{sec:SW:test}
 
-    Una parte importante de todo desarrollo de software pasa por una correcta verificación del funcionamiento del mismo. Para una comprobación efectiva se han realizado diferentes tipos de test, desde test unitarios de diferentes métodos hasta test de integración de los diferentes componentes. La verificación del sistema en general se ha realizado de modo visual, poninendo en marcha el brazo robótico y comprobando su correcto funcionamiento. Aunque las funcionalidades de \ingles{debug} son tremendamente útiles para hacer un seguimiento del desarrollo de la ejecución el trabajo a bajo nivel con protocolos de comunicación puede hacer que se convierta en un trabajo complicado y tedioso una vez empizan a acumularse los paquetes de bytes por la salida en pantalla. Por esta razón de han diseñado diferentes test automáticos para diferentes componentes.
+    Una parte importante de todo desarrollo de software pasa por una correcta verificación del funcionamiento del mismo. Para una comprobación efectiva se han realizado diferentes tipos de test, desde test unitarios de diferentes métodos hasta test de integración de los diferentes componentes. La verificación del sistema en general se ha realizado de modo visual, poniendo en marcha el brazo robótico y comprobando su correcto funcionamiento. Aunque las funcionalidades de \ingles{debug} son tremendamente útiles para hacer un seguimiento del desarrollo de la ejecución el trabajo a bajo nivel con protocolos de comunicación puede hacer que se convierta en un trabajo complicado y tedioso una vez empiezan a acumularse los paquetes de bytes por la salida en pantalla. Por esta razón de han diseñado diferentes test automáticos para diferentes componentes.
     \\
     
     Una de las ventajas que ofrece el uso de \glosario{PlatformIO} es que incorpora una herramienta o \ingles{framework} \completarCon{se debe definir más?} con el objetivo de realizar test sobre la propia placa que se está programando. La interfaz que ofrece es similar a otros sistemas de testing como pudiera ser \ingles{google test}.
@@ -245,7 +245,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
     Esta filosofía de trabajo, además de permitir una comprobación rápida y cómoda de información a bajo nivel, permite generar una serie de test \textbf{automatizados} que se podrán ejecutar regularmente para asegurar que los cambios efectuados al software no corrompen funcionalidades clave.
     \\
     
-    Como se ha visto en la sección \ref{sec:SW:estructura_dir} se ha incluido un directorio donde se agrupan todos los test a realizar, dentro del cual, nuevamente en diferentes directorios se encuentran los test a realizar. Cada directorio congrega los diferentes casos de test a realizar sobre un componente cocreto.
+    Como se ha visto en la sección \ref{sec:SW:estructura_dir} se ha incluido un directorio donde se agrupan todos los test a realizar, dentro del cual, nuevamente en diferentes directorios se encuentran los test a realizar. Cada directorio congrega los diferentes casos de test a realizar sobre un componente concreto.
     \\
     
     La ejecución de estos test se realizará, una a una, sobre la placa recibiendo un informe detallado sobre los resultados en cada caso así como un resumen final con todos los casos ejecutados. La propia herramienta se encarga de compilar y cargar los test en la placa a través del puerto serie así como de recoger los resultados pertinentes. Para ejecutar los mismos solo es necesario añadir la siguiente directiva para el precompilador, de forma que se desactive el bucle principal cuando se ejecuten los test:
@@ -268,7 +268,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
        	\immagesource{Autor. Salida de Platformio}
     \end{figure}
 
-    Como se puede apreciar en la figura \ref{fig:SW:test:error_output}, de fallar uno o varios casos implementados en el test se verá un mensaje detallando la causa del resultado erroneo.
+    Como se puede apreciar en la figura \ref{fig:SW:test:error_output}, de fallar uno o varios casos implementados en el test se verá un mensaje detallando la causa del resultado erróneo
 
     \begin{figure}[H]
         \centering
@@ -308,7 +308,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         Para los objetos englobados dentro de esta categoría se han definido diferentes test. Concretamente se ha comprobado de esta forma el correcto funcionamiento de los tipos de temporizadores definidos, en la figura \ref{fig:SW:test:rha_types_ok}. Este componente resulta clave y sobre el se apoya el funcionamiento de varios de los objetos por lo que es imprescindible tener una herramienta que compruebe su correcto funcionamiento cuando sea necesario.
         \\
         
-        Igual de importante, en este caso para los lazos de control definidos es el objeto encargado de encapsular el funcionamiento de un regulador PID, en la figura \ref{fig:SW:test:pid_regulator_ok}. En este caso se ha comprobado tanto la incicialización, la gestión de los valores del error así como la respuesta del mismo.
+        Igual de importante, en este caso para los lazos de control definidos es el objeto encargado de encapsular el funcionamiento de un regulador PID, en la figura \ref{fig:SW:test:pid_regulator_ok}. En este caso se ha comprobado tanto la inicicialización, la gestión de los valores del error así como la respuesta del mismo.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.95\textwidth]{figuras/Imagenes_SW/test/SWTest_2.jpg}
@@ -325,7 +325,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \end{figure}
 
     \subsection{Test sobre la gestión de la información del servo}
-        Tal y como se ha descrito en la seeción \ref{subsec:SW:servorha} es importante comprobar el correcto manejo de la información efectuado por este componente. Los test realizados incluyen la correcta actualización de la información, cálculo de errores así como encapsulado de dicha información cuando componentes de más alto nivel lo requieren. Se puede ver la salida correcta ofrecida por Platformio para este componente concreto en la figura \ref{fig:SW:test:servo_rha_ok}.
+        Tal y como se ha descrito en la sección \ref{subsec:SW:servorha} es importante comprobar el correcto manejo de la información efectuado por este componente. Los test realizados incluyen la correcta actualización de la información, cálculo de errores así como encapsulado de dicha información cuando componentes de más alto nivel lo requieren. Se puede ver la salida correcta ofrecida por Platformio para este componente concreto en la figura \ref{fig:SW:test:servo_rha_ok}.
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{figuras/Imagenes_SW/test/SWTest_4.jpg}
@@ -364,7 +364,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \item Complejidad ciclomática. \footnote{La complejidad ciclomática mide el número de ramas de ejecución que pueden abrirse en cada función; entendiendo que el hilo de ejecución se divide con cada condicional que implemente dos o varias opciones a seguir. una elevada complejidad ciclomática implica una mayor dificultad a la hora de testear todos las situaciones posibles de su funcionamiento.}
     \end{enumerate}
 
-    Combinando las métricas iniciales y midiendo el porcentaje de comentarios y líneas de debug sobre el total se puede contorlar un desarrollo equilibrado del software y la documentación del mismo. Como es de suponer no todas las líneas de comentarios se corresponden a documentación explícita del software, aunque da una idea bastante aproximada. \completarCon{Añadir datos sobre mínimos en SW crítico? Normalmente se exige un mínimo de un 20\%, habría que buscar alguna fuente que citar.}
+    Combinando las métricas iniciales y midiendo el porcentaje de comentarios y líneas de debug sobre el total se puede controlar un desarrollo equilibrado del software y la documentación del mismo. Como es de suponer no todas las líneas de comentarios se corresponden a documentación explícita del software, aunque da una idea bastante aproximada. \completarCon{Añadir datos sobre mínimos en SW crítico? Normalmente se exige un mínimo de un 20\%, habría que buscar alguna fuente que citar.}
     \\
     
     En la Figura \ref{fig:SW:code_analysis} se puede una serie de gráficas donde se puede ver la relación entre el código, la documentación (comentarios) y el \ingles{debug} que se lleva a cabo en el software.
@@ -384,7 +384,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
 
     \completarCon{añadir el quesito que representa los porcentajes}
 
-    Las métricas que miden el número de ficheros así como de funciones en los mismos son menos significativas, aunque un menor número de funciones normalmente implique una menor complejidad dentro de ese fichero no se puede establecer un número de referencia. Con la complejidad ciclomática ocurre lo mismo \completarCon {comentar lo que ocurre en SW crítico?}, bastará con mantener un control continuado de la misma y llevar a cabo correcciones puntuales para evitar que crezca en distintas funciones. Se pede ver en la figura \completar los resultados finales dichas métricas del sofware.
+    Las métricas que miden el número de ficheros así como de funciones en los mismos son menos significativas, aunque un menor número de funciones normalmente implique una menor complejidad dentro de ese fichero no se puede establecer un número de referencia. Con la complejidad ciclomática ocurre lo mismo \completarCon {comentar lo que ocurre en SW crítico?}, bastará con mantener un control continuado de la misma y llevar a cabo correcciones puntuales para evitar que crezca en distintas funciones. Se puede ver en la figura \completar los resultados finales dichas métricas del software.
 
     \completarCon{Añadir la imagen correspondiente a la situación final}
 
@@ -401,7 +401,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
             \immagesource{Autor. Salida de la herramienta cpplint}
         \end{figure}
 
-        Además de dicho resumen se adjunta un informe detallado de los errores y su hubicación concreta en el código, como puede verse en la figura \ref{fig:SW:test:error_output_cpplint}.
+        Además de dicho resumen se adjunta un informe detallado de los errores y su ubicación concreta en el código, como puede verse en la figura \ref{fig:SW:test:error_output_cpplint}.
 
         \begin{figure}[H]
             \centering
