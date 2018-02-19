@@ -142,19 +142,33 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
         \immagesource{Autor}
     \end{figure}
 
-    Toda esta estructura va montada sobre una base que ejerce de contrapeso para evitar que el eje central del brazo (eje Z) se incline. Como se ha visto anteriormente para esta base se ha adaptado un contrapeso de sombrilla sobre el que encaja el brazo. Este apoyo podría modificarse e incluso adaptar una fijación a otra superficie en caso de montar el brazo en otro entorno.
+    Toda esta estructura va montada sobre una base que ejerce de contrapeso para evitar que el eje central del brazo (eje Z) se incline, que puede verse en la figura \ref{fig:Mecanica:contrapeso}. Como se ha visto anteriormente para esta base se ha adaptado un contrapeso de sombrilla sobre el que encaja el brazo. Este apoyo podría modificarse e incluso adaptar una fijación a otra superficie en caso de montar el brazo en otro entorno.
 
-    \completarCon{¿Debería añadir una imagen con el pie y esta articulación o ya es pasarse de imágenes? La tengho hecha realmente así que...}
+   \begin{figure}[H]
+      	\centering
+      	\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/foto_brazo_13.jpg}
+      	\caption{Contrapeso para evitar el vencimiento del brazo}
+      	\label{fig:Mecanica:contrapeso}
+      	\immagesource{Autor}
+   \end{figure}
 
 \section{Articulaciones dos y tres. Posicionamiento en el plano sagital} \label{sec:Mecanica:articulacion_dostres}
 
     Las articulaciones dos y tres, representadas de forma esquemática en la figura \ref{fig:Mecanica:convenciones_generales} son las encargadas de posicionar el robot en el plano sagital del robot. Este plano girará al rededor del eje Z gracias a la articulación primera, vista en la sección anterior. Como se ha anticipado en el capítulo \ref{chap:Punto_partida} estas dos articulaciones están conformadas por dos mecanismos de cuatro barras acopladas en serie.
     \\
 
-    La figura \ref{fig:PuntoPartida:maquetas} del capítulo \ref{chap:Punto_partida} ya anticipaba diferentes métodos de acople entre los mecanismos , cada uno presentando sus virtudes y desventajas.
+    La figura \ref{fig:PuntoPartida:maquetas} del capítulo \ref{chap:Punto_partida} ya anticipaba diferentes métodos de acople entre los mecanismos , cada uno presentando sus ventajas y desventajas.
     \\
 
-	\completarCon{Tenía pensado incluir el modo "grua" que provamos al inicio en la descripción, pero puede que alargue y líe el capítulo más}
+	La primera forma de acoplar ambos mecanismos es mediante una unión triangular (representada en la figura \ref{fig:Mecanica:4_bar_mecanism_triangle}). En este caso se plantea fijar el segundo mecanismo, situado en el extremo a modo de estructura fija trasladando la responsabilidad de manejar ambos grados de libertad desde la primera articulación. El movimiento del extremo vendrá determinado por la combinación del giro de ambas articulaciones. Llevar ambos grados de libertad a un mismo punto de actuación supone una gran ventaja al evitar alargar la transmisión del movimiento del motor. Según se varíe la relación ente el tamaño de las barras así como los ángulos del acople se podrán conseguir diferentes relaciones de movimientos.
+	
+	\begin{figure}[H]
+		\centering       	
+		\includegraphics[width=\textwidth]{figuras/Imagenes_Mecanica/mecanismos_4_barras_triangulo.jpg}
+		\caption{Esquema de las articulaciones dos y tres. Estructura de unión triangular}
+		\label{fig:Mecanica:4_bar_mecanism_triangle}
+		\immagesource{Autor}
+	\end{figure}
 	
 	La situación final elegida basa por presentar ambos mecanismos las mismas dimensiones siendo sus barras iguales dos a dos. Una cadena de eslabones configurada de esta manera, aunque alarga la necesidad de transmitir el movimiento hasta cada eje de giro, tiene la particularidad de que mantiene la orientación del extremo del brazo siempre paralela a la de la barra de acople y en este caso, al eje Z. En la figura \ref{fig:Mecanica:4_bar_mecanism} se pueden ver los puntos sobre los que se actúan ambas articulaciones. Concretamente se ha diseñado de forma que tanto el extremo como la barra acopladora se mantienen siempre perpendiculares al plano del suelo como se puede apreciar en la figura \ref{fig:Mecanica:movimiento}.
     \\

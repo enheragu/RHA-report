@@ -23,8 +23,9 @@ El objetivo del brazo robótico es el de ubicar ante un paciente una \ingles{tab
 
 Así pues, algunos aspectos claves del prototipo deben ser:
 \begin{itemize}
-    \item El Objetivo del prototipo será el de permitir una interacción más cómoda y automatizada entre los pacientes cuya capacidad de interacción se ha visto coartada por la causa que sea.
+    \item El Objetivo del prototipo será el de permitir una interacción más cómoda y automatizada entre los pacientes cuya capacidad de interacción se ha visto reducida por la causa que sea.
     \item Se debe tener en cuenta es que el prototipo estará en constante contacto con gran variedad de usuarios: pacientes, médicos, familiares, etc. El diseño debe proteger en todo momento la seguridad de dichos usuarios
+    \item Concretamente el diseño está pensado para interactuar con pacientes que se encuentran recostados en una camilla en el hospital.
 \end{itemize}
 
 \subsection{Objetivos derivados}
@@ -61,7 +62,7 @@ Como complemento a la información que exponen los apartados de esta memoria se 
 
 \begin{itemize}
     \item Se adjunta un listado de todas las piezas diseñadas con información relevante sobre su uso y fabricación en el anexo \ref{app:listadoPiezas}.
-    \item Vistas las piezas que conforman el prototipo es importante localizarlas para entender su uso y diseño. El anexo \ref{app:montajePiezas} detalla unas pautas y orden para el ensamblado del prototipo. Además permite localizar en su contexto las piezas listadas en el anexo \ref{app:lisadoPiezas}.
+    \item Vistas las piezas que conforman el prototipo es importante localizarlas para entender su uso y diseño. El anexo \ref{app:montajePiezas} detalla unas pautas y orden para el ensamblado del prototipo. Además permite localizar en su contexto las piezas listadas en el anexo \ref{app:listadoPiezas}.
     \item Volviendo sobre los aspectos del software, en el Anexo \ref{app:codificacionSW} se concretan las reglas de codificación, mencionadas en el capítulo \ref{chap:SW}, más relevantes que se han aplicado en el desarrollo del código.
     \item De igual forma se amplia la información sobre el software desarrollado en el anexo \ref{app:documentacion_software}. En él se encuentra la documentación del software generada a través de la herramienta \glosario{doxygen}.
     \item El desarrollo del proyecto conlleva la utilización de diferentes herramientas software cuya instalación y puesta apunto se detalla en el anexo \ref{app:instalacion_software}.
@@ -74,6 +75,7 @@ Aunque en el anexo \ref{app:instalacion_software} se detalla la instalación del
 \begin{itemize}
     \item Autodesk Inventor 2016: Es un software de modelado paramétrico 3D de la compañía Autodesk Inc.
     \item Atom: Se trata de un editor de texto \ingles{open source}. Permite la instalación de diferentes extensiones para ampliar sus utilidades, entre otras será necesario instalar \glosario{PlatformIO}, que convierte el editor en un \glosario{IDE} completo para el desarrollo de software para diferentes placas como Arduino, que será la base de este proyecto.
+    \item Matlab: herramienta de cálculo utilizada para analizar la información recogida del ámbito de control así como para las comprobaciones pertinentes sobre la cinemática.
     \item Lizard: Software que permite el análisis de la complejidad de código. Se compone de una serie de scripts en python que, al ser ejecutados devuelven un fichero con métricas de complejidad referentes a los ficheros de código sobre los que se invoca: complejidad ciclomática, número de funciones en cada fichero, líneas de código en cada función y fichero, entre otras..
     \item Cloc: Es una herramienta sencilla que cuenta, de forma más precisa, el número de líneas de código, comentarios y líneas en blanco de los ficheros de código.
     \item cpplint: Análisis del cumplimiento de las reglas de codificación en el software. Es una herramienta desarrollada en python por Google LLC para asegurar que los proyectos cumplen con sus reglas de codificación, que se han seguido de forma parcial en este proyecto. Se pueden ver los aspectos más relevantes de las reglas de codificación en el Anexo \ref{app:codificacionSW}.
@@ -81,3 +83,113 @@ Aunque en el anexo \ref{app:instalacion_software} se detalla la instalación del
 \end{itemize}
 
 Además es interesante repasar los términos que se incluyen en el Glosario y que aparecerán referenciados a lo largo del documento. \completar
+
+\section{Iconografía del proyecto}
+
+Se han diseñado y utilizado diferentes iconos que pueden servir para orientar el propósito o temática de las diferentes figuras incluidas en el documento así como el capítulo al que pertenecen, manteniendo un color uniforme a lo largo de cada capítulo. Además de tener en la figura \ref{fig:introduccion:iconos} una recopilación de los mismos, a continuación se expone una lista con su significado y capítulo al que se asocia.
+
+
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\subsection*{Capítulo 1: Introducción}
+		\inconExplanation{intro_yellow}{Introducción, apertura del proyecto}
+	\end{flushleft}	
+		
+	\begin{flushright} 
+		\subsection*{Capítulo 2: Estado del arte}
+		\inconExplanation{arte_blue}{Aspectos relacionados con el estado del arte}
+	\end{flushright}
+\end{multicols} 
+
+\subsection*{Capítulo 3: Punto de inicio del diseño}
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\inconExplanation{lupa_yellow}{Detalles sobre el robot}
+	\end{flushleft}	
+	
+	\begin{flushright} 
+		\inconExplanation{idea_yellow}{Ideas de interés}
+	\end{flushright}
+\end{multicols} 
+
+\subsection*{Capítulo 4: Mecánica}
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\inconExplanation{brazo_red}{Aspectos generales de la estructura del brazo robótico}
+	\end{flushleft}
+	
+	\begin{flushright} 
+		\inconExplanation{mecanismo_red}{Transmisión mecánica de movimiento}
+	\end{flushright}	
+\end{multicols} 
+
+\subsection*{Capítulo 5: Electromecánica}
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\inconExplanation{motor_green}{Actuadores para el brazo robótico}
+	\end{flushleft}
+	
+	\begin{flushright} 
+		\inconExplanation{bateria_green}{Alimentación y etapas de potencia}
+	\end{flushright}
+\end{multicols} 
+\begin{multicols}{2}
+	\begin{flushleft} 
+		\inconExplanation{velocidad_green}{Sensores para el brazo robótico}	
+	\end{flushleft}
+\end{multicols} 
+
+\subsection*{Capítulo 6: Estudio matemático}
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\inconExplanation{math_red}{Ecuaciones y relaciones matemáticas}
+	\end{flushleft}
+	
+	\begin{flushright} 
+		\inconExplanation{abaco_red}{Resultados calculados}
+	\end{flushright}
+\end{multicols} 
+
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\subsection*{Capítulo 7: Aspectos de Control}
+		\inconExplanation{control_yellow}{Gráficas y aspectos del control}
+	\end{flushleft}
+\end{multicols} 
+
+\subsection*{Capítulo 8: Software}
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\inconExplanation{llaves_blue}{Diseño y desarrollo del software}
+	\end{flushleft}
+	
+	\begin{flushright} 
+		\inconExplanation{debug_blue}{Test, verificación y debug del software desarrollado}
+	\end{flushright}	
+\end{multicols} 
+
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\subsection*{Capítulo 9: Resultados y discusión}
+		\inconExplanationOne{megafono_red}
+	\end{flushleft}
+	\begin{flushright} 
+		\subsection*{Capítulo 10: Gestión del proyecto}
+		\inconExplanation{agenda_green}{Aspectos relacionados con el estado del arte}
+	\end{flushright}
+\end{multicols} 
+
+\begin{multicols}{2} 
+	\begin{flushleft} 
+		\subsection*{Capítulo 11: Conclusiones}
+		\inconExplanation{megafono_red}{\completar}
+	\end{flushleft}
+\end{multicols} 
+
+\begin{figure}[H]
+   	\centering
+   	\includegraphics[width=\textwidth]{figuras/Icons/iconos.jpg}
+   	\caption{Recopilación de los iconos diseñados y utilizados \completarCon{Añadir la diana}}
+   	\label{fig:introduccion:iconos}
+   	\immagesource{Autor}
+\end{figure}

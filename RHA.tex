@@ -59,9 +59,9 @@
 
 %parametros del documento (sus propiedades)
 \hypersetup{
-    pdftitle={Nombre del alumno - TFG - año},
-    pdfsubject={TFG - año},
-    pdfauthor={Nombre del alumno},
+    pdftitle={Enrique Heredia Aguado - TFG - 2017-2018},
+    pdfsubject={TFG - 2017-2018},
+    pdfauthor={Enrique Heredia Aguado},
     pdfkeywords={palabraclave1} {palabraclave2} {palabraclave3},
     colorlinks,
     citecolor=black,
@@ -103,6 +103,23 @@
 	\vspace{-10pt}
 	\captionsetup{font={footnotesize,bf,it}}
 	\caption*{\hfill Fuente: #1}
+	}
+	
+\newcommand{\inconExplanation}[2]{
+	\begin{minipage}{0.10\textwidth}
+		\includegraphics[width=\textwidth]{figuras/Icons/#1.png}
+	\end{minipage}
+	\begin{minipage}{0.35\textwidth}\raggedright
+		\begin{itemize}
+			\item #2
+		\end{itemize}
+	\end{minipage}
+	}
+	
+\newcommand{\inconExplanationOne}[1]{
+	\begin{minipage}{0.10\textwidth}
+		\includegraphics[width=\textwidth]{figuras/Icons/#1.png}
+	\end{minipage}
 	}
 
 %empieza el documento
@@ -169,7 +186,6 @@
  \include{capitulos/conclusion}
 
  \include{capitulos/anexo}
-
  \backmatter
 
 % %estilo de bibliografía: plana, alfa...
@@ -183,6 +199,7 @@
 
  %se incluye la bibliografía. Archivo de tipo .bib (bibtex)
  \bibliography{bibliografia/bibliografia}
+
 
 %fin del documento
 \end{document}

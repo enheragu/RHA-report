@@ -364,7 +364,7 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
         \item Complejidad ciclomática. \footnote{La complejidad ciclomática mide el número de ramas de ejecución que pueden abrirse en cada función; entendiendo que el hilo de ejecución se divide con cada condicional que implemente dos o varias opciones a seguir. una elevada complejidad ciclomática implica una mayor dificultad a la hora de testear todos las situaciones posibles de su funcionamiento.}
     \end{enumerate}
 
-    Combinando las métricas iniciales y midiendo el porcentaje de comentarios y líneas de debug sobre el total se puede controlar un desarrollo equilibrado del software y la documentación del mismo. Como es de suponer no todas las líneas de comentarios se corresponden a documentación explícita del software, aunque da una idea bastante aproximada. \completarCon{Añadir datos sobre mínimos en SW crítico? Normalmente se exige un mínimo de un 20\%, habría que buscar alguna fuente que citar.}
+    Combinando las métricas iniciales y midiendo el porcentaje de comentarios y líneas de debug sobre el total se puede controlar un desarrollo equilibrado del software y la documentación del mismo. Como es de suponer no todas las líneas de comentarios se corresponden a documentación explícita del software, aunque da una idea bastante aproximada.
     \\
     
     En la Figura \ref{fig:SW:code_analysis} se puede una serie de gráficas donde se puede ver la relación entre el código, la documentación (comentarios) y el \ingles{debug} que se lleva a cabo en el software.
@@ -374,19 +374,36 @@ Como se ha explicado anteriormente el software del brazo robótico se puede sepa
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{figuras/Imagenes_SW/analisis_codigo.png}
-        \caption{Análisis del código del proyecto. \completarCon{Hay que actualizar tanto la gráfica como la estética}}
+        \includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/code_analysis.jpg}
+        \caption{Análisis del código del proyecto. Situación a lo largo del tiempo}
         \label{fig:SW:code_analysis}
         \immagesource{Autor}
     \end{figure}
 
-    En la figura \completar se puede ver la última situación de forma más detallada.
+    En la figura \ref{fig:SW:quesito} se puede ver la última situación de forma más detallada.
 
-    \completarCon{añadir el quesito que representa los porcentajes}
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\textwidth]{figuras/Imagenes_SW/quesito_final.jpg}
+    	\caption{Análisis del código del proyecto. Situación final}
+    	\label{fig:SW:quesito}
+    	\immagesource{Autor}
+    \end{figure}
 
-    Las métricas que miden el número de ficheros así como de funciones en los mismos son menos significativas, aunque un menor número de funciones normalmente implique una menor complejidad dentro de ese fichero no se puede establecer un número de referencia. Con la complejidad ciclomática ocurre lo mismo \completarCon {comentar lo que ocurre en SW crítico?}, bastará con mantener un control continuado de la misma y llevar a cabo correcciones puntuales para evitar que crezca en distintas funciones. Se puede ver en la figura \completar los resultados finales dichas métricas del software.
+    Las métricas que miden el número de ficheros así como de funciones en los mismos son menos significativas, aunque un menor número de funciones normalmente implique una menor complejidad dentro de ese fichero no se puede establecer un número de referencia. Con la complejidad ciclomática ocurre lo mismo, bastará con mantener un control continuado de la misma y llevar a cabo correcciones puntuales para evitar que crezca en distintas funciones. A continuación se muestran datos de la situación final del software:
 
-    \completarCon{Añadir la imagen correspondiente a la situación final}
+	\begin{itemize}
+		\item Número de funciones total: 178
+		\item Media de funciones: 8.9 (contando ficheros con extensión .h y .cpp)
+		\item Fichero con máximo número de funciones: 31,  joint\_handler.cpp)
+		\item Número de líneas de código total: 2019
+		\item Media de líneas de código en cada fichero: 100.95 (contando ficheros con extensión .h y .cpp)
+		\item Fichero con máximo número de líneas: 411,  joint\_handler.cpp)
+		\item Complejidad ciclomática media: 2.2
+		\item Función con máxima complejidad ciclomática: 20, JointHandler::sendPacket
+	\end{itemize}
+	
+	Como se puede ver la media de líneas, funciones y complejidad ciclomática se mantiene en unos rangos manejables a lo largo del software. Concretamente se sale de los márgenes en el componente descrito en la sección \ref{subsec:SW:joint_handler}, el manejador de las articulaciones. Este caso sobrepasa bastante los datos medios debido a que gestiona el puerto serie que comunica con los servos así como los lazos de control de posición y velocidad. Todas estas operaciones conllevan una complejidad intrínseca que no se puede evitar. Paralelamente el componente que gestiona el brazo robótico (descrito en la sección \ref{subsec:SW:robotrha}) destaca en estas medidas. De igual manera gestiona la comunicación serie de todo el sistema con el exterior así como la matemática del robot.
 
     \subsection{Comprobación del cumplimiento de las reglas de codificación del Código}
         Para asegurar la mantenibilidad del software es importante imponer una coherencia en la codificación del mismo. En este caso se han definido una serie de reglas de codificación, descritas en el anexo \ref{app:codificacionSW}. Para hacer un seguimiento del cumplimiento de las mismas se ha hecho uso de una herramienta desarrollada por Google para la comprobación de este tipo de sintaxis y reglas en proyectos de grandes dimensiones: \ingles{Cpplint}.

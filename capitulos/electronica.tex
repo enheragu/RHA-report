@@ -3,7 +3,7 @@
 \hrule
 \vspace{3mm}
 
-Aunque se han anticipado tanto textualmente como a través de imágenes algunas características de los componentes electrónicos utilizados aún no se han descrito en detalle. Este capítulo se mete de lleno en los aspectos electromecánicos del brazo robótico, haciendo una descripción de los componentes empleados, algunas pautas para su correcto uso así como su integración dentro de la estructura descrita en el capítulo \ref{chap:Mecanica}
+Aunque se han anticipado tanto textualmente como a través de imágenes algunas características de los componentes electrónicos utilizados aún no se han descrito en detalle. Este capítulo se mete de lleno en los aspectos electromecánicos del brazo robótico, haciendo una descripción de los componentes empleados, algunas pautas para su correcto uso así como su integración dentro de la estructura descrita en el capítulo \ref{chap:Mecanica}.
 
 \section{Actuadores} \label{sec:Electronica:Actuadores}
 \label{sec:Electronica:Actuadores:G15}
@@ -11,7 +11,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     La imposición de utilizar unos motores de par reducido puede interpretarse como una desventaja, pero en este caso al quedar descartados los motores de corriente contínua y motores paso a paso convencionales queda la alternativa de uso de \glosarioPlural{smartservo} con todas las ventajas que ofrecen.
     \\
 
-    Los \glosarioPlural{smartservo} elegidos para el proyecto son, concretamente, losG15 Cube de la marca Cytron. Estos servos vienen acompañados de una gran variedad de funcionalidades que facilitarán el control y manejo del brazo robótico. Estos servos, como la mayoría de \glosarioPlural{smartservo}, tienen implementado un sistema de comunicación bidireccional con la placa controladora a través de un tipo de comunicación conocida como \ingles{Half Serial Duplex Communication}. Como se cuenta en \cite{embeddedSystems}, este tipo de comunicación utiliza un solo cable que podrá operar en una u otra dirección cada vez. Puede darse la situación en que varios componentes intenten comunicar al mismo tiempo en ambas direcciones pudiendo ocasionar graves problemas en la electrónica de los mismos. El uso de este tipo de servos implica el uso de electrónica adicional, no solo a modo de etapa de potencia, si no para la gestión de la comunicación entre los mismos y el microcontrolador.
+    Los \glosarioPlural{smartservo} elegidos para el proyecto son, concretamente, los G15 Cube de la marca Cytron. Estos servos vienen acompañados de una gran variedad de funcionalidades que facilitarán el control y manejo del brazo robótico. Estos servos, como la mayoría de \glosarioPlural{smartservo}, tienen implementado un sistema de comunicación bidireccional con la placa controladora a través de un tipo de comunicación conocida como \ingles{Half Serial Duplex Communication}. Como se cuenta en \cite{embeddedSystems}, este tipo de comunicación utiliza un solo cable que podrá operar en una u otra dirección cada vez. Puede darse la situación en que varios componentes intenten comunicar al mismo tiempo en ambas direcciones pudiendo ocasionar graves problemas en la electrónica de los mismos. El uso de este tipo de servos implica el uso de electrónica adicional, no solo a modo de etapa de potencia, si no para la gestión de la comunicación entre los mismos y el microcontrolador.
     \\
 
     Utilizar un protocolo de comunicación más complejo permite conectar varios servos a un mismo puerto de comunicación, conectando cada servo al anterior, también conocido como conexión \ingles{daisy chain}. En la figura \ref{fig:Electronica:bus-servos} se puede ver representada este tipo de cadena y donde se puede ver el aspecto del modelo de servos seleccionado.
@@ -67,13 +67,13 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 			\hline
 			\multicolumn{2}{|c|}{Par capaz de realizar (a $12V$)} & \multicolumn{2}{|c|}{$12kg \cdot cm$}\\
 			\hline
-			\multicolumn{2}{|c|}{Par capaz de soportar} & \multicolumn{2}{|c|}{$15km \cdot cm$} \\
+			\multicolumn{2}{|c|}{Par capaz de soportar} & \multicolumn{2}{|c|}{$15kg \cdot cm$} \\
 			\hline
 			\multicolumn{2}{|c|}{Margen angular de operación } & \multicolumn{2}{|c|}{$360^o$ en giro continuo}\\
 			\hline
 			\multicolumn{2}{|c|}{Máxima velocidad (en vacío a $12V$)} & \multicolumn{2}{|c|}{$63 RPM$ }\\
 			\hline
-			\multicolumn{2}{|c|}{Comunicaciçon} & \multicolumn{2}{|c|}{ \begin{minipage}{1.0\textwidth}\vspace{0.1cm}
+			\multicolumn{2}{|c|}{Comunicación} & \multicolumn{2}{|c|}{ \begin{minipage}{1.0\textwidth}\vspace{0.1cm}
 			Half duplex asynchronous serial \\ communication ($7812.5bps-500kbps $)\end{minipage} }\\
     		\hline
     	\end{tabular}
@@ -94,7 +94,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 	Para la alimentación de los servos se ofrecen dos posibles entradas remarcadas en la figura \ref{fig:Electronica:alimentacion-shield} con los colores azul y rojo. Para alternar de una a otra habrá que, mediante el uso de un soldador, modificar la conexión recuadrada en amarillo para habilitar la opción deseada deshabilitando la contraria.
 	\begin{itemize}
 		\item Alimentación externa (recuadrada en azul): en este caso se conecta la fuente de alimentación directamente a los conectores pasando el voltaje a los cables de alimentación de los servos.
-		\item Alimentación mixta shield-controlador (recuadrada en rojo): en este caso la alimentación se comparte con la placa controladora (que deberá rectificar el voltaje de entrada a valores aceptables para la misma). Por defecto esta es la entrada que viene habilitada; se ha mantenido ya que permite la alimentación simultánea de los servos y de la placa controladora a partir de la misma fuente de alimentación (se verá en secciones posteriores la elección del controlador y otros aspectos).
+		\item Alimentación mixta shield-controlador (recuadrada en rojo): en este caso la alimentación se comparte con la placa controladora (que deberá rectificar el voltaje de entrada a valores aceptables para la misma). Por defecto esta es la entrada que viene habilitada; se ha mantenido ya que permite la alimentación simultánea de los servos y de la placa controladora a partir de la misma fuente de alimentación (se verá en secciones posteriores la elección del controlador y otros aspectos). Esta entrada suministra los 12V necesarios para los servos a la vez que, internamente a la placa Arduino, se rectifica a 5V para la alimentación de la misma.
 	\end{itemize}
 
 	\begin{figure}[H]
@@ -145,7 +145,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 	 		\end{center}
 	 \end{table}
 
-	 En este proyecto concreto se enlazaran diferentes lazos de control a diferentes frecuencias de refresco (ver capítulo \ref{chap:Control}) que exigirán el máximo de la capacidad comunicativa entre los dispositivos. Los datos máximos obtenidos para la placa Arduino Mega son los utilizados para el funcionamiento del robot.
+	 En este proyecto concreto se enlazarán diferentes lazos de control a diferentes frecuencias de refresco (ver capítulo \ref{chap:Control}) que exigirán el máximo de la capacidad comunicativa entre los dispositivos. Los datos máximos obtenidos para la placa Arduino Mega son los utilizados para el funcionamiento del robot.
 
     \begin{figure}[H]
     	\centering
@@ -181,7 +181,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     \end{table}
 
 \section{Sensores} \label{sec:Electronica:Sensores}
-    A pesar de la gran cantidad de información que ofrecen los servos escogidos, por las características mecánicas descritas las medidas que proporcionan no son medidas directamente referenciadas a las articulaciones. Desde el punto de vista de control del brazo robótico el objetivo es el control del brazo completo descomponiendo el problema de el control de las articulaciones. Principalmente en las articulaciones dos y tres cuya relación entre las medidas del servo y el comportamiento de la articulación es más compleja es conveniente incluir una realimentación externa, concretamente de posición.
+    A pesar de la gran cantidad de información que ofrecen los servos escogidos, por las características mecánicas descritas las medidas que proporcionan no son medidas directamente referenciadas a las articulaciones. Desde el punto de vista de control del brazo robótico el objetivo es el control del brazo completo descomponiendo el problema de control de las articulaciones. Principalmente en las articulaciones dos y tres cuya relación entre las medidas del servo y el comportamiento de la articulación es más compleja es conveniente incluir una realimentación externa, concretamente de posición.
     \\
 
     La realimentación se hará efectiva a través del uso de potenciómetros para ambas articulaciones. Aunque aun no se ha tratado en detalle los rangos de movimiento posibles para cada articulación, la explicación de la sección \ref{sec:Mecanica:articulacion_dostres} permite deducir que el rango de movimiento será: para el caso de la segunda articulación menor a $180^o$; para la tercera articulación menor a $90^o$. En capítulos posteriores se tratará en detalle estos aspectos del robot; es necesario anticiparse para la elección de los potenciómetros.
@@ -221,27 +221,72 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     Se puede apreciar, que los potenciómetros escogidos cubren por completo el rango de movimiento de las articulaciones que se pretende realimentar.
 
 \section{Fuente de alimentación} \label{sec:Electronica:fuente_alimentacion}
-    \completarCon{comprobar la referencia para describir la fuente en un par de párrafos}
+    Acorde con la información que se ha dado anteriormente la fuente elegida (ver figura \ref{fig:Electronica:fuente}) deberá suministrar un voltaje suficiente para la alimentación de todo el sistema. Se ha escogido el modelo S-120-12, cuyas características se pueden ver en la tabla \ref{tab:fuente}.
+ 
+	\begin{figure}[H]
+	  	\centering
+	  	\includegraphics[width=\textwidth]{figuras/Imagenes_Electronica/fuente_alimentacion.jpg}
+	  	\caption{Visual de la fuente de alimentación escogida}
+	  	\label{fig:Electronica:fuente}
+	  	\immagesource{Fotografía del fabricante}
+	\end{figure}
+	
+	\begin{table}[H]
+      	\caption{Características de la fuente de alimentación}
+      	\immagesource{Fuente de alimentación}
+      	\label{tab:fuente}
+      	%\begin{minipage}{0.42\textwidth}
+      	\begin{center}
+      		\begin{tabular}{ |c|c| }
+      			\hline
+      			Voltaje de entrada & $200-240 V(AC)a$  \\
+      			\hline
+      			Intensidad de entrada & $1.2A$\\
+      			\hline
+      			Voltaje de salida & $+12V(DC)$  \\
+      			\hline
+      			Intensidad de salida & $10A$  \\
+      			\hline
+      		\end{tabular}
+      	\end{center}
+      	%\end{minipage}
+	\end{table}
 
 \section{Integración de los componentes en la estructura mecánica} \label{sec:Electronica:Integracion}
 
-    Una vez conocisdos los componentes electromecánicos que se van a utilizar pueden ser integrados en la estructura diseñada.
+    Una vez conocidos los componentes electromecánicos que se van a utilizar pueden ser integrados en la estructura diseñada.
     \\
 
     En el caso de los tres servos encargados de los grados de libertad de posición, han sido montados en una torre apoyándose en la modularidad de su diseño. De esta forma la torre queda anclada a ambos lados de la estructura así como a la base.
     \\
 
-    En el caso de los correspondientes a la segunda y tercera articulación, el eje que fija la polea solidaria al motor que enrolla el cable se apoya en el otro extremo para evitar que el servo tenga que absorber la fuerzas de tracción que proboca el peso del brazo transmitida a través de la cuerda.
+    En el caso de los correspondientes a la segunda y tercera articulación, el eje que fija la polea solidaria al motor que enrolla el cable se apoya en el otro extremo para evitar que el servo tenga que absorber las fuerzas de tracción que provoca el peso del brazo transmitidas a través de la cuerda. Se puede ver una representación del despiece de dicha estructura en la figura \ref{fig:Electronica:montaje_servos}
 
-    \completarCon{Imagen en la que se vea este montaje de frente}
+   	\begin{figure}[H]
+   		\centering
+   		\includegraphics[width=\textwidth]{figuras/Imagenes_Electronica/anclaje_servos.jpg}
+   		\caption{Representación de como se fijan los servos a la estructura}
+   		\label{fig:Electronica:montaje_servos}
+   		\immagesource{Autor}
+   	\end{figure}
 
-    Ambas placas, tanto la \ingles{shield} como la placa Arduino Mega van montadas sobre una plataforma aprovechando los anclajes de los servos.
+    Ambas placas, tanto la \ingles{shield} como la placa Arduino Mega van montadas sobre una plataforma aprovechando los anclajes de los servos, tal y como se presenta en la figura \ref{fig:Electronica:placas}.
     \\
-
+   	\begin{figure}[H]
+   		\centering
+   		\includegraphics[width=\textwidth]{figuras/Imagenes_Electronica/foto_brazo_11.jpg}
+   		\caption{Acoplamiento de las placas y motores}
+   		\label{fig:Electronica:placas}
+   		\immagesource{Autor}
+   	\end{figure}
+   	
     En el caso de los potenciómetros su montaje difiere de un caso a otro:
     \begin{itemize}
-        \item Segunda Articulación: El movimiento de la articulación se transmite a través de un juego de engranajes hasta el potenciómetro, que está ubicado sobre el eje de dicha articulación. Se puede ver el montaje en la figura \ref{fig:Mecanica:realimentacion_1}. Se ha aprovechado el uso de engranajes para aumentar la resolución de medida de forma que el movimiento se amplifica para aprovechar en su totalidad los $265^o$ de giro ofrecidos por el potenciómetro.
-        \item Tercera articulación: El eje del potenciómetro se encuentra en la misma línea que el eje de la articulación. Se ha diseñado una pieza a modo de adaptador para unir el eje del potenciómetro al giro de la barra que puede verse en la figura \ref{fig:Mecanica:realimentacion_2} En este caso la lectura leída del potenciómetro (en grados) es equivalente al desplazamiento articular.
+        \item Segunda Articulación: El movimiento de la articulación se transmite a través de un juego de engranajes hasta el potenciómetro, que está ubicado sobre el eje de dicha articulación. Se puede ver el montaje en la figura \ref{fig:Mecanica:realimentacion_1}. Se ha aprovechado el uso de engranajes para aumentar la resolución de medida de forma que el movimiento se amplifica para aprovechar en su totalidad los $265^o$ de giro ofrecidos por el potenciómetro. La relación entre las medidas se presenta a continuación:
+        \begin{equation}
+        	Medida Articular = \frac{Medida Potenciometro \cdot 180}{265}
+        \end{equation}
+        \item Tercera articulación: El eje del potenciómetro se encuentra en la misma línea que el eje de la articulación. Se ha diseñado una pieza para unir el eje del potenciómetro al giro de la barra que puede verse en la figura \ref{fig:Mecanica:realimentacion_2} En este caso la lectura leída del potenciómetro (en grados) es equivalente al desplazamiento articular.
     \end{itemize}
 
     \begin{minipage}{0.47\textwidth}
