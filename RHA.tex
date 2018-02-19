@@ -8,6 +8,7 @@
 %\usepackage[latin1]{inputenc}
 \usepackage[utf8]{inputenc}
 
+
 %algunos símbolos matemáticos y paquete para usar subimágenes
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -26,6 +27,8 @@
 \usepackage{multicol}
 
 \usepackage{longtable}
+
+
 
 \usepackage{float}
 \usepackage{eurosym}
@@ -84,7 +87,9 @@
 %                            \normalsize}
 %                            }
 \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
-\newcommand{\iconoImagen}[1]{\includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}
+\newcommand{\iconoImagen}[1]{\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}}
+\newcommand{\pieceDescription}[1]{
+	\vspace{0pt} {\begin{minipage}[t]{.20\linewidth}\vspace{0pt}#1\\ \end{minipage}}}
 
 \usepackage{graphicx,eso-pic}
 

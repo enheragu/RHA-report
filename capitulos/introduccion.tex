@@ -35,6 +35,8 @@ La realización de dicho prototipo implica el cumplimiento de otros objetivos se
     \item Prueba de diferentes tipos de estructuras y materiales como base física del brazo robótico.
     \item Adquisición de conocimientos sobre modelado 3D digital así como diferentes métodos de fabricación como son la impresión 3D, el corte láser, fresado CNC así como el uso de otras herramientas de mecanizado más tradicionales.
     \item Diseño e implementación de un sistema de control en cascada, que permita un control en posición y en velocidad del brazo robótico.
+    \item Trabajar con protocolos de comunicación serie a bajo nivel (Comunicación entre el robot y el exterior exterior además de la comunicación con los actuadores).
+    \item Diseñar una interfaz que permita controlar el brazo de manera intuitiva (interfaz gráfica o similar).
 \end{itemize}
 
 
@@ -82,12 +84,17 @@ Aunque en el anexo \ref{app:instalacion_software} se detalla la instalación del
     \item doxygen: Permite la generación de documentación para código de diferentes lenguajes, c++ en este caso, de forma automática. La herramienta obtiene comentarios del código, escritos con una sintaxis determinada, para documentar los diferentes métodos, objetos y estructura del software.
 \end{itemize}
 
-Además es interesante repasar los términos que se incluyen en el Glosario y que aparecerán referenciados a lo largo del documento. \completar
 
 \section{Iconografía del proyecto}
 
 Se han diseñado y utilizado diferentes iconos que pueden servir para orientar el propósito o temática de las diferentes figuras incluidas en el documento así como el capítulo al que pertenecen, manteniendo un color uniforme a lo largo de cada capítulo. Además de tener en la figura \ref{fig:introduccion:iconos} una recopilación de los mismos, a continuación se expone una lista con su significado y capítulo al que se asocia.
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/Icons/iconos.jpg}
+	\caption{Recopilación de los iconos diseñados y utilizados}
+	\label{fig:introduccion:iconos}
+	\immagesource{Autor}
+\end{figure}
 
 \begin{multicols}{2} 
 	\begin{flushleft} 
@@ -175,21 +182,13 @@ Se han diseñado y utilizado diferentes iconos que pueden servir para orientar e
 	\end{flushleft}
 	\begin{flushright} 
 		\subsection*{Capítulo 10: Gestión del proyecto}
-		\inconExplanation{agenda_green}{Aspectos relacionados con el estado del arte}
+		\inconExplanation{agenda_green}{Gestión del proyecto}
 	\end{flushright}
 \end{multicols} 
 
 \begin{multicols}{2} 
 	\begin{flushleft} 
 		\subsection*{Capítulo 11: Conclusiones}
-		\inconExplanation{megafono_red}{\completar}
+		\inconExplanation{diana_blue}{Conclusiones}
 	\end{flushleft}
 \end{multicols} 
-
-\begin{figure}[H]
-   	\centering
-   	\includegraphics[width=\textwidth]{figuras/Icons/iconos.jpg}
-   	\caption{Recopilación de los iconos diseñados y utilizados \completarCon{Añadir la diana}}
-   	\label{fig:introduccion:iconos}
-   	\immagesource{Autor}
-\end{figure}
