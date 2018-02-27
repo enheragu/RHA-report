@@ -36,7 +36,7 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
     	\immagesource{Captura obtenida de \cite{CytronTechnologies2012}}
     \end{figure}
 
-    Entre las ventajas de utilizar \glosarioPlural{smartservo} es que se cuenta con información relevante que se podrá \textit{preguntar} al servo cuando sea necesaria. Estos servos tienen diferentes modos de funcionamiento, aunque se utilizará principalmente el modo de \textbf{giro continuo}. Para este caso los servos ofrecen un control en par de manera que se podrán enviar comandos del par que deberá ejercer. Como información relevante a consultar ofrece datos de posición del servo, par realizado y sentido del mismo, temperatura, voltaje de alimentación, velocidad y sentido de movimiento, entre otros.
+    Entre las ventajas de utilizar \glosarioPlural{smartservo} es que se cuenta con información re\-levante que se podrá \textit{preguntar} al servo cuando sea necesaria. Estos servos tienen diferentes modos de funcionamiento, aunque se utilizará principalmente el modo de \textbf{giro continuo}. Para este caso los servos ofrecen un control en par de manera que se podrán enviar comandos del par que deberá ejercer. Como información relevante a consultar ofrece datos de posición del servo, par realizado y sentido del mismo, temperatura, voltaje de alimentación, velocidad y sentido de movimiento, entre otros.
     \\
 
     Cabe destacar algunas características importantes de los mismos, que se encuentran resumidas en la tabla \ref{tab:g15_catact}. Concretamente es de destacar los $12kg \cdot cm$ de par efectivo; un par relativamente bajo que se aprovechará como medida extra de protección a usuarios del brazo robótico tal y como se ha anticipado en capítulos anteriores.
@@ -123,12 +123,15 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
 
 	Como se puede ver, utilizando una placa Arduino Uno la comunicación con los servos queda relegada a un puerto emulado por software. Esta es la razón principal por la cual se decide cambiar y utilizar una Placa Arduino Mega2560, que además presenta mayores prestaciones respecto a memoria (ver tabla \ref{tab:arduino_comparison}). Para el control del brazo robótico y el diseño y testeo del software es necesario optimizar la velocidad de comunicación entre los dispositivos al máximo. La placa Arduino Mega incluye tres puertos serie hardware adicionales que se podrán puentear a la placa \ingles{shield} para ser utilizados. Esta conexión se puede ver en la figura \ref{fig:Electronica:shield-arduino}. De esta forma se podrá aprovechar todo el potencial de la comunicación a través de un puerto serie hardware.
 	\\
+	
+	Se utilizarán tres puertos serie de la placa: uno para comunicar con los servos, otro para la carga de software así como funcionalidades de debug para desarrollo y un tercer puerto para el control del robot a través una comunicación serial.
+	\\
 
 	Para hacerse una idea de la importancia que tiene este cambio se ha forzado la comunicación en ambos casos para obtener los máximos en los cuales sería viable trabajar. Los datos presentados en la tabla \ref{tab:comunication_serial} se han obtenido de forma experimental bajo el marco de este proyecto. Entre los mismos se puede apreciar la gran diferencia existente entre las diferentes formas de comunicación. Las velocidades se han ido duplicando (a modo de convencionalismo las velocidades de comunicación estándar para Placas Arduino suelen obtenerse de esta manera) hasta llegar al máximo que permite una comunicación satisfactoria.
 
 	 \begin{table}[H]
 	 	\caption{Comparativa entre placas Arduino Uno y Arduino Mega2560}
-	 	\immagesource{Tabla con información resumida de \cite{arduinoUno} y \cite{arduinoMega} }
+	 	\immagesource{Tabla con información obtenida de forma experimental }
 	 	\label{tab:comunication_serial}
 	 		\begin{center}
 	 			\begin{tabular}{ |c|c|c| }
@@ -251,7 +254,19 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
       	\end{center}
       	%\end{minipage}
 	\end{table}
-
+	
+\section{Adaptador USB para puerto serie}
+	Este componente permite adaptar los puertos serie de la placa Arduino Mega de forma que sean compatibles con una entrada USB. De esta forma se tiene acceso a los pines RX y TX a través de USB. Se utiliza para comunicar otro puerto serie extra a través de USB.
+	\\
+	
+	En modelo de la figura \ref{fig:Electronica:ftdi} es compatible con dispositivos a 3.3V y a 5V (como es el caso de la placa utilizada).
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{figuras/Imagenes_Electronica/adaptador_ftdi.jpg}
+		\caption{Adaptador puerto serie a USB}
+		\label{fig:Electronica:ftdi}
+		\immagesource{Fotografía del fabricante}
+	\end{figure}
 \section{Integración de los componentes en la estructura mecánica} \label{sec:Electronica:Integracion}
 
     Una vez conocidos los componentes electromecánicos que se van a utilizar pueden ser integrados en la estructura diseñada.
@@ -307,5 +322,3 @@ Aunque se han anticipado tanto textualmente como a través de imágenes algunas 
             \immagesource{Autor}
         \end{figure}
     \end{minipage}
-
-\completarCon{Añadir el FTDI si finalmente el control del brazo se hace por uno de los puertos serie extra de la placa}

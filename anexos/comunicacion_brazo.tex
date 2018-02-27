@@ -1,1 +1,248 @@
-\completarCon{TBD una vez esté implementado}
+
+En este anexo se describe el protocolo de comunicación a bajo nivel que que se ha diseñado para codificar el paso de mensajes entre el brazo robótico y un controlador externo, en este caso la interfaz gráfica diseñada.
+\\
+
+
+Se trata de un protocolo de comunicación para mensajes de longitud variable multipropósito y con comprobación de errores mediante un \ingles{checksum}.
+\\
+
+
+El protocolo se ha diseñado pensando en posibilitar y facilitar su ampliación posterior. Por ahora se incluyen algunas funcionalidades básicas que podrán ser ampliadas.
+\\
+
+
+Tal y como se describe en el anexo \cite{app:registros_g15} la información enviada va codificada en formato hexadecimal, byte a byte. Nuevamente los mensajes contienen uos elementos comunes:
+
+
+\begin{itemize}
+
+\item Encabezado: Los primeros dos bytes del mensaje estarán compuestos por encabezado que será el que marque el inicio del mensaje. Estos bytes serán: 0xFF 0xFF
+
+\item Longitud: se codifica, en el propio mensaje, la longitud en bytes que se debe leer.
+
+\item Un fin de mensaje: El último byte del mensaje estará marcado por un valor llamado \ingles{CheckSum} que será el encargado de verificar que todo el paquete ha llegado correctamente. El \ingles{CheckSum} es el inverso del valor binario de la suma de todos los bytes enviados a excepción del encabezado y el propio \ingles{CheckSum}.
+
+\end{itemize}
+
+
+Los paquetes enviados, en ambos sentidos, comparten la siguiente estructura:
+
+
+\begin{itemize}
+
+\item Bytes 0 y 1: reservados para el encabezado.
+
+\item Byte 2: Codifica la longitud del mensaje sin contar el encabezado. Se puede entender como el número de bytes a leer una vez detectado el inicio del mensaje.
+
+\item Byte 3: codifica la instrucción que se desea realizar. Se han establecido diferentes tipos de mensaje, interpretándose cado de una forma e identificandose mediante un número codificado en este byte.
+
+\item Bytes del 4 al N: Parámetros que se quieran envian.
+
+\item Byte N+1: \ingles{CheckSum}
+
+\end{itemize}
+
+
+En la figura \ref{fig:app:comunicacion_brazo:comunicacion_mensaje} se puede ver una representación gráfica de este esquema de mensaje.
+
+
+\begin{figure}[H]
+
+\centering
+
+\includegraphics[width=0.9\textwidth]{figuras/Imagenes_SW/Packet_From_RobotRHA.jpg}
+
+\caption{Paquete de información genérico para comunicar con los Servos G15 Cube}
+
+\label{fig:app:comunicacion_brazo:comunicacion_mensaje}
+
+\end{figure}
+
+
+Como se ha visto, el byte 3 acepta diferentes valores en función del propósito del mensaje. Estas funcionalidades se codifican con un id, que en binario será:
+
+
+\begin{itemize}
+
+\item Opción 0: Mensaje de actualización de la información del robot, en el cual el mismo codifica la información general sobre su estado.
+
+\item Opción 1: Mensaje de error del robot, donde se codifican y envian errores en las articulaciones o servos.
+
+\item Opción 2: Comandos para actuar sobre el robot. En este caso es la interfaz gráfica (o cualquier otro controlador con una conexión serie) quien evía comandos de posiciones articulares a alcanzar al robot.
+
+\end{itemize}
+
+
+\section{Estado del robot}
+
+
+En la tabla \ref{tab:robot_state} puede verse la cadena de mensaje que se envía con este propósito. Cabe destacar que parte de los datos sobrepasan el valor que puede codificarse en un byte y se codifican en dos quedando el de más bajo nivel el primero seguido del byte superior.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Codificación del estado del robot.}
+\label{tab:robot_state}
+\immagesource{Autor}
+\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	\textbf{Byte} & \textbf{Información contenida} \\
+	\hline
+	0 & Encabezado (Fijo: 0xFF) \\
+	\hline
+	1 & Encabezado (Fijo: 0xFF) \\
+	\hline
+	2 & Longitud a leer (18) \\
+	\hline
+	3 & Tipo de mensaje (0) \\
+	\hline
+	\multicolumn{2}{|c|}{\textbf{Información de la primera articulación}} \\
+	\hline
+	4 & Posición articular \\
+	\hline
+	5 & Velocidad (con dirección). Byte L \\
+	\hline
+	6 & Velocidad (con dirección). Byte H \\
+	\hline
+	7 & Par aplicado (con dirección). Byte L \\
+	\hline
+	8 & Par aplicado (con dirección). Byte H \\
+	\hline
+	\multicolumn{2}{|c|}{\textbf{Información de la segunda articulación}} \\
+	\hline
+	9 & Posición articular \\
+	\hline
+	10 & Velocidad (con dirección). Byte L \\
+	\hline
+	11 & Velocidad (con dirección). Byte H \\
+	\hline
+	12 & Par aplicado (con dirección). Byte L \\
+	\hline
+	13 & Par aplicado (con dirección). Byte H \\
+	\hline
+	\multicolumn{2}{|c|}{\textbf{Información de la tercera articulación}} \\
+	\hline
+	14 & Posición articular \\
+	\hline
+	15 & Velocidad (con dirección). Byte L \\
+	\hline
+	16 & Velocidad (con dirección). Byte H \\
+	\hline
+	17 & Par aplicado (con dirección). Byte L \\
+	\hline
+	18 & Par aplicado (con dirección). Byte H \\
+	\hline
+	19 & Checksum \\
+	\hline
+	\end{tabular}
+\end{center}
+\end{table}
+
+
+Aunque la información codificada es la que se presenta en la tabla, ésta puede ser ampliada de forma sencilla añadiendo más bytes al mensaje.
+
+
+\section{Informes de error}
+
+
+El robot es capaz de notificar errores en los servos. Este tipo de mensaje se construye de la siguiente manera:
+
+\begin{itemize}
+
+\item Bytes 0 y 1: con el encabezado: 0xFF en ambos.
+
+\item Byte 2: 5 (longitud)
+
+\item Byte 3: 0x01 (tipo de mensaje).
+
+\item Byte 4: Codifica el estado de los servos. Siguiendo la codificación descrita en la tabla \ref{tab:servo_error} se puede almacenar la información de hasta ocho servos en un solo byte. Este error codifica posibles errores en la comunicación con los servos, cada servo se identifica según la articulación en la que se encuentra, no según el ID interno a cada uno. Se almacena el error poniendo el bit correspondiente a uno y la ausencia del mismo poniéndolo a cero
+
+\item Byte 5: Como en el caso anterior y siguiendo las indicaciones de la tabla \ref{tab:joint_error} se puede almacenar el estado de error de hasta ocho articulaciones en un byte. Este error informa de posibles inconsistencias en el funcionamiento de la articulación. Un caso de ejemplo puede ser que el movimiento del servo no se traduzca en un movimiento articular.
+
+\item Byte 6: \ingles{CheckSum}
+
+\end{itemize}
+
+
+\begin{table}[htbp]
+\centering
+\caption{Codificación de error en servos.}
+\label{tab:servo_error}
+\immagesource{Autor}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Bit} & \textbf{Información contenida} & \textbf{Máscara de error} \\
+\hline
+0 & error servo (articulación 1) & 0x01 \\
+\hline
+1 & error servo (articulación 2) & 0x02 \\
+\hline
+2 & error servo (articulación 3) & 0x04 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+
+\centering
+
+\caption{Codificación de error en articulaciones.}
+
+\label{tab:joint_error}
+
+\immagesource{Autor}
+
+\begin{center}
+
+\begin{tabular}{|c|c|c|}
+
+\hline
+
+\textbf{Bit} & \textbf{Información contenida} & \textbf{Máscara de error} \\
+
+\hline
+
+0 & error articulación 1 & 0x01 \\
+
+\hline
+
+1 & error articulación 2 & 0x02 \\
+
+\hline
+
+2 & error articulación 3 & 0x04 \\
+
+\hline
+
+\end{tabular}
+
+\end{center}
+
+\end{table}
+
+
+\section{Comandar el robot}
+
+
+El mensaje que codifica objetivos para el robot es similar a los mensajes enviados por el mismo, manteniendo la misma estructura incluye:
+
+\begin{itemize}
+
+\item Bytes 0 y 1: con el encabezado: 0xFF en ambos.
+
+\item Byte 2: 6 (longitud del mensaje sin encabezado)
+
+\item Byte 3: 0x02 (tipo de mensaje).
+
+\item Byte 4: Objetivo de posición para la primera articulación.
+
+\item Byte 5: Objetivo de posición para la segunda articulación.
+
+\item Byte 6: Objetivo de posición para la tercera articulación.
+
+\item Byte 7: \ingles{CheckSum}
+
+\end{itemize}

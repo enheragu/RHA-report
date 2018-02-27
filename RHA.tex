@@ -76,7 +76,7 @@
 
 % %%%%%%%%% SUPER COMANDOS %%%%%%%%%%
 \newcommand{\completar}{\textcolor{pRojo}{\small{\textbf{-- COMPLETAR --}}}}
-\newcommand{\completarCon}[1]{ \textcolor{pRojo}{\small{\MakeUppercase{\textbf{#1}}}}}
+\newcommand{\completarCon}[1]{ \textcolor{pRojo}{\small{\MakeUppercase{\textbf{COMPLETAR: #1}}}}}
 \newcommand{\ingles}[1]{\textit{#1}}
 \newcommand{\glosario}[1]{\ingles{\gls{#1}}}
 \newcommand{\glosarioPlural}[1]{\ingles{\glspl{#1}}}
@@ -87,9 +87,9 @@
 %                            \normalsize}
 %                            }
 \newcommand{\codigo}[1]{\ttfamily{#1}\normalfont}
-\newcommand{\iconoImagen}[1]{\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}}
+\newcommand{\iconoImagen}[1]{\raisebox{-.5\height}{\includegraphics[width=0.27\textwidth]{figuras/Imagenes_Piezas/#1.PNG}}}
 \newcommand{\pieceDescription}[1]{
-	\vspace{0pt} {\begin{minipage}[t]{.20\linewidth}\vspace{0pt}#1\\ \end{minipage}}}
+	\vspace{0pt} {\begin{minipage}[t]{.40\linewidth}\vspace{0pt}#1\\ \end{minipage}}}
 
 \usepackage{graphicx,eso-pic}
 
@@ -109,6 +109,8 @@
 	\captionsetup{font={footnotesize,bf,it}}
 	\caption*{\hfill Fuente: #1}
 	}
+	
+\renewcommand{\lstlistingname}{Código}
 	
 \newcommand{\inconExplanation}[2]{
 	\begin{minipage}{0.10\textwidth}

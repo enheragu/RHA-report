@@ -32,15 +32,15 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     La transmisión mecánica del movimiento debe optimizarse para ser capaz de mover el brazo; este trabajo se verá simplificado a su vez aligerando, cuando sea posible, la estructura del mismo. Como material estructural base se han elegido perfiles de aluminio de sección cuadrada (cuya referencia es puede encontrar en el capítulo \ref{chap:Gestion} junto con el resto de materiales). Estos perfiles presentan una alta resistencia y capacidad de carga a la vez que un peso reducido.
     \\
 
-    El material estructural definido se complementa con otra serie de piezas diseñadas específicamente para este proyecto (se puede ver el anexo \ref{app:listadoPiezas} para ver estas piezas). En este caso, por su versatilidad se utilizarán piezas modeladas digitalmente e Impresas en 3D posteriormente. De igual manera parte del diseño se apoya en piezas de metacrilato cortado con láser.
+    El material estructural definido se complementa con otra serie de piezas diseñadas específicamente para este proyecto (En el anexo \ref{app:listadoPiezas} se encuentran descritas estas piezas). En este caso, por su versatilidad se utilizarán piezas modeladas digitalmente e impresas en 3D posteriormente. De igual manera parte del diseño se apoya en piezas de metacrilato cortado con láser. El tipo de fabricación del prototipo está en gran medida determinado por las posibilidades dadas en el laboratorio de proyectos.
     \\
 
-    Aunque el peso del brazo completo se estima será reducido, la transmisión mediante cuerdas debe ser completamente fiable. Debido a las dimensiones con las que se trabaja se ve inviable el uso de cadenas o cuerdas de gran grosor; es por eso que se ha optado por utilizar hilo de \ingles{kevlar} de un milímetro de grosor.
+    Aunque el peso del brazo completo se estima será reducido, la transmisión mediante cuerdas debe ser completamente fiable. Debido a las dimensiones con las que se trabaja se ve inviable el uso de cadenas o cuerdas de gran grosor; es por eso que se ha optado por utilizar hilo de \ingles{kevlar} de un milímetro de grosor (pudiento aguantar hasta 135kg).
     \\
 
-    Aunque supone anticipar parte del desarrollo que se verá a continuación, a modo de lista se pueden resumir los materiales necesarios a nivel constructivo del proyecto en:
+    Aunque supone anticipar parte del desarrollo que se verá a continuación, a continuación se enumeran los materiales necesarios a nivel constructivo del proyecto, pudiéndose encontrar más información sobre los mismos en el capítulo \ref{chap:Gestion}:
     \begin{itemize}
-        \item Barras de aluminio de sección cuadrada de 1/2"x1m (lado de la sección x longitud).
+        \item Barras de aluminio de sección cuadrada de 1/2"x1m (lado de la sección x longitud). Siendo necesario un total de 3.3m de perfil.
         \item Rodamientos de bolas de 4mm x 13mm (diámetro interior X diámetro exterior)
         \item Rodamientos de bolas de 3mm x 10mm (diámetro interior X diámetro exterior)
         \item Rodamiento axial de 37.5mm x 52mm (diámetro interior X diámetro exterior)
@@ -49,9 +49,11 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
         \item Piezas impresas en impresora 3D. (Lista detallada en el Anexo \ref{app:listadoPiezas})
         \item Piezas de metacrilato cortadas con láser. (Lista detallada en el Anexo \ref{app:listadoPiezas})
         \item Tornillería: tornillos y tuercas de diferentes métricas.
-        \item Hilo de kevlar.
+        \item Hilo de kevlar. Siendo necesario aproximadamente 3m.
         \item Poleas de acetal de 4.9mm x 21.8mm (diámetro interior X diámetro exterior).
         \item Soporte de sombrilla. La base sobre la que se apoye el brazo debe ser capaz de soportarlo en una posición de trabajo en todo momento. Para no fijar ni imponer ningún tipo de anclaje (a superficie plana, anclaje a una camilla, etc) se ha optado por esta solución para el desarrollo del prototipo.
+        \item Barra cilíndrica de acero. Soporte para el robot de 70cm de longitud (20mm de diámetro y 1.2mm de grosor).
+        \item Barra cilíndrica de aluminio. Eje de giro para la primera articulación, esta barra tiene 65cm de longitud  (16mm de diámetro y 1mm de grosor).
     \end{itemize}
 
     En el capítulo \ref{chap:Gestion}, concretamente en la tabla \ref{tab:presupuesto}, están reflejados los detalles técnicos de estos materiales así como las referencias de compra, cantidades necesarias y precios.
@@ -88,7 +90,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
         \immagesource{Imagen de consalud.es, editada posteriormente por el Autor}
     \end{figure}
 
-\section{Articulación uno. Giro en el eje Z} \label{sec:Mecanica:articulacion_uno}
+\section{Primera articulación. Giro en el eje Z} \label{sec:Mecanica:articulacion_uno}
 
     Volviendo sobre el diseño mecánico, la primera articulación que se encuentra subiendo desde la base es la encargada de girar todo el robot en el eje Z.
 
@@ -101,15 +103,15 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\textwidth]{figuras/Imagenes_Mecanica/RuedasGiroZ.png}
-		\caption{Montaje de la transmisión del movimiento del servo a la articulación encargada de girar en Z \completarCon{cambiar por foto buena}}
+		\includegraphics[width=0.4\textwidth]{figuras/Imagenes_Mecanica/RuedasGiroZ.png}
+		\caption{Montaje de la transmisión del movimiento del servo a la articulación encargada de girar en Z}
 		\label{fig:Mecanica:giro_z}
 		\immagesource{Autor}
 	\end{figure}
 
 	Una vez vista la transmisión del movimiento queda otro punto importante, el apoyo del peso del brazo sobre la articulación. Referente a este punto se han explorado dos líneas del desarrollo posibles:
     \begin{itemize}
-        \item Apoyo sobre ruedas: Además de la rueda transmisora se fijan a la parte móvil de la articulación una serie de ruedas sobre las que apoyará el brazo. Inicialmente puede parecer que el apoyo será más estable cuantos más puntos tenga; desde el punto de vista práctico incluir apoyos redundantes genera más problemas a la larga. Tres puntos son suficientes para definir un plano y es el número de ruedas óptimo a utilizar: dos ruedas de apoyo más la rueda de transmisión. Se puede ver en detalle como queda el montaje en la figura \ref{fig:Mecanica:apoyo_ruedas}. Como se puede ver el diseño incluye unas piezas en metacrilato, en concreto la pieza solidaria a la parte fija del robot cuenta con una la superficie ranurada (realizado a modo de grabado con la máquina de corte láser) para aumentar el rozamiento con la rueda de transmisión. Las ruedas de apoyo están ubicadas a la misma distancia del eje de giro que la rueda transmisora.
+        \item Apoyo sobre ruedas: Además de la rueda transmisora se fijan a la parte móvil de la articulación una serie de ruedas sobre las que apoyará el brazo. Inicialmente puede parecer que el apoyo será más estable cuantos más puntos tenga; desde el punto de vista práctico incluir apoyos redundantes genera más problemas a la larga. Tres puntos son suficientes para definir un plano y es el número de ruedas óptimo a utilizar: dos ruedas de apoyo más la rueda de transmisión. Se puede ver en detalle como queda el montaje en la figura \ref{fig:Mecanica:apoyo_ruedas}. Como se puede ver el diseño incluye unas piezas en metacrilato, en concreto la pieza solidaria a la parte fija del robot cuenta con una la superficie ranurada (grabado con la máquina de corte láser) para aumentar el rozamiento con la rueda de transmisión. Las ruedas de apoyo están ubicadas a la misma distancia del eje de giro que la rueda transmisora.
         \item Apoyo sobre rodamiento: El apoyo se realiza sobre un rodamiento axial; quedando junto a ambas piezas, superior e inferior, incrustados entre si. Sobre este punto se apoya el peso del brazo y el encaje entre las piezas impide que el eje del brazo se mueva de la vertical. El uso de un rodamiento implica reducir la distancia sobre la que se apoya el peso, aunque permite fijar por ambos lados las piezas al rodamiento de forma más firme. Finalmente ésta es la opción adoptada para el brazo robótico por aportar una mayor solidez y estabilidad al aportar puto de apoyo continuo en los $360^o$ al rededor del eje.
     \end{itemize}
 
@@ -132,7 +134,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
         \end{figure}
     \end{minipage}
 
-    Además del tipo de apoyo se debe valorar en qué lado se sitúa la rueda de transmisión. Anticipando siguientes apartados la estructura del brazo sobresale por uno de los lados. En caso de ubicar la rueda motriz en el lado opuesto la carga dificulta el apoyo de la misma. En el caso de apoyo con ruedas además se apoya todo el peso sobre un voladizo, la distancia entre las dos ruedas de apoyo contrarias a la rueda de transmisión. Aunque en el caso del apoyo mediante rodamiento axial este efecto se suaviza, ya no apoya sobre un voladizo, el diseño final aprovecha la carga del brazo para asegurar el apoyo de la rueda de transmisión. En caso de que la explicación textual no sea suficientemente explicativa, se puede ver una representación gráfica de las diferentes situaciones en la figura \ref{fig:Mecanica:apoyo_carga}.
+    Además del tipo de apoyo se debe valorar en qué lado se sitúa la rueda de transmisión. Anticipando siguientes apartados la estructura del brazo sobresale por uno de los lados. En caso de ubicar la rueda motriz en el lado opuesto la carga dificulta el apoyo de la misma. En el caso de apoyo con ruedas además se apoya todo el peso sobre un voladizo, la distancia entre las dos ruedas de apoyo contrarias a la rueda de transmisión. Aunque en el caso del apoyo mediante rodamiento axial este efecto se suaviza, ya no apoya sobre un voladizo, el diseño final aprovecha la carga del brazo para asegurar el apoyo de la rueda de transmisión. En caso de que la explicación textual no sea suficientemente clara, se puede ver una representación gráfica de las diferentes situaciones en la figura \ref{fig:Mecanica:apoyo_carga}.
 
     \begin{figure}[H]
         \centering
@@ -190,7 +192,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
        	\immagesource{Autor}
     \end{figure}
 
-    Se ha adelantado en el capítulo \ref{chap:Punto_partida} la importancia de compensar el peso. En \cite{Rahman_asimple} se puede encontrar una demostración matemática de como se puede compensar, mediante el uso de muelles, el peso del los eslabones. Ambas estructuras expuestas permiten este tipo de compensación de la carga. Finalmente se ha optado por la segunda opción (acoplamiento lineal) ya que mantiene la orientación del extremo siempre constante y perpendicular al plano del suelo. Esta característica resulta muy útil ya que simplifica el análisis matemático y posterior control del brazo robótico en gran medida.
+    Se ha adelantado en el capítulo \ref{chap:Punto_partida} la importancia de compensar el peso. En \cite{Rahman_asimple} se puede encontrar una demostración matemática de como se puede compensar, mediante el uso de muelles, el peso de los eslabones así como de parte de la carga. Ambas estructuras expuestas permiten este tipo de compensación de la carga. Finalmente se ha optado por la segunda opción (acoplamiento lineal) ya que mantiene la orientación del extremo siempre constante y perpendicular al plano del suelo. Esta característica resulta muy útil ya que simplifica el análisis matemático y posterior control del brazo robótico en gran medida.
     \\
     
     En versiones anteriores se ha probado con diferentes tipos de acoplamiento, en la figura \ref{fig:Mecanica:geometria_acopladora} se puede ver como afecta esta pieza a la orientación del extremo en base a maquetas preparadas.
@@ -218,7 +220,7 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     Volviendo sobre la compensación del peso del robot, se ha seguido una estrategia similar aunque simplificada a la planteada por \cite{Rahman_asimple}. El propósito de los muelles, uno para cada mecanismo, es el de compensar el peso de toda la estructura del brazo de forma que, en vacío, el brazo tenderá a elevarse. Será el peso de la \ingles{tablet} una vez se acople el culpable del funcionamiento del brazo tal y como se ha planteado: el manipulador asciende gracias al par aportado por los servomotores; y desciende por gravedad.
     \\
 
-    En la figura \ref{brazo_con_muelles} se puede ver el montaje de las barras con los muelles que, de forma cruzada, se oponen al peso de la estructura. En esta imagen se anticipa algunos conceptos y servirá como mapa general para localizar diferentes componentes del brazo robótico sobre los que se focalizará a continuación.
+    En la figura \ref{fig:Mecanica:brazo_con_muelles} se puede ver el montaje de las barras con los muelles que, de forma cruzada, se oponen al peso de la estructura. En esta imagen se anticipa algunos conceptos y servirá como mapa general para localizar diferentes componentes del brazo robótico sobre los que se focalizará a continuación.
 
     \begin{figure}[H]
         \centering
@@ -257,6 +259,9 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
     \end{minipage}
 
     Volviendo sobre el diseño del brazo se ha diseñado de forma que en todo momento ambas cuerdas se mantendrán paralelas; además las poleas están montadas sobre dos rodamientos que aseguran un mayor rendimiento de la amplificación mecánica. Se pueden ver ambos montajes (palanca y polipasto) en las figuras \ref{fig:Mecanica:columpio_art_uno} y \ref{fig:Mecanica:columpio_art_dos} el montaje de estos \textit{columpios} para ambas articulaciones.
+    \\
+    
+    Para maximizar el par aplicado por el cable se ha buscado un punto de aplicación que forme $90^o$d con la palanca durante la mayor parte del recorrido. Al presentar una configuración no lineal, en los extremos se producirá una pérdida de par. Se ha diseñado de forma que este efecto se minimice.
 
     \begin{minipage}{0.41\textwidth}
         \begin{figure}[H]
@@ -298,5 +303,4 @@ Una vez vistas algunas ideas previas generales que deberá tener el prototipo di
         \end{figure}
     \end{minipage}
 
-\section{Grados de libertad de la orientación}
-\completarCon{¡TBD!}
+

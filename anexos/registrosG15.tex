@@ -6,10 +6,9 @@
 
     \begin{itemize}
     	\item Encabezado: Los primeros dos bytes del mensaje estarán compuestos por encabezado que será el que marque el inicio del mensaje. Estos bytes serán: 0xFF 0xFF
-    	\item Un fin de mensaje: El último byte del mensaje estará marcado por un valor llamado \ingles{CheckSum} que será el encargado de verificar que todo el paquete ha llegado correctamente. El \ingles{CheckSum} es el inverso del valor binario de la suma de todos los bytes enviados a excepción del encabezado y el propio \ingles{CheckSum}. En la figura \completar se puede ver un ejemplo de como se calcula dicho valor.
+    	\item Un fin de mensaje: El último byte del mensaje estará marcado por un valor llamado \ingles{CheckSum} que será el encargado de verificar que todo el paquete ha llegado correctamente. El \ingles{CheckSum} es el inverso del valor binario de la suma de todos los bytes enviados a excepción del encabezado y el propio \ingles{CheckSum}. 
     \end{itemize}
 
-    \completarCon{Ejemplo de como se calcula el checksum}
 
     En los paquetes que se envíen a los servos la información se codificará de la siguiente manera concreta:
 
